@@ -4,9 +4,17 @@
         <servlet-name>MyServlet</servlet-name>
         <servlet-class>Servleets.MyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ireshServlet</servlet-name>
+        <servlet-class>ireshServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ireshServlet</servlet-name>
+        <url-pattern>/ireshServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
