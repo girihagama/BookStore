@@ -10,7 +10,7 @@
 
 function validateForm() {
 
-    // Get references to the form elements:
+    // Get references to the form elements
     var pass1 = Document.getElementById("pass1");
     var pass2 = Document.getElementById("pass2");
 
@@ -28,5 +28,17 @@ function exceptionShow() {
 }
 
 function signup() {
-    alert(arguments[0]);
+    alert("Signup Success..");
+}
+
+function signupError() {
+    alert("Signup Failed..");
+}
+
+function RedirectToError() {
+    window.location="http://localhost:8080/BookStore/Error.jsp";
+}
+
+function RedirectToStart() {
+    window.location="http://localhost:8080/BookStore";
 }

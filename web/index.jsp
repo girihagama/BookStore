@@ -26,10 +26,10 @@
         <div class="startpage_main_div2">
             <iframe src="indunil_files/WOWSlider/iframe_wow slider.html" style="width:1350px;height:450px;max-width:100%;overflow:hidden;border:none;padding:0;margin:0 auto;display:block; border-radius: 10px;opacity: 0.2; z-index: 0;" marginheight="0" marginwidth="0" ng-disabled="true"></iframe>
             <div class="sign">
-                <form method="POST" action="MyServlet">
-                    <table class="signtable"> 
-                        <center><font style="font-family: trebuchet ms; font-size:18px;">Sign Up</font></center>
-                        <hr>                                              
+                <form method="POST" action="MyServlet">                     
+                    <center><font style="font-family: trebuchet ms; font-size:18px;">Sign Up</font></center>
+                    <hr>
+                    <table class="signtable">
                         <tr>
                             <td>
                                 User Name :
@@ -64,7 +64,7 @@
                         </tr>                        
                     </table>
                     <hr>
-                    <center><input type="submit" value="Create Account"/></center>
+                    <center><input type="submit" value="Create Account" onclick="validateForm();"/></center>
                 </form>
             </div>
         </div>
