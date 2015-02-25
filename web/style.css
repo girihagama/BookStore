@@ -72,3 +72,9 @@ and open the template in the editor.
     font-size: 15px;
     border-spacing: 10px;
 }
+
+.MyServletDivStyle{
+    font-family: trebuchet ms;
+    font-kerning: normal;
+    font-size: xx-large;
+}

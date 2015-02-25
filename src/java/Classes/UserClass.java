@@ -6,12 +6,13 @@
 package Classes;
 
 import javax.script.*;
+import javax.swing.JApplet;
 
 /**
  *
  * @author Indunil
  */
-public class UserClass {
+public class UserClass extends JApplet{
 
     //DbClass object
     DbClass db = new DbClass();
@@ -67,11 +68,35 @@ public class UserClass {
     }
 
     //class methods
-    public int addUser() throws ScriptException, NoSuchMethodException{
+    public int addUser() throws Exception {
         int x = 1;
         
-        
-        
+        try{
+            db.getConnection();          
+            
+        }catch(Exception ex){
+            exceptionShow(ex.getMessage());            
+        }finally{
+            if(!db.conn.isClosed())
+            db.endConnection();
+        }
+
         return x;
+    }
+
+    protected void exceptionShow(String msg) throws Exception {
+
+        ScriptEngineManager sem = new ScriptEngineManager();
+        ScriptEngine scEng = sem.getEngineByName("JavaScript");
+
+        // JavaScript code in a String
+        String script = "function exceptionShow(msg){ alert(arguments[0]); }";
+
+        // evaluate script
+        scEng.eval(script);        
+        Invocable inv = (Invocable) scEng;
+
+        // invoke the global function named "hello"
+        inv.invokeFunction("exceptionShow", msg);
     }
 }

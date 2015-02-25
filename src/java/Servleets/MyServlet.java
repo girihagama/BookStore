@@ -64,6 +64,7 @@ public class MyServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         
         try (PrintWriter out = response.getWriter()) {
@@ -87,11 +88,16 @@ public class MyServlet extends HttpServlet {
                         + "My Title"
                         + "</title>"
                         + "<script src=\"script.js\"></script>"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">"
                         + "</head>"
                         + "<body onload=\"signup();\">"
+                        + "<div class=\"MyServletDivStyle\">"
+                        + "<center><h1>BookStore - Sign Up</h1></center>"
+                        + "<hr/>"
                         + "New User Created : " + session.getAttribute("username")
                         + "<br/>"
                         + "Registerd eMail : " + session.getAttribute("email")
+                        + "<hr/>"
                         + "</body>"
                         + "</html>");
                 //out.println("New User Created: " + request.getParameter("username"));
@@ -112,6 +118,8 @@ public class MyServlet extends HttpServlet {
         } catch (ScriptException ex) {
             Logger.getLogger(MyServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchMethodException ex) {
+            Logger.getLogger(MyServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(MyServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

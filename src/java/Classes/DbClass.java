@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package Classes;
-
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
