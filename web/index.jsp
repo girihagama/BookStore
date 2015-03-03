@@ -18,6 +18,7 @@
 
         <link rel="stylesheet" type="text/css" href="style.css"/>
         <script type="text/javascript" src="script.js"></script>
+        
         <title>Orchid Store</title>
 
         <!-- Bootstrap Core CSS -->
@@ -90,24 +91,139 @@
                     <div class="intro-lead-in">Welcome To Our Store!</div>
                     <div class="intro-heading">It's Nice To Meet You</div>
                     <a href="#Signin" class="page-scroll btn btn-xl">Sign In</a>
+                    <a href="#Signup" class="page-scroll btn btn-xl">Sign Up</a>
                 </div>
             </div>
         </header>
 
+        <hr/>
+
+        <a id="Signin"></a>
         <!-- Sign In Section -->
-        <section id="Signin">
-            <div class="container">
-                <div class="row">
-                    sign in
+        <section>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="jumbotron text-center">                        
+                        <h1 class="" style="font-family: calibri;">Sign In..!</h1>
+                        <p style="font-family: calibri;">Orchid Store login</p>
+                    </div>
+                </div>
+                <div Class="col-lg-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Sign In
+                        </div>
+                        <div class="panel-body">
+
+                            <form class="form-horizontal">
+                                <fieldset>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="name">Username / E-Mail :</label>  
+                                        <div class="col-md-4">
+                                            <input id="name" name="name" type="text" placeholder="" class="form-control input-md" required="">
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Password input-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="password">Password :</label>
+                                        <div class="col-md-4">
+                                            <input id="password" name="password" type="password" placeholder="" class="form-control input-md" required="">
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Multiple Checkboxes (inline) -->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="remember"></label>
+                                        <div class="col-md-4">
+                                            <label class="checkbox-inline" for="remember-0">
+                                                <input type="checkbox" name="remember" id="remember-0" value="">
+                                                Remember Me
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Button -->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="login"></label>
+                                        <div class="col-md-4">
+                                            <button id="login" name="login" class="btn btn-success">Log In</button>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <hr/>
+
+        <a id="Signup"></a>
         <!-- Sign Up Section -->
-        <section id="Signup">
-            <div class="container">
-                <div class="row">
-                    sign up
+        <section>        
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Sign Up
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" name="signup" method="POST">
+                                <fieldset>  
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="username">Username :</label>  
+                                        <div class="col-md-4">
+                                            <input id="username" name="username" type="text" placeholder="" class="form-control input-md" required="">
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Password input-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="pass1">Password :</label>
+                                        <div class="col-md-6">
+                                            <input id="pass1" name="pass1" type="password" placeholder="password" class="form-control input-md" required="" >
+
+                                            <input id="Password1" name="pass2" type="password" placeholder="confirm password" class="form-control input-md" required="" >
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="email">E-Mail :</label>  
+                                        <div class="col-md-4">
+                                            <input id="eMail" name="email" type="email" placeholder="" class="form-control input-md" required="">
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Button -->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="submit"></label>
+                                        <div class="col-md-4">
+                                            <button id="submit" name="submit" class="btn btn-info" onsubmit="return validateForm()">Register To BookStore</button>
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="jumbotron text-center">
+                        <h1 class="" style="font-family: calibri;">Sign Up..!</h1>
+                        <p style="font-family: calibri;">Orchid Store register</p>
+                    </div>
                 </div>
             </div>
         </section>
