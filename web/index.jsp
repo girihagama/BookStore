@@ -175,7 +175,7 @@
                             Sign Up
                         </div>
                         <div class="panel-body">
-                            <form class="form-horizontal" name="signup" method="POST">
+                            <form class="form-horizontal" name="signup" method="POST" action="SignUp">
                                 <fieldset>  
                                     <!-- Text input-->
                                     <div class="form-group">
@@ -209,7 +209,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label" for="submit"></label>
                                         <div class="col-md-4">
-                                            <button id="submit" name="submit" class="btn btn-info" onsubmit="return validateForm()">Register To BookStore</button>
+                                            <button id="submit" name="submit" class="btn btn-info">Register To BookStore</button>
                                         </div>
                                     </div>
 

@@ -5,6 +5,8 @@
  */
 package Classes;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.script.*;
 import javax.swing.JApplet;
 
@@ -12,7 +14,7 @@ import javax.swing.JApplet;
  *
  * @author Indunil
  */
-public class UserClass extends JApplet{
+public class UserClass extends JApplet {
 
     //DbClass object
     DbClass db = new DbClass();
@@ -69,19 +71,26 @@ public class UserClass extends JApplet{
 
     //class methods
     public int addUser() throws Exception {
-        int x = 1;
-        
-        try{
-            db.getConnection();          
-            
-        }catch(Exception ex){
-            exceptionShow(ex.getMessage());            
-        }finally{
-            if(!db.conn.isClosed())
+        int stat = 1;       
+
+        try {
+            db.getConnection();
+
+//            String query;
+//            query = "INSERT INTO user(u_Name,u_Pass,u_privilege) VALUES(?,?,?)";
+//
+//            PreparedStatement pstmt = db.conn.prepareStatement(query);
+//            pstmt.setString(1, "indunil tharanga");
+//            pstmt.setString(2, "hmitpg");
+//            pstmt.setInt(3, 1);
+//
+//            stat = pstmt.executeUpdate();
+        } finally {
             db.endConnection();
         }
 
-        return x;
+        //return stat
+        return stat;
     }
 
     protected void exceptionShow(String msg) throws Exception {
@@ -93,7 +102,7 @@ public class UserClass extends JApplet{
         String script = "function exceptionShow(msg){ alert(arguments[0]); }";
 
         // evaluate script
-        scEng.eval(script);        
+        scEng.eval(script);
         Invocable inv = (Invocable) scEng;
 
         // invoke the global function named "hello"
