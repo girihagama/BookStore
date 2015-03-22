@@ -22,13 +22,13 @@ public class DbClass {
     public Connection conn = null;
 
     //sql url
-    public static final String URL = "jdbc://sql12.hostinger.co.uk:3306/";
+    public static final String URL = "jdbc:mysql://localhost:3306/";
     //sql database name
-    public static String dbName = "u583928354_store";
+    public static String dbName = "javabookstore";
     //username
-    public static String username = "u583928354_root";
+    public static String username = "root";
     //password
-    public static String password = "9hVtAkw2685A";
+    public static String password = "";
 
     //open connection
     public boolean getConnection() {
