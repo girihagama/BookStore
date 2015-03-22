@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 
-//function popupWindow(message) {
-//    window.open(message);
-//}
+function popupWindow() {
+    window.open("message");
+}
 
 function validateForm() {
 
     // Get references to the form elements
-    var pass1 = Document.getElementById("pass1");
-    var pass2 = Document.getElementById("pass2");
+    var pass1 = document.forms["signup"]["pass1"].value;
+    var pass2 = document.forms["signup"]["pass2"].value;
 
     // Validate the login
     if (pass1 === pass2) {
@@ -38,10 +38,10 @@ function signupError() {
 }
 
 function validateForm() {    
-    var username = document.forms["myForm"]["username"].value;
-    var pass1 = document.forms["myForm"]["pass1"].value;
-    var pass2 = document.forms["myForm"]["pass2"].value;
-    var eMail = document.forms["myForm"]["eMail"].value;
+    var username = document.forms["signup"]["username"].value;
+    var pass1 = document.forms["signup"]["pass1"].value;
+    var pass2 = document.forms["signup"]["pass2"].value;
+    var eMail = document.forms["signup"]["eMail"].value;
 
     if (username == null || username == "") {
         alert("Provide Username");
@@ -63,6 +63,9 @@ function validateForm() {
         if (pass1 != pass2) {
             alert("Passwords must be same");
             return false;
+        }
+        else{
+            return true;
         }
     }
 }

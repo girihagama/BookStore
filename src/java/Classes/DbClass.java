@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Classes;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,10 +17,10 @@ import javax.swing.JOptionPane;
  * @author Indunil
  */
 public class DbClass {
-    
+
     //connection object
-    Connection conn = null;
-    
+    public Connection conn = null;
+
     //sql url
     public static final String URL = "jdbc:mysql://localhost:3306/";
     //sql database name
@@ -28,10 +29,11 @@ public class DbClass {
     public static String username = "root";
     //password
     public static String password = "";
-    
-    
+
     //open connection
-    public void getConnection(){
+    public boolean getConnection() {
+        boolean state = false;
+
         try {
             System.out.println("Connecting..");
 
@@ -52,10 +54,17 @@ public class DbClass {
             JOptionPane.showMessageDialog(null, ex);
             System.out.println(ex.toString());
         }
+
+        if (this.conn != null) {
+            state = true;
+        }
+        
+        return state;
     }
-    
+
     //close connection
-    public void endConnection(){
+    public void endConnection() {
+
         System.out.println("Closing..");
 
         try {

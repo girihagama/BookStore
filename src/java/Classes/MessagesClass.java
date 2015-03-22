@@ -1,0 +1,89 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Classes;
+
+/**
+ *
+ * @author Indunil
+ */
+public class MessagesClass {
+    private int m_ID;
+    private String u_Name;
+    private String m_Date;
+    private String m_Content;
+    private int m_ReadState;
+
+    /**
+     * @return the m_ID
+     */
+    public int getM_ID() {
+        return m_ID;
+    }
+
+    /**
+     * @param m_ID the m_ID to set
+     */
+    public void setM_ID(int m_ID) {
+        this.m_ID = m_ID;
+    }
+
+    /**
+     * @return the u_Name
+     */
+    public String getU_Name() {
+        return u_Name;
+    }
+
+    /**
+     * @param u_Name the u_Name to set
+     */
+    public void setU_Name(String u_Name) {
+        this.u_Name = u_Name;
+    }
+
+    /**
+     * @return the m_Date
+     */
+    public String getM_Date() {
+        return m_Date;
+    }
+
+    /**
+     * @param m_Date the m_Date to set
+     */
+    public void setM_Date(String m_Date) {
+        this.m_Date = m_Date;
+    }
+
+    /**
+     * @return the m_Content
+     */
+    public String getM_Content() {
+        return m_Content;
+    }
+
+    /**
+     * @param m_Content the m_Content to set
+     */
+    public void setM_Content(String m_Content) {
+        this.m_Content = m_Content;
+    }
+
+    /**
+     * @return the m_ReadState
+     */
+    public int getM_ReadState() {
+        return m_ReadState;
+    }
+
+    /**
+     * @param m_ReadState the m_ReadState to set
+     */
+    public void setM_ReadState(int m_ReadState) {
+        this.m_ReadState = m_ReadState;
+    }
+    
+}
