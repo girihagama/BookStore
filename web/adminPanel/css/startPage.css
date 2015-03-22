@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 22, 2015, 1:36:27 PM
+    Author     : Chami
+*/
+
+.overlay {
+  bottom: 0;left: 0; top: 0; right: 0;
+  height: 150px;
+  width: 150px;
+  margin: auto;
+  position: absolute;
+  opacity:0;
+}
+
+.fancypics{width:100%;}
+
+.text_box{
+  color:black;
+  weight:bold;
+  font-size:5em;
+  padding:50px;
+  padding-bottom:50%;
+  text-align:center;
+  text-shadow: 1px 2px 0px #FF7519, 2px 3px 0px #707070;
+}
+
+.picholder:hover .overlay{opacity:1;}
+.picholder:hover .fancypics{opacity:0.5;}
