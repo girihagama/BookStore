@@ -1,6 +1,6 @@
 <%-- 
-    Document   : test
-    Created on : Mar 5, 2015, 6:34:08 PM
+    Document   : BeginPage
+    Created on : Mar 15, 2015, 6:35:56 PM
     Author     : Indunil
 --%>
 
@@ -12,9 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <form action="SignUp">
-            <input type="submit" value="Submit" />
-        </form>
+        <input type="button" onclick="response.sendRedirect('index.jsp');" value="Submit"/>
     </body>
 </html>
