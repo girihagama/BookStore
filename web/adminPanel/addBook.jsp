@@ -74,9 +74,9 @@
                         <li>
                             <div id="topmenu">
                             <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation" class="active"><a href="#">Add Books</a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Modify Books</font></a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Remove Books</font></a></li>
+                                <li role="presentation" class="active"><a href="#">Add Book</a></li>
+                                <li role="presentation"><a href="#"><font style="color: orange">Modify Book</font></a></li>
+                                <li role="presentation"><a href="#"><font style="color: orange">Remove Book</font></a></li>
                             </ul>
                             </div>
                         </li>
@@ -96,6 +96,21 @@
                                 <input type="text" class="form-control" placeholder="Enter book title">
                             </div>
                         </div>
+                           <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Author Name</label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <select class="form-control" placeholder="Select year" >
+                                            <option>Author name</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                       <a class="btn btn-default" href="#" role="button">Add Authors</a>
+                                    </div>
+                                </div>                            
+                            </div>
+                        </div> 
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Book Edition</label>
