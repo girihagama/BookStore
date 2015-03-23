@@ -1,6 +1,6 @@
 <%-- 
-    Document   : subPage
-    Created on : Mar 22, 2015, 6:08:29 PM
+    Document   : modifiBook
+    Created on : Mar 23, 2015, 3:45:51 PM
     Author     : Chami
 --%>
 
@@ -68,85 +68,66 @@
             <%-- end of sub menus--%>           
             <div class="row">
                 <%--left side navigation--%>
-                <div class="col-lg-2">
+                <div class="col-lg-2" >
                     <ul class="nav nav-pills nav-stacked ">
                         <li role="presentation" class="text_box" style="padding: 0px; text-align: left;">Books</li>
                         <li>
                             <div id="topmenu">
-                            <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation" class="active"><a href="#">Add Book</a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Modify Book</font></a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Remove Book</font></a></li>
-                            </ul>
+                                <ul class="nav nav-pills nav-stacked topmenu">
+                                    <li role="presentation"><a href="#"><font style="color: orange">Add Book</font></a></li>
+                                    <li role="presentation" class="active"><a href="#">Modify Book</a></li>
+                                    <li role="presentation"><a href="#"><font style="color: orange">Remove Book</font></a></li>
+                                </ul>
                             </div>
                         </li>
                     </ul>  
                 </div>
-                <div class="col-lg-1">&nbsp;</div>
+                <div class="col-xs-1">&nbsp;</div>
                 <%--left side navigation end--%>
-                
-                <%--Form--%>
                 <div class="col-lg-9">
-                    <br>
-                    <br>
-                    <form>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Title</label>
-                                <input type="text" class="form-control" placeholder="Enter book title" required>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                           <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Author Name</label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <select class="form-control" placeholder="Select year" required >
-                                            <option>Author name</option>
-                                        </select>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">&nbsp;</div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <label><h4>Search Book For Modify</h4></label>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div id="orange">
+                                      <div class="input-group">
+                                        <input type="text" class="form-control orange" placeholder="Search for...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default orange" type="button">Search</button>
+                                        </span>
+                                    </div>  
                                     </div>
-                                    <div class="col-lg-2">
-                                       <a class="btn btn-default" href="#" role="button">Add Authors</a>
-                                    </div>
-                                </div>                            
-                            </div>
-                        </div> 
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Edition</label>
-                                <div class="row">
-                                <div class="col-lg-4">
-                                <input type="text" class="form-control" placeholder="Enter book edition">
-                                </div>
                                 </div>
                             </div>
                         </div>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Published Year</label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <select class="form-control" placeholder="Select year" >
-                                            <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
-                                    for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
-                                        </select>
-                                    </div>
-                                </div>                            
-                            </div>
-                        </div> 
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Image</label>
-                                <input type="file" style="border-color: orange">
-                            </div>  
-                        </div> 
-                        <button type="submit" class="btn btn-default">Add Book</button>
-                    </form>
+                        <br>
+                        
+                    </div>
                 </div>
             </div>
-            <%--Form end--%>
+
             <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
                 &nbsp;
             </div>
             <div class="row">
@@ -158,7 +139,7 @@
                     <li><a href="#">Library</a></li>
                     <li class="active">Data</li>
                 </ol>
-            </div> 
-        </div>
+            </div>            
+        </div>        
     </body>
 </html>
