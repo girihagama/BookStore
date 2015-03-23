@@ -40,6 +40,9 @@
                 &nbsp;
             </div>
             <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
                 <div class="col-md-1">&nbsp;</div>
                 <div class="col-md-1">&nbsp;</div>
                 <div class="col-md-2">                    
@@ -54,7 +57,7 @@
                 <div class="col-md-2">
                     <div class="picholder">
                     <img src="Images/StartPageIcons/Author.jpg" class="fancypics" alt="Responsive image">
-                    <div class="overlay"><a href="#" style="text-decoration: none"><p class="text_box">Go</p></a></div>
+                    <div class="overlay"><a href="addAuthors.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
                     </div>
                 </div>  
                 <div class="col-md-2">
@@ -85,7 +88,7 @@
                 <div class="col-md-2">
                     <div class="picholder">
                     <img src="Images/StartPageIcons/Suppliers.jpg" class="fancypics" alt="Responsive image">
-                    <div class="overlay"><a href="#" style="text-decoration: none"><p class="text_box">Go</p></a></div>
+                    <div class="overlay"><a href="addSuppliers.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
                     </div>
                 </div>  
                 <div class="col-md-2">
@@ -104,18 +107,16 @@
             <div class="row">
                 &nbsp;
             </div>
-             <div class="row" style="background-color:#FF9933">
+            <div class="row">
                 &nbsp;
             </div>
-             <div class="row" style="background-color:#FF9933">
-                &nbsp;
-            </div>
-             <div class="row" style="background-color:#FF9933">
-                &nbsp;
-            </div>
-             <div class="row" style="background-color:#FF9933">
-                &nbsp;
-            </div>
+            <div class="row" >
+                <ol class="breadcrumb" style="background-color:#FF9933">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li class="active">Data</li>
+                </ol>
+            </div> 
         </div>
     </body>
 </html>
