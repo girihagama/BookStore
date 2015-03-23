@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Error
-    Created on : Feb 19, 2015, 9:41:35 PM
-    Author     : Indunil
+    Document   : subPage
+    Created on : Mar 22, 2015, 6:08:29 PM
+    Author     : Chami
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Managed Error Page</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1>This is a managed error page..</h1>
+        <h1>Hello World!</h1>
     </body>
 </html>

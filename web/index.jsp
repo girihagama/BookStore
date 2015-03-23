@@ -1,72 +1,84 @@
 <%-- 
     Document   : index
-    Created on : Feb 1, 2015, 10:45:23 PM
+    Created on : Mar 15, 2015, 5:36:23 PM
     Author     : Indunil
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <title>Start Page</title>
-    </head>
-    <body class="body">
-        <div class="startpage_main_div1">
-            <div class="startpage_header">
-                Orchid Book Store
-                <hr class="startpage_header_hr"/>
-                <div class="startpage_heaader_div1">Online Marketplace</div>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Start Page</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="startpage/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="startpage/css/stylish-portfolio.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="startpage/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- jQuery -->
+    <script src="startpage/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="startpage/js/bootstrap.min.js"></script>   
+    
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>It's Nice To See You..!</h1>
+            <h3>Welcome To Orchid Store</h3>
+            <br>
+            <a href="BeginPage.jsp" class="btn btn-dark btn-lg">                
+                <span class="glyphicon glyphicon glyphicon-play-circle"></span>
+                <br/>
+                Enter Orchid Store
+            </a>
+        </div>
+    </header>
+    
+    <hr class="small">
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4><strong>Orchid Store</strong>
+                    </h4>
+                    <p>3481 Independence Avenue,<br>Colombo 07, Sri Lanka</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-phone fa-fw"></i> (+94)11 2 233-444</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:orchidstore@gmail.com" target="_blank">Contact Us</a>
+                        </li>
+                    </ul>
+                    <br>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="https://www.facebook.com/search/orchidstore" target="_blank"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/orchidbookstore" target="_blank"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
+                        </li>
+                    </ul>
+                    <hr class="small">
+                    <p class="text-muted">Copyright &copy; Orchid Store Online Marketplace 2015</p>
+                </div>
             </div>
         </div>
+    </footer>  
 
-        <br/>
-
-        <div class="startpage_main_div2">
-            <iframe src="indunil_files/WOWSlider/iframe_wow slider.html" style="width:1350px;height:450px;max-width:100%;overflow:hidden;border:none;padding:0;margin:0 auto;display:block; border-radius: 10px;opacity: 0.2; z-index: 0;" marginheight="0" marginwidth="0" ng-disabled="true"></iframe>
-            <div class="sign">
-                <form method="POST" action="MyServlet">                     
-                    <center><font style="font-family: trebuchet ms; font-size:18px;">Sign Up</font></center>
-                    <hr>
-                    <table class="signtable">
-                        <tr>
-                            <td>
-                                User Name :
-                            </td>
-                            <td>
-                                <input type="text" name="username" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Password :
-                            </td>
-                            <td>
-                                <input id="pass1" type="password" name="pass1" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Password :
-                            </td>
-                            <td>
-                                <input id="pass2" type="password" name="pass2" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                eMail :
-                            </td>
-                            <td>
-                                <input type="email" name="eMail" />
-                            </td>
-                        </tr>                        
-                    </table>
-                    <hr>
-                    <center><input type="submit" value="Create Account" onclick="validateForm();"/></center>
-                </form>
-            </div>
-        </div>
-    </body>
+</body>
 </html>

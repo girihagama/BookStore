@@ -8,67 +8,6 @@ and open the template in the editor.
     Author     : Indunil
 */
 .body{
-    background-color: whitesmoke;
-}
-
-.startpage_header{
-    height: auto;
-    color: white;
-    padding-top: 10px;
-    background-color: #000066;
-    border: solid 2px #cccccc;
-    text-align: center;
-    border-radius: 10px;
-    font-family: trebuchet ms;    
-    font-size: 70px;
-    box-shadow: 0px 0px 20px 0px #000066;
-}
-
-.startpage_header_hr{
-    padding: 0px;
-    margin: 0px;
-    margin-bottom: 5px;
-    border: solid 2px white;
-}
-
-.startpage_heaader_div1{
-    font-family: trebuchet ms;    
-    font-size: 25px;
-    color: #999999;
-}
-
-.startpage_main_div1{
-    height: auto;
-    width: auto;
-    border-radius: 5px;
-    background-color: transparent;
-    padding: 5px;
-}
-
-.startpage_main_div2{
-    height: auto;
-    width: auto;
-    border-radius: 10px;
-    padding: 5px;
-    box-shadow: 0px 0px 10px 1px black;    
-    z-index: 0;
-}
-
-.sign{
-    height: auto;
-    background-color: ghostwhite;
-    opacity: 0.85;
-    position: absolute;
-    top: 250px;
-    left: 25%;
-    border: solid 2px black;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 1px aqua;
-    padding: 10px 25px 10px 25px;
-}
-
-.signtable{
-    font-family: trebuchet ms;
-    font-size: 15px;
-    border-spacing: 10px;
+    margin: 1px;
+    padding: 2px;
 }
