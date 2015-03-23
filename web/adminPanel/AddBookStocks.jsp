@@ -1,11 +1,9 @@
-
 <%-- 
-    Document   : subPage
-    Created on : Mar 22, 2015, 6:08:29 PM
-    Author     : Chami
+    Document   : Stocks
+    Created on : Mar 23, 2015, 2:53:44 PM
+    Author     : Khaushalya
 --%>
 
-<%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,12 +18,12 @@
     </head>
     <body>
         <div class="container" style="background-color:#F5F5F0">
-            <div class="row"><div class="col-md-10">&nbsp;</div></div>
-            <div class="row">
+             <div class="row"><div class="col-md-10">&nbsp;</div></div>
+             <div class="row">
                 <div class="col-md-11"></div>
                 <div class="col-md-1"><button type="button" class="btn btn-warning">Logout</button></div>
             </div>
-            <div class="row">
+               <div class="row">
                 <div class="col-lg-1">
                     <img src="Images/Page icons/BookIcon.png" class="img-responsive" width="100%"alt="Responsive image">
                 </div>
@@ -33,7 +31,7 @@
                     <font color=#FF7519><h1><strong>Orchid Book Store</strong><small>&nbsp; Admin Panel</small></h1></font>
                 </div>
             </div>
-            <div class="row">
+             <div class="row">
                 <img src="Images/Orthers/line.png" width="100%" alt="Responsive image">
             </div>
             <%-- sub menus--%>
@@ -54,7 +52,7 @@
                     <a href="#"><img src="Images/Page icons/Admin.png" class="image" width="100%" alt="Responsive image" title="Admins"></a>
                 </div>
                 <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" title="Stocks"></a>
+                    <a href="AddBookStocks.jsp"><img src="Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" title="Stocks"></a>
                 </div>
                 <div class="col-lg-1">
                     <a href="#"><img src="Images/Page icons/Suppliers.png" class="image" width="100%" alt="Responsive image" title="Suppliers"></a>
@@ -62,30 +60,30 @@
                 <div class="col-lg-1">
                     <a href="#"><img src="Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" title="Orders"></a>
                 </div>
-            </div>    
-            <div class="row">
+                 <div class="row">
                 <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image">
             </div>
-            <%-- end of sub menus--%>           
-            <div class="row">
-                <%--left side navigation--%>
-                <div class="col-lg-2">
-                    <ul class="nav nav-pills nav-stacked ">
-                        <li role="presentation" class="text_box" style="padding: 0px; text-align: left;">Books</li>
-                        <li>
+                  <%--end of the sub menu--%>     
+                <div class="row">
+                    <%-- left side --%>
+                    <div class="col-lg-2">
+                        <ul class="nav nav-pills nav-stacked">
+                              <li role="presentation" class="text_box" style="padding: 0px; text-align: left;">Stocks</li>
+                            <li>
                             <div id="topmenu">
                             <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation" class="active"><a href="#">Add Books</a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Modify Books</font></a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Remove Books</font></a></li>
+                                <li role="presentation" class="active"><a href="#">Add Book Stocks</a></li>
+                                <li role="presentation"><a href="EditStock.jsp"><font style="color: orange">Edit Book Stocks</font></a></li>
+                                <li role="presentation"><a href="DeleteStocks.jsp"><font style="color: orange">Delete Stocks</font></a></li>
+                                <li role="1presentation"><a href="SearchStocks.jsp"><font style="color: orange">Search Book Stocks</font></a></li>
                             </ul>
                             </div>
                         </li>
-                    </ul>  
-                </div>
-                <div class="col-lg-1">&nbsp;</div>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-lg-1">&nbsp;</div>
                 <%--left side navigation end--%>
-                
                 <%--Form--%>
                 <div class="col-lg-9">
                     <br>
@@ -103,31 +101,12 @@
                                 <input type="text" class="form-control" placeholder="Enter book edition">
                             </div>
                         </div>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Published Year</label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <select class="form-control" placeholder="Select year" >
-                                            <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
-                                    for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
-                                        </select>
-                                    </div>
-                                </div>                            
-                            </div>
-                        </div> 
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Image</label>
-                                <input type="file" style="border-color: orange">
-                            </div>  
-                        </div> 
-                        <button type="submit" class="btn btn-default">Add Book</button>
+                     
                     </form>
                 </div>
             </div>
             <%--Form end--%>
-            <div class="row">
+         <div class="row">
                 &nbsp;
             </div>
             <div class="row">
