@@ -63,7 +63,7 @@
                 </div>
             </div>    
             <div class="row">
-                <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image"">
+                <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image">
             </div>
             <%-- end of sub menus--%>           
             <div class="row">
