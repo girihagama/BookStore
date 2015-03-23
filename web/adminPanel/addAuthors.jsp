@@ -44,7 +44,7 @@
                     <a href="#"><img src="Images/Page icons/Books.png" class="image" width="100%" alt="Responsive image" title="Books"></a>
                 </div>
                 <div class="col-lg-1">
-                    <img src="Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" title="Authors" style="opacity: 0.4">
+                    <a href="addAuthors.jsp"><img src="Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" title="Authors" style="opacity: 0.4"></a>
                 </div>
                 <div class="col-lg-1">
                     <a href="#"><img src="Images/Page icons/Clients.png" class="image" width="100%" alt="Responsive image" title="Clients"></a>
@@ -56,7 +56,7 @@
                     <a href="#"><img src="Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" title="Stocks"></a>
                 </div>
                 <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Suppliers.png" class="image" width="100%" alt="Responsive image" title="Suppliers"></a>
+                    <a href="addSuppliers.jsp"><img src="Images/Page icons/Suppliers.png" class="image" width="100%" alt="Responsive image" title="Suppliers"></a>
                 </div>
                 <div class="col-lg-1">
                     <a href="#"><img src="Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" title="Orders"></a>
@@ -75,8 +75,8 @@
                             <div id="topmenu">
                             <ul class="nav nav-pills nav-stacked topmenu">
                                 <li role="presentation" class="active"><a href="#">Add Author</a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Modify Author</font></a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Remove Author</font></a></li>
+                                <li role="presentation"><a href="modifyAuthors.jsp"><font style="color: orange">Modify Author</font></a></li>
+                                <li role="presentation"><a href="removeAuthors.jsp"><font style="color: orange">Remove Author</font></a></li>
                             </ul>
                             </div>
                         </li>
@@ -93,7 +93,7 @@
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Author Name">
+                                <input type="text" class="form-control" placeholder="Enter Author Name" required>
                             </div>
                         </div>
   
@@ -109,7 +109,7 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
-                                        <select class="form-control" placeholder="Select year" >
+                                        <select class="form-control" placeholder="Select year">
                                             <option>Month</option>
                                             <option>January</option>
                                             <option>February</option>
