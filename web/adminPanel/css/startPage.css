@@ -31,3 +31,11 @@ and open the template in the editor.
 
 .picholder:hover .overlay{opacity:1;}
 .picholder:hover .fancypics{opacity:0.5;}
+
+.image {
+   opacity:1;
+}
+.image:hover {
+    opacity:0.4;
+    display: block;
+}
