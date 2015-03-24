@@ -1,17 +1,17 @@
 <%-- 
-    Document   : BeginPage
-    Created on : Mar 15, 2015, 6:35:56 PM
+    Document   : SignUp
+    Created on : Mar 22, 2015, 7:25:40 PM
     Author     : Indunil
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Sign Up</title>
     </head>
     <body>
-        <input type="button" onclick="response.sendRedirect('index.jsp');" value="Submit"/>
+        <h1>Hello World!</h1>
     </body>
 </html>
