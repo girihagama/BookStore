@@ -5,6 +5,13 @@
  */
 package Classes;
 
+import com.mysql.jdbc.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  *
  * @author Indunil
@@ -14,7 +21,8 @@ public class AuthorClass {
     private int a_ID;
     private String a_Name;
     private String a_DOB;
-    private String a_Desc;
+    private String a_Desc;    
+    private PreparedStatement pstmt;
 
     /**
      * @return the a_ID
@@ -70,6 +78,25 @@ public class AuthorClass {
      */
     public void setA_Desc(String a_Desc) {
         this.a_Desc = a_Desc;
+    }
+    
+    public void findAutherID(String a_name){
+        DbClass db = new DbClass();
+        if(db.getConnection()==true){
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select a_ID from author where a_Name=?");
+                pstmt.setString(1, a_name);
+                
+                ResultSet rs = pstmt.executeQuery();
+                while(rs.next()){
+                    this.a_ID=rs.getInt(1);
+                }
+                pstmt.close();
+                db.endConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
 }
