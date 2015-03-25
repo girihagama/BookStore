@@ -81,11 +81,52 @@
                         </li>
                     </ul>  
                 </div>
-            </div>
+            
                 <div class="col-lg-1">&nbsp;</div>
                 <%--left side navigation end--%>
-                
+                                         <div class="col-lg-9">
+                    <div class="row">&nbsp;</div>
+                    <div class="row">&nbsp;</div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <label><h4>Search Supplier to Modify</h4></label>
                             <div class="row">
+                                <div class="col-lg-8">
+                                    <div id="orange">
+                                      <div class="input-group">
+                                        <input type="text" class="form-control orange" placeholder="Search for...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default orange" type="button">Search</button>
+                                        </span>
+                                    </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        
+                    </div>
+                </div>
+                                </div>
+<div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
                 &nbsp;
             </div>
             <div class="row">
