@@ -87,8 +87,9 @@
                 <%--Form--%>
                 <div class="col-lg-9">
                     
-                <% if(request.getAttribute("msg")!=null){
-                    %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%></strong></div><%
+                    <% if (request.getAttribute("msg") != null) {
+                    %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br>
+                            If you want add another book fill below form and add a book.</div><%
                 }else{%>
                     <br><%}%>
                     <br>                 
