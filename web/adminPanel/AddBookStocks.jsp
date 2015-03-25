@@ -96,7 +96,11 @@
                                 <label>Book Name :</label>
                                 <div class="row">
                                       <div class="col-lg-6">
+<<<<<<< HEAD
                                           <input type="text" class="form-control" placeholder="Enter book name here" required="ppp"> 
+=======
+                                          <input type="text" class="form-control" placeholder="Enter book name here"> 
+>>>>>>> aed03d1105974d0c9be0c46eeec6936a9bb70113
                                       </div>
                                         <div class="col-lg-2">
                                             <div class="col-md-1"><a href="addBook.jsp"><button type="button" class="btn btn-default">Add New Book</button></a></div> 
