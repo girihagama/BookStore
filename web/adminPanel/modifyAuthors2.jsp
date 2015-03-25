@@ -11,10 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/startPage.css" rel="stylesheet">
-        <link href="css/form.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
         <title>Admin Panel</title>
     </head>
     <body>
