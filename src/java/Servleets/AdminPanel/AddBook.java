@@ -86,7 +86,7 @@ public class AddBook extends HttpServlet {
         //processRequest(request, response);
         String warningMsg=null;
         String bookTitle=request.getParameter("bookTitle");
-        String authorName=request.getParameter("authorName");
+        String authorName=request.getParameter("autherName");
         String edition=request.getParameter("bookEdition");
         String year=request.getParameter("year");
         InputStream image = null; // input stream of the upload file
@@ -94,17 +94,11 @@ public class AddBook extends HttpServlet {
         // obtains the upload file part in this multipart request
         Part filePart = request.getPart("image");
         if (filePart != null) {
-            // prints out some information for debugging
-            System.out.println(filePart.getName());
-            System.out.println(filePart.getSize());
-            System.out.println(filePart.getContentType());
-             
-            // obtains input stream of the upload file
             image = filePart.getInputStream();
         }
         else 
             image=null;
-        
+                
         AuthorClass author = new AuthorClass();
         author.findAutherID(authorName);
         int a_ID=author.getA_ID();
@@ -120,9 +114,19 @@ public class AddBook extends HttpServlet {
         if(result==1){
             warningMsg="Your book is inserted to the system";
         }
+        else{
+            warningMsg="Your book is not inserted due to an error. Please try again later";
+            request.setAttribute("errorBookTitle", bookTitle);
+            request.setAttribute("errorAuthor", authorName);
+            request.setAttribute("errorYear", year);
+            request.setAttribute("errorEdition", edition);
+        }
+        
         request.setAttribute("msg", warningMsg);
+        request.setAttribute("action", "AddBook");
         RequestDispatcher rd = request.getRequestDispatcher("adminPanel/addBook.jsp");
         rd.include(request, response);
+        
     }
 
     /**
