@@ -60,6 +60,7 @@
                 <div class="col-lg-1">
                     <a href="#"><img src="Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" title="Orders"></a>
                 </div>
+            </div>
                  <div class="row">
                 <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image">
             </div>
@@ -82,36 +83,34 @@
                             
                         </ul>
                     </div>
-                    <div class="col-lg-1">&nbsp;</div>
+                                     <div class="col-xs-1">&nbsp;</div>
                 <%--left side navigation end--%>
-                <%--Form--%>
-                <div class="col-lg-9">
-                    <br>
-                    <br>
-                    <form>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Title</label>
-                                <input type="text" class="form-control" placeholder="Enter book title">
+               
+                 <div class="col-lg-9">
+                     <br><br>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <label><h4>Search Book For Delete Stock </h4></label>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div id="orange">
+                                      <div class="input-group">
+                                        <input type="text" class="form-control orange" placeholder="Search for delete...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default orange" type="button">Search</button>
+                                        </span>
+                                    </div>  
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Edition</label>
-                                <input type="text" class="form-control" placeholder="Enter book edition">
-                            </div>
-                        </div>
-                     
-                    </form>
+                        <br>
+                        
+                    </div>
                 </div>
+              
             </div>
-            <%--Form end--%>
-         <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
+         <br><br><br><br><br><br>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
                     <li><a href="#">Home</a></li>

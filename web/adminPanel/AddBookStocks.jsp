@@ -4,6 +4,7 @@
     Author     : Khaushalya
 --%>
 
+<%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -60,6 +61,7 @@
                 <div class="col-lg-1">
                     <a href="#"><img src="Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" title="Orders"></a>
                 </div>
+            </div>
                  <div class="row">
                 <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image">
             </div>
@@ -85,27 +87,104 @@
                     <div class="col-lg-1">&nbsp;</div>
                 <%--left side navigation end--%>
                 <%--Form--%>
-                <div class="col-lg-9">
+                <div class="col-lg-7">
                     <br>
                     <br>
                     <form>
-                        <div id ="orange">
+                    <div id ="orange">
                             <div class="form-group orange">
-                                <label>Book Title</label>
-                                <input type="text" class="form-control" placeholder="Enter book title">
+                                <label>Book Name :</label>
+                                <div class="row">
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" placeholder="Enter book name here"> 
+                                      </div>
+                                        <div class="col-lg-2">
+                                            <div class="col-md-1"><a href="addBook.jsp"><button type="button" class="btn btn-default">Add New Book</button></a></div> 
+                                       </div>
+                                   
+                                </div>                            
                             </div>
                         </div>
-                        <div id ="orange">
+                        <br>
+                       <div id ="orange">
                             <div class="form-group orange">
-                                <label>Book Edition</label>
-                                <input type="text" class="form-control" placeholder="Enter book edition">
+                                <label>Supplier Name :</label>
+                                <div class="row">
+                                      <div class="col-lg-6">
+                                          <input type="text" class="form-control" placeholder="Enter supplier name here"> 
+                                      </div>
+                                        <div class="col-lg-2">
+                                            <div class="col-md-1"><a href="#"><button type="button" class="btn btn-default">Add New Supplier</button></a></div> 
+                                       </div>
+                                   
+                                </div>                            
                             </div>
                         </div>
-                     
+                        <br>
+                           <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Stock Date :</label>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <select class="form-control" placeholder="Select date" >
+                                            <%  int date = Calendar.getInstance().get(Calendar.DATE) - 1;
+                                    for (int i = date; i >0 ; i--) {%><option><%=i%></option><%}%>
+                                        </select>
+                                    </div>
+                                        <div class="col-lg-2">
+                                            <select class="form-control" placeholder="Select month">
+                                                <option><%="January" %> </option>
+                                               <option> <%="February" %> </option>
+                                               <option> <%="March" %> </option>
+                                               <option> <%="April" %> </option>
+                                               <option> <%="May" %> </option>
+                                               <option> <%="June" %> </option>
+                                               <option> <%="July" %> </option>
+                                                <option><%="Auguast" %> </option>
+                                                <option><%="September" %> </option>
+                                                <option><%="October" %> </option>
+                                               <option> <%="November" %> </option>
+                                               <option> <%="December" %> </option>
+                                           </select>
+                                          
+                                    </div>
+                                            <div class="col-lg-2">
+                                        <select class="form-control" placeholder="Select date" >
+                                            <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
+                                    for (int i = year; i >(year-10) ; i--) {%><option><%=i%></option><%}%>
+                                        </select>
+                                    </div>
+                                </div>                            
+                            </div>
+                        </div>
+                            <br>            
+                            <div id ="orange">
+                            <div class="form-group orange">
+                                 <label>Stock Quentity :</label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                 <label>Stock Price :</label>
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" placeholder="Enter stock quntity">
+                                    </div>
+                                    
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" placeholder="Enter stock price">  
+                                    </div>
+                                </div>
+                            </div>
+                         <br>
+                        </div> 
+                        
+                           <div id ="orange">
+                            <div class="form-group orange">    
+                              <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
-            <%--Form end--%>
+        <%--Form end--%>
+        
          <div class="row">
                 &nbsp;
             </div>
@@ -120,5 +199,6 @@
                 </ol>
             </div> 
         </div>
+      
     </body>
 </html>
