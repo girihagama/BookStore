@@ -115,9 +115,11 @@ public class BookClass {
                 pstmt.setString(4, b_Year);
                 pstmt.setInt(5, a_ID);
                 
+                System.out.println(pstmt);
                 int inserted = pstmt.executeUpdate();
                 pstmt.close();
                 db.endConnection();
+                
                 return inserted;
             } catch (SQLException ex) {
                 Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
