@@ -97,20 +97,14 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
                            <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Name</label>
                                 <div class="row">
                                     <div class="col-lg-4">
-<<<<<<< HEAD
                                         <select class="form-control" placeholder="Select year" >
-=======
                                         <select class="form-control" placeholder="Select year" required >
->>>>>>> origin/master
                                             <option>Author name</option>
                                         </select>
                                     </div>
