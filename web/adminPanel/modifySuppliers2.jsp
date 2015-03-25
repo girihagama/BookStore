@@ -92,29 +92,29 @@
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Supplier Name" required>
+                                <input type="text" class="form-control" placeholder="Enter Supplier Name" name="modifySupplierName" required>
                             </div>
                         </div>
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Contact Number</label>
-                                <input type="text" class="form-control" placeholder="Enter Contact Number" required>
+                                <input type="text" class="form-control" placeholder="Enter Contact Number" name="modifySupplierContactNO" required>
                             </div>
                         </div>
                         
                                                 <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Email</label>
-                                <input type="email" class="form-control" placeholder="Enter Email" data-error="Email address is invalid" required>
+                                <input type="email" class="form-control" name="modifySupplierEmail" placeholder="Enter Email" data-error="Email address is invalid" required>
                             </div>
                         </div>
                         
                                                 <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Address</label>
-                                <input type="text" class="form-control" placeholder="Address Line 1" required>
-                                <input type="text" class="form-control" placeholder="Address Line 2">
-                                <input type="text" class="form-control" placeholder="Address Line 3">
+                                <input type="text" name="modifySupplierADD1" class="form-control" placeholder="Address Line 1" required>
+                                <input type="text" name="modifySupplierADD2" class="form-control" placeholder="Address Line 2">
+                                <input type="text" name="modifySupplierADD3" class="form-control" placeholder="Address Line 3">
                             </div>
                         </div>
                         

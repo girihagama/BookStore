@@ -93,7 +93,7 @@
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Author Name" required>
+                                <input type="text" name="addAuthorName" class="form-control" placeholder="Enter Author Name" required>
                             </div>
                         </div>
   
@@ -102,14 +102,14 @@
                                 <label>Author Date of Birth</label>
                                 <div class="row">
                                     <div class="col-lg-2">
-                                        <select class="form-control" placeholder="Select year" >
+                                        <select class="form-control" placeholder="Select year" name="addYear">
                                             <option>Year</option>
                                             <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
                                                 for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
-                                        <select class="form-control" placeholder="Select year">
+                                        <select class="form-control" placeholder="Select year" name="addMonth">
                                             <option>Month</option>
                                             <option>January</option>
                                             <option>February</option>
@@ -126,7 +126,7 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
-                                        <select class="form-control" placeholder="Select year" >
+                                        <select class="form-control" placeholder="Select year" name="addDate">
                                             <option>Date</option>
                                             <% 
                                                 for (int i = 0; i <31; i++) {%><option><%=i+1%></option><%}%>
@@ -139,7 +139,7 @@
                            <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Description</label>
-                                <textarea class="form-control" rows="3" placeholder="Enter Description"></textarea>
+                                <textarea class="form-control" rows="3" placeholder="Enter Description" name="addAuthorDesc"></textarea>
                             </div>
                         </div>
                         

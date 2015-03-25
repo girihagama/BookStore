@@ -94,7 +94,7 @@
                                 <div class="col-lg-8">
                                     <div id="orange">
                                       <div class="input-group">
-                                        <input type="text" class="form-control orange" placeholder="Search for...">
+                                          <input type="text" class="form-control orange" placeholder="Search for..." name="modifyAuthorSearch">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default orange" type="button">Search</button>
                                         </span>

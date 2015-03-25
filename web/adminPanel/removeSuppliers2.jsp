@@ -92,20 +92,20 @@
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Supplier Name" required>
+                                <input type="text" class="form-control" placeholder="Enter Supplier Name" name="removeSupplierName" required>
                             </div>
                         </div>
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Contact Number</label>
-                                <input type="text" class="form-control" placeholder="Enter Contact Number" required>
+                                <input type="text" class="form-control" placeholder="Enter Contact Number" name="removeSupplierContactNO" required>
                             </div>
                         </div>
                         
                                                 <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Email</label>
-                                <input type="email" class="form-control" placeholder="Enter Email" data-error="Email address is invalid" required>
+                                <input type="email" class="form-control" placeholder="Enter Email" data-error="Email address is invalid" name="removeSupplierEmail" required>
                             </div>
                         </div>
                         
