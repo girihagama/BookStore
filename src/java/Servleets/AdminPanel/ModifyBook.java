@@ -3,32 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Servleets.AdminPanel;
 
-import Classes.AuthorClass;
 import Classes.BookClass;
-import Classes.DbClass;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import javax.imageio.ImageIO;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author Chami
  */
-@MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
-@WebServlet(name = "AddBook", urlPatterns = {"/AddBook"})
-public class AddBook extends HttpServlet {
+@WebServlet(name = "ModifyBook", urlPatterns = {"/ModifyBook"})
+public class ModifyBook extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,10 +40,10 @@ public class AddBook extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddBook</title>");            
+            out.println("<title>Servlet ModifyBook</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddBook at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ModifyBook at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -84,49 +77,18 @@ public class AddBook extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         //processRequest(request, response);
-        String warningMsg=null;
-        String bookTitle=request.getParameter("bookTitle");
-        String authorName=request.getParameter("autherName");
-        String edition=request.getParameter("bookEdition");
-        String year=request.getParameter("year");
-        InputStream image = null; // input stream of the upload file
-         
-        // obtains the upload file part in this multipart request
-        Part filePart = request.getPart("image");
-        if (filePart != null) {
-            image = filePart.getInputStream();
-        }
-        else 
-            image=null;
-                
-        AuthorClass author = new AuthorClass();
-        author.findAutherID(authorName);
-        int a_ID=author.getA_ID();
-        
+        String bookName = request.getParameter("searchName");
         BookClass book = new BookClass();
-        book.setB_Title(bookTitle);
-        book.setB_Edition(edition);
-        book.setB_Year(year);
-        book.setB_Image(image);
-        book.setA_ID(a_ID);
-        int result=book.insertBook();
-        
-        if(result==1){
-            warningMsg="Your book is inserted to the system";
+        book.setB_Title(bookName);
+        List bookList = book.searchBook();
+        if (bookList.isEmpty()) {
+            request.setAttribute("errorSearch", bookName);
+        } else {
+            request.setAttribute("bookList", bookList);
         }
-        else{
-            warningMsg="Your book is not inserted due to an error. Please try again";
-            request.setAttribute("errorBookTitle", bookTitle);
-            request.setAttribute("errorAuthor", authorName);
-            request.setAttribute("errorYear", year);
-            request.setAttribute("errorEdition", edition);
-        }
-        
-        request.setAttribute("msg", warningMsg);
-        request.setAttribute("action", "AddBook");
-        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/addBook.jsp");
-        rd.include(request, response);
-        
+
+        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifiBook1.jsp");
+        rd.forward(request, response);
     }
 
     /**
