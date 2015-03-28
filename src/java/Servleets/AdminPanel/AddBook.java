@@ -115,7 +115,7 @@ public class AddBook extends HttpServlet {
             warningMsg="Your book is inserted to the system";
         }
         else{
-            warningMsg="Your book is not inserted due to an error. Please try again later";
+            warningMsg="Your book is not inserted due to an error. Please try again";
             request.setAttribute("errorBookTitle", bookTitle);
             request.setAttribute("errorAuthor", authorName);
             request.setAttribute("errorYear", year);
