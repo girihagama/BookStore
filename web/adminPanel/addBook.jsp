@@ -19,6 +19,7 @@
     </head>
     <body>
         <div class="container" style="background-color:#F5F5F0">
+<<<<<<< HEAD
             <div class="row"><div class="col-md-10">&nbsp;</div></div>
             <div class="row">
                 <div class="col-md-11"></div>
@@ -66,6 +67,9 @@
                 <img src="http://localhost:8080/BookStore/adminPanel/Images/Orthers/orange line.png"width="100%" alt="Responsive image"">
             </div>
             <%-- end of sub menus--%>           
+=======
+            <%@include file="HeaderFiles/bookHeader.jsp"%>
+>>>>>>> 9b4e94a2fb0c725101359220ddfadc9067976088
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -87,6 +91,7 @@
                 <%--Form--%>
                 <div class="col-lg-9">
                     
+<<<<<<< HEAD
                 <% if("nknln".equals(request.getAttribute("result"))){
                     %><p class="bg-warning"><%=request.getAttribute("result")%></p><%
                 }%>
@@ -101,17 +106,45 @@
                             </div>
                         </div>
 
+=======
+                    <% if (request.getAttribute("msg") != null) {
+                    %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br>
+                            If you want add another book fill below form and add a book.</div><%
+                }else{%>
+                    <br><%}%>
+                    <br>                 
+                    <form <%if(request.getAttribute("action")!=null){%>
+                                       action="<%=request.getAttribute("action")%>"<%}else{%>
+                                       action="../AddBook"<%}%>
+                                       method="POST" enctype="multipart/form-data">
+                        <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Book Title</label>
+                                <input type="text" name="bookTitle" class="form-control" placeholder="Enter book title" required
+                                       <%if(request.getAttribute("errorBookTitle")!=null){%>
+                                       value="<%=request.getAttribute("errorBookTitle")%>"<%}%>>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+>>>>>>> 9b4e94a2fb0c725101359220ddfadc9067976088
                            <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Name</label>
                                 <div class="row">
                                     <div class="col-lg-4">
+<<<<<<< HEAD
                                         <select class="form-control" placeholder="Select year" >
                                         <select class="form-control" placeholder="Select year" required >
                                             <option>Author name</option>
                                         <select name="autherName" class="form-control" placeholder="Select year" required >
                                             <option>Martin Wickramasinghe</option>
 
+=======
+                                        <select name="autherName" class="form-control" placeholder="Select year" required
+                                                <%if(request.getAttribute("errorAuthor")!=null){%>
+                                                value="<%=request.getAttribute("errorAuthor")%>"<%}%>>
+                                            <option>Martin Wickramasinghe</option>
+>>>>>>> 9b4e94a2fb0c725101359220ddfadc9067976088
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
@@ -125,7 +158,13 @@
                                 <label>Book Edition</label>
                                 <div class="row">
                                 <div class="col-lg-4">
+<<<<<<< HEAD
                                     <input name="bookEdition" type="text" class="form-control" placeholder="Enter book edition">
+=======
+                                    <input name="bookEdition" type="text" class="form-control" placeholder="Enter book edition"
+                                           <%if(request.getAttribute("errorEdition")!=null){%>
+                                       value="<%=request.getAttribute("errorEdition")%>"<%}%>>
+>>>>>>> 9b4e94a2fb0c725101359220ddfadc9067976088
                                 </div>
                                 </div>
                             </div>
@@ -135,7 +174,13 @@
                                 <label>Book Published Year</label>
                                 <div class="row">
                                     <div class="col-lg-4">
+<<<<<<< HEAD
                                         <select name="year" class="form-control" placeholder="Select year" >
+=======
+                                        <select name="year" class="form-control" placeholder="Select year" 
+                                                <%if(request.getAttribute("errorYear")!=null){%>
+                                       value="<%=request.getAttribute("errorYear")%>"<%}%>>
+>>>>>>> 9b4e94a2fb0c725101359220ddfadc9067976088
                                             <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
                                     for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
                                         </select>

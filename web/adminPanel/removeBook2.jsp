@@ -1,6 +1,6 @@
 <%-- 
-    Document   : modifibook2
-    Created on : Mar 23, 2015, 5:19:38 PM
+    Document   : removePage2
+    Created on : Mar 23, 2015, 5:30:38 PM
     Author     : Chami
 --%>
 
@@ -11,10 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/startPage.css" rel="stylesheet">
+        <link href="css/form.css" rel="stylesheet">
         <title>Admin Panel</title>
     </head>
     <body>
@@ -29,8 +29,8 @@
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
                                     <li role="presentation"><a href="#"><font style="color: orange">Add Book</font></a></li>
-                                    <li role="presentation" class="active"><a href="#">Modify Book</a></li>
-                                    <li role="presentation"><a href="#"><font style="color: orange">Remove Book</font></a></li>
+                                    <li role="presentation"><a href="#"><font style="color: orange">Modify Book</font></a></li>
+                                    <li role="presentation" class="active" ><a href="#">Remove Book</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -43,26 +43,21 @@
                 <div class="col-lg-9">
                     <br>
                     <br>
-                    <% if (request.getAttribute("msg") != null) {
-                    %><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
-                            } else {%>
-                    <form action="ModifyBook3" method="POST">
+                    <form>
                         <div id ="orange">
                             <div class="form-group orange">
-                                <label>Book Title : <%=request.getAttribute("searchedBookName")%></label>
-                                <input type="hidden" name="oldName" value="<%=request.getAttribute("searchedBookName")%>">
-                                <input type="text" class="form-control" placeholder="Enter new book title" required name="changedName">
+                                <label>Book Title</label>
+                                <input type="text" class="form-control" placeholder="Enter book title" required>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div id ="orange">
                             <div class="form-group orange">
-                                <label>Author Name : <%=request.getAttribute("searchedBookAName")%></label>
+                                <label>Author Name</label>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <select class="form-control" placeholder="Select year" name="changedAName">
+                                        <select class="form-control" placeholder="Select year" required >
                                             <option>Author name</option>
-                                            <option>Martin Wickramasinghe</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
@@ -73,59 +68,38 @@
                         </div> 
                         <div id ="orange">
                             <div class="form-group orange">
-                                <label>Book Edition : <%=request.getAttribute("searchedBookEdition")%></label>
+                                <label>Book Edition</label>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Enter new book edition" name="changedEdition" >
+                                        <input type="text" class="form-control" placeholder="Enter book edition">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id ="orange">
                             <div class="form-group orange">
-                                <label>Book Published Year :  <%=request.getAttribute("searchedBookYear")%></label>
+                                <label>Book Published Year</label>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <select class="form-control" placeholder="Select year" name="changedYear">
+                                        <select class="form-control" placeholder="Select year" >
                                             <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
                                                 for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
                                         </select>
                                     </div>
                                 </div>                            
                             </div>
-                        </div>                         
-                        <button type="submit" class="btn btn-default">Modify Book</button>
-                    </form><%}%>
+                        </div> 
+                        <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Book Image</label>
+                                <input type="file" style="border-color: orange">
+                            </div>  
+                        </div> 
+                        <button type="submit" class="btn btn-default">Remove Book</button>
+                    </form>
                 </div>
             </div>
             <%--Form end--%>
-            <% if (request.getAttribute("msg") != null) {
-            %>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <%}%>
             <div class="row">
                 &nbsp;
             </div>

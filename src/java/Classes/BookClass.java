@@ -8,7 +8,10 @@ package Classes;
 import com.mysql.jdbc.PreparedStatement;
 import java.awt.Image;
 import java.io.InputStream;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,13 +20,13 @@ import java.util.logging.Logger;
  * @author Indunil
  */
 public class BookClass {
+
     private int b_ID;
     private String b_Title;
-    private InputStream  b_Image;
+    private InputStream b_Image;
     private String b_Edition;
     private String b_Year;
     private int a_ID; //author ID
-    private PreparedStatement pstmt;
 
     /**
      * @return the b_ID
@@ -58,9 +61,9 @@ public class BookClass {
     }
 
     public void setB_Image(InputStream image) {
-        this.b_Image=image;
+        this.b_Image = image;
     }
-    
+
     /**
      * @return the b_Edition
      */
@@ -102,11 +105,11 @@ public class BookClass {
     public void setA_ID(int a_ID) {
         this.a_ID = a_ID;
     }
-    
-   
-    public int insertBook (){
+
+    public int insertBook() {        
+    PreparedStatement pstmt;
         DbClass db = new DbClass();
-        if(db.getConnection()==true){
+        if (db.getConnection() == true) {
             try {
                 pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into book(b_Title,b_image,b_Edition,b_year,a_ID) values(?,?,?,?,?)");
                 pstmt.setString(1, b_Title);
@@ -114,10 +117,12 @@ public class BookClass {
                 pstmt.setString(3, b_Edition);
                 pstmt.setString(4, b_Year);
                 pstmt.setInt(5, a_ID);
-                
+
+                System.out.println(pstmt);
                 int inserted = pstmt.executeUpdate();
                 pstmt.close();
                 db.endConnection();
+
                 return inserted;
             } catch (SQLException ex) {
                 Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,5 +131,97 @@ public class BookClass {
         return -1;
     }
 
-    
+    public List searchBook() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        List blist = new ArrayList();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select b_title from book where b_Title like ?");
+                pstmt.setString(1,"%"+b_Title+"%");
+
+                System.out.println(pstmt);
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    blist.add(rs.getString("b_Title"));
+                }
+                pstmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return blist;
+        }
+        return null;
+    }
+    public void getBookDetails(){
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+         if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select * from book where b_Title = ?");
+                pstmt.setString(1,b_Title);
+
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    this.b_Title=rs.getString("b_Title");
+                    this.b_Edition=rs.getString("b_Edition");
+                    this.b_Year=rs.getString("b_year").substring(0, 4);
+                    this.a_ID=rs.getInt("a_ID");
+                }
+                pstmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+    }
+    public void getBookID(String bookName){
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+         if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select * from book where b_Title = ?");
+                pstmt.setString(1,bookName);
+
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    this.b_ID=rs.getInt("b_ID");
+                }
+                pstmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+    }
+    public int modifyBook() {        
+    PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Update book set b_Title=?, b_Edition = ?, b_year = ?, a_ID=? where b_ID=?");
+                pstmt.setString(1, b_Title);
+                //pstmt.setBlob(2, b_Image);
+                pstmt.setString(2, b_Edition);
+                pstmt.setString(3, b_Year);
+                pstmt.setInt(4, a_ID);
+                pstmt.setInt(5, b_ID);
+
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1;
+    }
+
 }

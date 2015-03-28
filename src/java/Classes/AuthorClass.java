@@ -98,5 +98,23 @@ public class AuthorClass {
             }
         }
     }
+    public void findAutherName(int a_ID){
+        DbClass db = new DbClass();
+        if(db.getConnection()==true){
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select a_Name from author where a_ID=?");
+                pstmt.setInt(1, a_ID);
+                
+                ResultSet rs = pstmt.executeQuery();
+                while(rs.next()){
+                    this.a_Name=rs.getString(1);
+                }
+                pstmt.close();
+                db.endConnection();
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     
 }
