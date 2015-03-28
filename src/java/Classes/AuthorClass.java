@@ -8,6 +8,9 @@ package Classes;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -115,6 +118,30 @@ public class AuthorClass {
                 Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    public List getAllAuthors() {
+        Statement stmt;
+        DbClass db = new DbClass();
+        List alist = new ArrayList();
+        if (db.getConnection() == true) {
+            try {
+                String query = "select a_Name from author desc";
+                stmt=db.conn.createStatement();
+
+                System.out.println(pstmt);
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    alist.add(rs.getString("a_Name"));
+                }
+                stmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return alist;
+        }
+        return null;
     }
     
 }
