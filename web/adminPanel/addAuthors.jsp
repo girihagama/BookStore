@@ -19,6 +19,7 @@
     </head>
     <body>
          <div class="container" style="background-color:#F5F5F0">
+<<<<<<< HEAD
             <div class="row"><div class="col-md-10">&nbsp;</div></div>
             <div class="row">
                 <div class="col-md-11"></div>
@@ -66,6 +67,9 @@
                 <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image">
             </div>
             <%-- end of sub menus--%>  
+=======
+            <%@include file="HeaderFiles/authorHeader.jsp"%>
+>>>>>>> chami1994-master
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">

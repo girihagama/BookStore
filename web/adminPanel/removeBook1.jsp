@@ -1,24 +1,33 @@
 <%-- 
-    Document   : removePage2
-    Created on : Mar 23, 2015, 5:30:38 PM
+    Document   : removePage1
+    Created on : Mar 23, 2015, 5:25:42 PM
     Author     : Chami
 --%>
 
-<%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+<<<<<<< HEAD:web/adminPanel/removePage1.jsp
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
+=======
+       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/startPage.css" rel="stylesheet">
         <link href="css/form.css" rel="stylesheet">
+>>>>>>> chami1994-master:web/adminPanel/removeBook1.jsp
         <title>Admin Panel</title>
     </head>
     <body>
         <div class="container" style="background-color:#F5F5F0">
+<<<<<<< HEAD:web/adminPanel/removePage1.jsp
             <div class="row"><div class="col-md-10">&nbsp;</div></div>
             <div class="row">
                 <div class="col-md-11"></div>
@@ -66,9 +75,12 @@
                 <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image"">
             </div>
             <%-- end of sub menus--%>           
+=======
+            <%@include file="HeaderFiles/bookHeader.jsp"%>           
+>>>>>>> chami1994-master:web/adminPanel/removeBook1.jsp
             <div class="row">
                 <%--left side navigation--%>
-                <div class="col-lg-2">
+                <div class="col-lg-2" >
                     <ul class="nav nav-pills nav-stacked ">
                         <li role="presentation" class="text_box" style="padding: 0px; text-align: left;">Books</li>
                         <li>
@@ -82,71 +94,52 @@
                         </li>
                     </ul>  
                 </div>
-                <div class="col-lg-1">&nbsp;</div>
+                <div class="col-xs-1">&nbsp;</div>
                 <%--left side navigation end--%>
-
-                <%--Form--%>
                 <div class="col-lg-9">
-                    <br>
-                    <br>
-                    <form>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Title</label>
-                                <input type="text" class="form-control" placeholder="Enter book title" required>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Author Name</label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <select class="form-control" placeholder="Select year" required >
-                                            <option>Author name</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <a class="btn btn-default" href="#" role="button">Add Authors</a>
-                                    </div>
-                                </div>                            
-                            </div>
-                        </div> 
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Edition</label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Enter book edition">
+                    <div class="row">&nbsp;</div>
+                    <div class="row">&nbsp;</div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <label><h4>Search Book For Remove</h4></label>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div id="orange">
+                                      <div class="input-group">
+                                        <input type="text" class="form-control orange" placeholder="Search for...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default orange" type="button">Search</button>
+                                        </span>
+                                    </div>  
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Published Year</label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <select class="form-control" placeholder="Select year" >
-                                            <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
-                                                for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
-                                        </select>
-                                    </div>
-                                </div>                            
-                            </div>
-                        </div> 
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Image</label>
-                                <input type="file" style="border-color: orange">
-                            </div>  
-                        </div> 
-                        <button type="submit" class="btn btn-default">Remove Book</button>
-                    </form>
+                        <br>
+                        
+                    </div>
                 </div>
             </div>
-            <%--Form end--%>
+
             <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
                 &nbsp;
             </div>
             <div class="row">
@@ -158,7 +151,7 @@
                     <li><a href="#">Library</a></li>
                     <li class="active">Data</li>
                 </ol>
-            </div> 
-        </div>
+            </div>            
+        </div>        
     </body>
 </html>

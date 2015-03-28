@@ -19,6 +19,7 @@
     </head>
     <body>
         <div class="container" style="background-color:#F5F5F0">
+<<<<<<< HEAD
             <div class="row"><div class="col-md-10">&nbsp;</div></div>
             <div class="row">
                 <div class="col-md-11"></div>
@@ -66,6 +67,9 @@
                 <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image"">
             </div>
             <%-- end of sub menus--%>           
+=======
+            <%@include file="HeaderFiles/bookHeader.jsp"%>           
+>>>>>>> chami1994-master
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -89,21 +93,42 @@
                 <div class="col-lg-9">
                     <br>
                     <br>
+<<<<<<< HEAD
                     <form>
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Book Title</label>
                                 <input type="text" class="form-control" placeholder="Enter book title" required>
+=======
+                    <% if (request.getAttribute("msg") != null) {
+                    %><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
+                            } else {%>
+                    <form action="ModifyBook3" method="POST">
+                        <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Book Title : <%=request.getAttribute("searchedBookName")%></label>
+                                <input type="hidden" name="oldName" value="<%=request.getAttribute("searchedBookName")%>">
+                                <input type="text" class="form-control" placeholder="Enter new book title" required name="changedName">
+>>>>>>> chami1994-master
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div id ="orange">
                             <div class="form-group orange">
+<<<<<<< HEAD
                                 <label>Author Name</label>
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <select class="form-control" placeholder="Select year" required >
                                             <option>Author name</option>
+=======
+                                <label>Author Name : <%=request.getAttribute("searchedBookAName")%></label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <select class="form-control" placeholder="Select year" name="changedAName">
+                                            <option>Author name</option>
+                                            <option>Martin Wickramasinghe</option>
+>>>>>>> chami1994-master
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
@@ -114,26 +139,41 @@
                         </div> 
                         <div id ="orange">
                             <div class="form-group orange">
+<<<<<<< HEAD
                                 <label>Book Edition</label>
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <input type="text" class="form-control" placeholder="Enter book edition">
+=======
+                                <label>Book Edition : <%=request.getAttribute("searchedBookEdition")%></label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" placeholder="Enter new book edition" name="changedEdition" >
+>>>>>>> chami1994-master
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id ="orange">
                             <div class="form-group orange">
+<<<<<<< HEAD
                                 <label>Book Published Year</label>
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <select class="form-control" placeholder="Select year" >
+=======
+                                <label>Book Published Year :  <%=request.getAttribute("searchedBookYear")%></label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <select class="form-control" placeholder="Select year" name="changedYear">
+>>>>>>> chami1994-master
                                             <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
                                                 for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
                                         </select>
                                     </div>
                                 </div>                            
                             </div>
+<<<<<<< HEAD
                         </div> 
                         <div id ="orange">
                             <div class="form-group orange">
@@ -146,6 +186,41 @@
                 </div>
             </div>
             <%--Form end--%>
+=======
+                        </div>                         
+                        <button type="submit" class="btn btn-default">Modify Book</button>
+                    </form><%}%>
+                </div>
+            </div>
+            <%--Form end--%>
+            <% if (request.getAttribute("msg") != null) {
+            %>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <%}%>
+>>>>>>> chami1994-master
             <div class="row">
                 &nbsp;
             </div>

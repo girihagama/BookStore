@@ -4,6 +4,11 @@
     Author     : Chami
 --%>
 
+<<<<<<< HEAD
+=======
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+>>>>>>> chami1994-master
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,6 +24,7 @@
     </head>
     <body>
         <div class="container" style="background-color:#F5F5F0">
+<<<<<<< HEAD
             <div class="row"><div class="col-md-10">&nbsp;</div></div>
             <div class="row">
                 <div class="col-md-11"></div>
@@ -66,6 +72,9 @@
                 <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image"">
             </div>
             <%-- end of sub menus--%>           
+=======
+            <%@include file="HeaderFiles/bookHeader.jsp"%>          
+>>>>>>> chami1994-master
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2" >
@@ -89,6 +98,7 @@
                     <div class="row">&nbsp;</div>
                     <div class="col-lg-12">
                         <div class="row">
+<<<<<<< HEAD
                             <label><h4>Search Book For Modify</h4></label>
                             <div class="row">
                                 <div class="col-lg-8">
@@ -105,29 +115,87 @@
                         </div>
                         <br>
                         
+=======
+                            <form <%if (request.getAttribute("bookList")!= null ||request.getAttribute("errorSearch")!=null ) {%>
+                                action="ModifyBook"<%} else {%>
+                                action="../ModifyBook"<%}%> method="POST">
+                                <label><h4>Search Book For Modify</h4></label>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div id="orange">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control orange" placeholder="Search for..." required name="searchName">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default orange" type="submit">Search</button>
+                                                </span>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <br>
+                        <%!String bookName;%>
+                        <%!int numberOfResult = 0;%> 
+                        <%if (request.getAttribute("bookList") != null) {
+                            List results =(List) request.getAttribute("bookList");
+                            Iterator it =results.iterator();
+                            numberOfResult=0;
+                                while (it.hasNext()) {
+                                    bookName = (String) it.next();
+                                    numberOfResult = numberOfResult + 1;%>                                
+                        <br>
+                        <form action="ModifyBook2" method="POST">
+                            <input type="hidden" name="bookName" value="<%=bookName%>">
+                            <button type="submit" class="btn btn-default">Click here to modify <strong><%=bookName%></strong></button>                                    
+                        </form>
+                        <%}%>
+                        <%} else if(request.getAttribute("errorSearch")!=null) {%>
+                        <br>
+                        <div class="alert alert-warning" role="alert"><strong>Sorry, Your search - <%=request.getAttribute("errorSearch")%> - did not match any book.</strong><br></div>
+                            <%}%>
+>>>>>>> chami1994-master
                     </div>
                 </div>
             </div>
 
+<<<<<<< HEAD
+=======
+            <%if (numberOfResult < 5) {%>
+>>>>>>> chami1994-master
             <div class="row">
                 &nbsp;
             </div>
             <div class="row">
                 &nbsp;
             </div>
+<<<<<<< HEAD
                 <div class="row">
+=======
+            <div class="row">
+>>>>>>> chami1994-master
                 &nbsp;
             </div>
             <div class="row">
                 &nbsp;
             </div>
+<<<<<<< HEAD
                 <div class="row">
+=======
+            <div class="row">
+>>>>>>> chami1994-master
                 &nbsp;
             </div>
             <div class="row">
                 &nbsp;
             </div>
+<<<<<<< HEAD
                 <div class="row">
+=======
+            <%}%>
+
+            <div class="row">
+>>>>>>> chami1994-master
                 &nbsp;
             </div>
             <div class="row">
