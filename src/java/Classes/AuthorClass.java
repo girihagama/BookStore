@@ -26,12 +26,23 @@ public class AuthorClass {
     private String a_DOB;
     private String a_Desc;    
     private PreparedStatement pstmt;
+    private List alist;
 
     /**
      * @return the a_ID
      */
     public int getA_ID() {
         return a_ID;
+    }
+
+    public List getAlist() {
+        this.alist=getAllAuthors();
+        System.out.println(alist);
+        return alist;
+    }
+
+    public void setAlist(List alist) {
+        this.alist = alist;
     }
 
     /**
@@ -121,25 +132,25 @@ public class AuthorClass {
     }
     public List getAllAuthors() {
         Statement stmt;
+        List authorlist = new ArrayList();
         DbClass db = new DbClass();
-        List alist = new ArrayList();
         if (db.getConnection() == true) {
             try {
-                String query = "select a_Name from author desc";
+                String query = "select a_Name from author order by a_Name";
                 stmt=db.conn.createStatement();
 
-                System.out.println(pstmt);
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
-                    alist.add(rs.getString("a_Name"));
+                    System.out.println(rs.getString("a_Name"));
+                    authorlist.add(rs.getString("a_Name"));
                 }
                 stmt.close();
                 db.endConnection();
+                return authorlist;
 
             } catch (SQLException ex) {
                 Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return alist;
         }
         return null;
     }

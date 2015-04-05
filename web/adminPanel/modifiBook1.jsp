@@ -13,8 +13,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+        
+        <%--Bootsrap CSS files--%>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrapValidator.css"/>
+        
+        <%--Bootsrap jS files--%>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrapValidator.js"></script>
+
+        <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
         <title>Admin Panel</title>
@@ -45,7 +55,7 @@
                     <div class="row">&nbsp;</div>
                     <div class="col-lg-12">
                         <div class="row">
-                            <form <%if (request.getAttribute("bookList")!= null ||request.getAttribute("errorSearch")!=null ) {%>
+                            <form id="Search" <%if (request.getAttribute("bookList")!= null ||request.getAttribute("errorSearch")!=null ) {%>
                                 action="ModifyBook"<%} else {%>
                                 action="../ModifyBook"<%}%> method="POST">
                                 <label><h4>Search Book For Modify</h4></label>
@@ -53,7 +63,7 @@
                                     <div class="col-lg-8">
                                         <div id="orange">
                                             <div class="input-group">
-                                                <input type="text" class="form-control orange" placeholder="Search for..." required name="searchName">
+                                                <input type="text" class="form-control orange" placeholder="Search for..." id="searchName" name="searchName">
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default orange" type="submit">Search</button>
                                                 </span>
@@ -86,7 +96,21 @@
                     </div>
                 </div>
             </div>
-
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var validator = $("#Search").bootstrapValidator({
+                        fields: {
+                            searchName: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "Please provide a book title to search"
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>  
             <%if (numberOfResult < 5) {%>
             <div class="row">
                 &nbsp;

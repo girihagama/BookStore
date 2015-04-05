@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Chami
  */
-@WebServlet(name = "ModifyBook2", urlPatterns = {"/ModifyBook2"})
-public class ModifyBook2 extends HttpServlet {
+@WebServlet(name = "RemoveBook1", urlPatterns = {"/RemoveBook1"})
+public class RemoveBook1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class ModifyBook2 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ModifyBook2</title>");            
+            out.println("<title>Servlet RemoveBook1</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ModifyBook2 at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RemoveBook1 at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -93,7 +93,7 @@ public class ModifyBook2 extends HttpServlet {
         request.setAttribute("searchedBookEdition", bookEdition);
         request.setAttribute("searchedBookAName", authorName);
         request.setAttribute("searchedBookYear", bookYear);
-        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifibook2.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/removeBook2.jsp");
         rd.forward(request, response);
     }
 

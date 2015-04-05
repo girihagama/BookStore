@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Chami
  */
-@WebServlet(name = "ModifyBook2", urlPatterns = {"/ModifyBook2"})
-public class ModifyBook2 extends HttpServlet {
+@WebServlet(name = "RemoveBook2", urlPatterns = {"/RemoveBook2"})
+public class RemoveBook2 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class ModifyBook2 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ModifyBook2</title>");            
+            out.println("<title>Servlet RemoveBook2</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ModifyBook2 at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RemoveBook2 at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +62,7 @@ public class ModifyBook2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
@@ -76,25 +76,23 @@ public class ModifyBook2 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        String bookSearchName= request.getParameter("bookName");
+       //processRequest(request, response);
+        String warningMsg=null;
+        String oldBookName=request.getParameter("oldName");
         BookClass book = new BookClass();
-        AuthorClass author = new AuthorClass();
-        book.setB_Title(bookSearchName);//set book title
-        book.getBookDetails();//get details
-        author.findAutherName(book.getA_ID());//find author name
-        //set values.........
-        String authorName = author.getA_Name();
-        String bookEdition = book.getB_Edition();
-        String bookTitle = book.getB_Title();
-        String bookYear = book.getB_Year();
-        //..............
-        request.setAttribute("searchedBookName", bookTitle);
-        request.setAttribute("searchedBookEdition", bookEdition);
-        request.setAttribute("searchedBookAName", authorName);
-        request.setAttribute("searchedBookYear", bookYear);
-        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifibook2.jsp");
-        rd.forward(request, response);
+        book.setB_Title(oldBookName);
+        int result=book.removeBook();
+        
+        if(result==1){
+            warningMsg="Your book is removed successfully";
+        }
+        else{
+            warningMsg="Your book is not removed due to an error. Please try again";
+        }
+        
+        request.setAttribute("msg", warningMsg);
+        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/removeBook2.jsp");
+        rd.include(request, response);
     }
 
     /**

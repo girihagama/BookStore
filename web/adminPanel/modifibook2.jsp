@@ -4,6 +4,8 @@
     Author     : Chami
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,8 +13,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+
+        <%--Bootsrap CSS files--%>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrapValidator.css"/>
+
+        <%--Bootsrap jS files--%>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrapValidator.js"></script>
+
+        <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
         <title>Admin Panel</title>
@@ -46,23 +58,29 @@
                     <% if (request.getAttribute("msg") != null) {
                     %><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
                             } else {%>
-                    <form action="ModifyBook3" method="POST">
+                    <form id="ModifyBook" action="ModifyBook3" method="POST">
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Book Title : <%=request.getAttribute("searchedBookName")%></label>
                                 <input type="hidden" name="oldName" value="<%=request.getAttribute("searchedBookName")%>">
-                                <input type="text" class="form-control" placeholder="Enter new book title" required name="changedName">
+                                <input type="text" class="form-control" placeholder="Enter new book title" name="changedName" id="changedName">
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
+                        <jsp:useBean id="author" class="Classes.AuthorClass"></jsp:useBean>
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Name : <%=request.getAttribute("searchedBookAName")%></label>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <select class="form-control" placeholder="Select year" name="changedAName">
-                                            <option>Author name</option>
-                                            <option>Martin Wickramasinghe</option>
+                                        <select name="autherName" id="autherName" class="form-control" >
+                                            <option disabled selected value="0">Select a new author</option> 
+                                        <%
+                                            List results = author.getAlist();
+                                            Iterator it = results.iterator();
+                                                while (it.hasNext()) {%>
+                                        <option><%=it.next()%></option>
+                                        <%}%>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
@@ -86,9 +104,10 @@
                                 <label>Book Published Year :  <%=request.getAttribute("searchedBookYear")%></label>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <select class="form-control" placeholder="Select year" name="changedYear">
-                                            <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
-                                                for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
+                                        <select name="year" class="form-control" placeholder="Select year">
+                                            <%  int year = Calendar.getInstance().get(Calendar.YEAR); %>
+                                            <option disabled selected value="0">Select a new year</option>
+                                                <%for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
                                         </select>
                                     </div>
                                 </div>                            
@@ -98,6 +117,28 @@
                     </form><%}%>
                 </div>
             </div>
+                <script type="text/javascript">
+                $(document).ready(function() {
+                    var validator = $("#ModifyBook").bootstrapValidator({
+                        fields: {
+                            changedName: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "Please provide a book title"
+                                    }
+                                }
+                            },
+                            autherName: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "Please provide an author. if there is no author, please add and select the author"
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
             <%--Form end--%>
             <% if (request.getAttribute("msg") != null) {
             %>

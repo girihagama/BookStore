@@ -6,10 +6,10 @@
 
 package Servleets.AdminPanel;
 
-import Classes.AuthorClass;
 import Classes.BookClass;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Chami
  */
-@WebServlet(name = "ModifyBook2", urlPatterns = {"/ModifyBook2"})
-public class ModifyBook2 extends HttpServlet {
+@WebServlet(name = "RemoveBook", urlPatterns = {"/RemoveBook"})
+public class RemoveBook extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class ModifyBook2 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ModifyBook2</title>");            
+            out.println("<title>Servlet RemoveBook</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ModifyBook2 at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RemoveBook at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,24 +76,19 @@ public class ModifyBook2 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       response.setContentType("text/html;charset=UTF-8");
         //processRequest(request, response);
-        String bookSearchName= request.getParameter("bookName");
+        String bookName = request.getParameter("searchName");
         BookClass book = new BookClass();
-        AuthorClass author = new AuthorClass();
-        book.setB_Title(bookSearchName);//set book title
-        book.getBookDetails();//get details
-        author.findAutherName(book.getA_ID());//find author name
-        //set values.........
-        String authorName = author.getA_Name();
-        String bookEdition = book.getB_Edition();
-        String bookTitle = book.getB_Title();
-        String bookYear = book.getB_Year();
-        //..............
-        request.setAttribute("searchedBookName", bookTitle);
-        request.setAttribute("searchedBookEdition", bookEdition);
-        request.setAttribute("searchedBookAName", authorName);
-        request.setAttribute("searchedBookYear", bookYear);
-        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifibook2.jsp");
+        book.setB_Title(bookName);
+        List bookList = book.searchBook();
+        if (bookList.isEmpty()) {
+            request.setAttribute("errorSearch", bookName);
+        } else {
+            request.setAttribute("bookList", bookList);
+        }
+        
+        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/removeBook1.jsp");
         rd.forward(request, response);
     }
 

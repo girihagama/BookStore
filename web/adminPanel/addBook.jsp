@@ -32,7 +32,7 @@
     </head>
     <body>
         <div class="container" style="background-color:#F5F5F0">
-            <%@include file="HeaderFiles/bookHeader.jsp"%>
+           <%@include file="HeaderFiles/bookHeader.jsp"%> 
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -72,19 +72,21 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
+                        <jsp:useBean id="author" class="Classes.AuthorClass"></jsp:useBean>                        
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label for="autherName">Author Name</label>
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <select name="autherName" id="autherName" class="form-control" >
-                                            <option disabled selected value="0">Select an author</option>
-                                            <% AuthorClass author = new AuthorClass();
-                                               List aList = author.getAllAuthors();
-                                               Iterator it =aList.iterator();
-                                               while (it.hasNext()){%>
-                                               <option><%=(String)it.next()%></option><%}%>
-                                        </select>
+                                            <option disabled selected value="0">Select an author</option> 
+                                        <%
+                                            List results = author.getAlist();
+                                            Iterator it = results.iterator();
+                                                while (it.hasNext()) {%>
+                                        <option><%=it.next()%></option>
+                                        <%}%>
+                                    </select>
                                     </div>
                                     <div class="col-lg-2">
                                         <a class="btn btn-default" href="#" role="button">Add Authors</a>
