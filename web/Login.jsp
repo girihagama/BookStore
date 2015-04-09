@@ -102,10 +102,11 @@
                     if (x !== "" || x !== null) {
                         document.getElementById('username').value = x;
                         sync();
-                        autoClick();
-                    }                    
+                    } else {                        
+                        return false;
+                    }
                     return false;
-                    
+
                 } else {
                     return true;
                 }
@@ -113,7 +114,8 @@
 
             function autoClick() {
                 document.forms('passRecover').submit();
-            }
+            }            
+            
         </script>
 
         <!--internal JS end-->
