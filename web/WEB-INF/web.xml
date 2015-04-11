@@ -4,9 +4,25 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>Servleets.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginCheck</servlet-name>
+        <servlet-class>Servleets.LoginCheck</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClearAll</servlet-name>
+        <servlet-class>Servleets.ClearAll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginCheck</servlet-name>
+        <url-pattern>/LoginCheck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClearAll</servlet-name>
+        <url-pattern>/ClearAll</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
