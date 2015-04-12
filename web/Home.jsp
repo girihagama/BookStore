@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Login successful!</h1>
+        <jsp:include page='header.jsp'></jsp:include>
+        <h1>Member login successful..!</h1>
     </body>
 </html>

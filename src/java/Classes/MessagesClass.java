@@ -5,6 +5,9 @@
  */
 package Classes;
 
+import com.mysql.jdbc.Statement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author Indunil
@@ -15,6 +18,9 @@ public class MessagesClass {
     private String m_Date;
     private String m_Content;
     private int m_ReadState;
+    
+    //DbClass object
+    private DbClass db = new DbClass();
 
     /**
      * @return the m_ID
@@ -86,4 +92,35 @@ public class MessagesClass {
         this.m_ReadState = m_ReadState;
     }
     
+    //methods
+    
+    public int unreadedMessagesCount(){
+        
+        int messages=0;
+        
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT COUNT(*) FROM messages WHERE u_Name='" + getU_Name() + "' AND m_ReadState = 0";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                messages = rs.getInt("COUNT(*)");
+            }
+            db.endConnection();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+        
+        return messages;        
+    }
 }

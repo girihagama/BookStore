@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,6 +65,10 @@ public class Login extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
+        
+        
+        
+        boolean rememberUser;
 
         try {
             UserClass x = new UserClass();
@@ -71,10 +76,16 @@ public class Login extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String remember = request.getParameter("Remember");
+
             /*
              remember me checkbox returns "Remember" if it is checked
              Or returns "null" if it isn't checked
-            */
+             */
+            if (remember == null) {
+                rememberUser = false;
+            } else {
+                rememberUser = true;
+            }
 
             x.setU_Name(username);
             x.setU_Pass(password);
@@ -83,21 +94,49 @@ public class Login extends HttpServlet {
 
             if (login == true) {
                 session.setAttribute("Login", "True");
-                
+
                 session.setAttribute("Username", username);
                 session.setAttribute("Password", password);
 
                 int chkPrivilege = x.chkPrivilege();
 
+                if (rememberUser == true) {
+                    Cookie loginCk = new Cookie("Login", "True");
+                    Cookie userCk = new Cookie("Username", username);
+                    Cookie passCk = new Cookie("Password", password);
+
+                    loginCk.setMaxAge(60 * 60 * 24 * 30);
+                    userCk.setMaxAge(60 * 60 * 24 * 30);
+                    passCk.setMaxAge(60 * 60 * 24 * 30);
+
+                    response.addCookie(loginCk);
+                    response.addCookie(userCk);
+                    response.addCookie(passCk);
+                }
+
                 if (chkPrivilege == 1) {
+                    
+                    if (rememberUser == true) {
+                        Cookie loginTypeCk = new Cookie("Login_Type", "admin");
+                        loginTypeCk.setMaxAge(60 * 60 * 24 * 30);
+                        response.addCookie(loginTypeCk);
+                    }
+                    
                     session.setAttribute("Login_Type", "admin");
                     response.sendRedirect("adminPanel/adminStartPage.jsp");
                 }
-                if (chkPrivilege == 0) {
+                if (chkPrivilege == 0) {                    
+                    
+                    if (rememberUser == true) {
+                        Cookie loginTypeCk = new Cookie("Login_Type", "user");
+                        loginTypeCk.setMaxAge(60 * 60 * 24 * 30);
+                        response.addCookie(loginTypeCk);
+                    }
+                    
                     session.setAttribute("Login_Type", "user");
                     response.sendRedirect("Home.jsp");
                 }
-            } else {   
+            } else {
                 session.setAttribute("Login", "False");
                 session.setAttribute("Error", "Wrong Username");
 
