@@ -5,7 +5,12 @@
  */
 package Classes;
 
+import com.mysql.jdbc.PreparedStatement;
 import java.awt.Image;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,10 +19,11 @@ import java.awt.Image;
 public class BookClass {
     private int b_ID;
     private String b_Title;
-    private Image b_Image;
+    private InputStream  b_Image;
     private String b_Edition;
     private String b_Year;
     private int a_ID; //author ID
+    private PreparedStatement pstmt;
 
     /**
      * @return the b_ID
@@ -47,20 +53,14 @@ public class BookClass {
         this.b_Title = b_Title;
     }
 
-    /**
-     * @return the b_Image
-     */
-    public Image getB_Image() {
+    public InputStream getB_Image() {
         return b_Image;
     }
 
-    /**
-     * @param b_Image the b_Image to set
-     */
-    public void setB_Image(Image b_Image) {
-        this.b_Image = b_Image;
+    public void setB_Image(InputStream image) {
+        this.b_Image=image;
     }
-
+    
     /**
      * @return the b_Edition
      */
@@ -102,4 +102,31 @@ public class BookClass {
     public void setA_ID(int a_ID) {
         this.a_ID = a_ID;
     }
+    
+   
+    public int insertBook (){
+        DbClass db = new DbClass();
+        if(db.getConnection()==true){
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into book(b_Title,b_image,b_Edition,b_year,a_ID) values(?,?,?,?,?)");
+                pstmt.setString(1, b_Title);
+                pstmt.setBlob(2, b_Image);
+                pstmt.setString(3, b_Edition);
+                pstmt.setString(4, b_Year);
+                pstmt.setInt(5, a_ID);
+                
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+                
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1;
+    }
+
+    
 }
