@@ -5,16 +5,23 @@
  */
 package Classes;
 
+import com.mysql.jdbc.Statement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author Indunil
  */
 public class NotificationsClass {
+
     private int n_ID;
     private String u_Name;
     private String n_Date;
     private String n_Content;
     private int n_ReadState;
+
+    //DbClass object
+    private DbClass db = new DbClass();
 
     /**
      * @return the n_ID
@@ -84,5 +91,35 @@ public class NotificationsClass {
      */
     public void setN_ReadState(int n_ReadState) {
         this.n_ReadState = n_ReadState;
+    }
+
+    //methods
+    public int unreadedNotificationCount() {
+        int notifications = 0;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT COUNT(*) FROM notifications WHERE u_Name='" + getU_Name() + "' AND n_ReadState = 0";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                notifications = rs.getInt("COUNT(*)");
+            }
+            db.endConnection();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return notifications;
     }
 }

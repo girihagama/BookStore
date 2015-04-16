@@ -10,10 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/startPage.css" rel="stylesheet">
-        <link href="css/form.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
         <title>Admin Panel</title>
     </head>
     <body>
@@ -81,11 +81,52 @@
                         </li>
                     </ul>  
                 </div>
-            </div>
+            
                 <div class="col-lg-1">&nbsp;</div>
                 <%--left side navigation end--%>
-                
+                                <div class="col-lg-9">
+                    <div class="row">&nbsp;</div>
+                    <div class="row">&nbsp;</div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <label><h4>Search Author to Modify</h4></label>
                             <div class="row">
+                                <div class="col-lg-8">
+                                    <div id="orange">
+                                      <div class="input-group">
+                                          <input type="text" class="form-control orange" placeholder="Search for..." name="modifyAuthorSearch">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default orange" type="button">Search</button>
+                                        </span>
+                                    </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        
+                    </div>
+                </div>
+                                </div>
+<div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+                <div class="row">
                 &nbsp;
             </div>
             <div class="row">

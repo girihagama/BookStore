@@ -4,9 +4,73 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>Servleets.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginCheck</servlet-name>
+        <servlet-class>Servleets.LoginCheck</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClearAll</servlet-name>
+        <servlet-class>Servleets.ClearAll</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChkMessage</servlet-name>
+        <servlet-class>Servleets.ChkMessage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChkNotification</servlet-name>
+        <servlet-class>Servleets.ChkNotification</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChkCart</servlet-name>
+        <servlet-class>Servleets.ChkCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBook</servlet-name>
+        <servlet-class>Servleets.SearchBook</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyProfile</servlet-name>
+        <servlet-class>Servleets.MyProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SignOut</servlet-name>
+        <servlet-class>Servleets.SignOut</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginCheck</servlet-name>
+        <url-pattern>/LoginCheck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClearAll</servlet-name>
+        <url-pattern>/ClearAll</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChkMessage</servlet-name>
+        <url-pattern>/ChkMessage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChkNotification</servlet-name>
+        <url-pattern>/ChkNotification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChkCart</servlet-name>
+        <url-pattern>/ChkCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBook</servlet-name>
+        <url-pattern>/SearchBook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyProfile</servlet-name>
+        <url-pattern>/MyProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignOut</servlet-name>
+        <url-pattern>/SignOut</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

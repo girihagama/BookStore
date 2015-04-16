@@ -10,10 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/startPage.css" rel="stylesheet">
-        <link href="css/form.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
+        <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
         <title>Admin Panel</title>
     </head>
     <body>
@@ -92,29 +92,29 @@
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Supplier Name" required>
+                                <input type="text" class="form-control" name="addSupplierName" placeholder="Enter Supplier Name" required>
                             </div>
                         </div>
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Contact Number</label>
-                                <input type="text" class="form-control" placeholder="Enter Contact Number" required>
+                                <input type="text" class="form-control" name="addSupplierContactNO" placeholder="Enter Contact Number" required>
                             </div>
                         </div>
                         
                                                 <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Email</label>
-                                <input type="email" class="form-control" placeholder="Enter Email" data-error="Email address is invalid" required>
+                                <input type="email" class="form-control" name="addSupplierEmail" placeholder="Enter Email" data-error="Email address is invalid" required>
                             </div>
                         </div>
                         
                                                 <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Address</label>
-                                <input type="text" class="form-control" placeholder="Address Line 1" required>
-                                <input type="text" class="form-control" placeholder="Address Line 2">
-                                <input type="text" class="form-control" placeholder="Address Line 3">
+                                <input type="text" name="addSupplierADD1" class="form-control" placeholder="Address Line 1" required>
+                                <input type="text" name="addSupplierADD2" class="form-control" placeholder="Address Line 2">
+                                <input type="text" name="addSupplierADD3" class="form-control" placeholder="Address Line 3">
                             </div>
                         </div>
                         

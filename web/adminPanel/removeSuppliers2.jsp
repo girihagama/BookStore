@@ -1,6 +1,6 @@
 <%-- 
-    Document   : removeSuppliers
-    Created on : Mar 23, 2015, 4:11:25 PM
+    Document   : removeSuppliers2
+    Created on : Mar 25, 2015, 10:45:25 AM
     Author     : Dushara Vitiyala
 --%>
 
@@ -17,7 +17,7 @@
         <title>Admin Panel</title>
     </head>
     <body>
-           <div class="container" style="background-color:#F5F5F0">
+        <div class="container" style="background-color:#F5F5F0">
             <div class="row"><div class="col-md-10">&nbsp;</div></div>
             <div class="row">
                 <div class="col-md-11"></div>
@@ -43,7 +43,7 @@
                     <a href="#"><img src="Images/Page icons/Books.png" class="image" width="100%" alt="Responsive image" title="Books"></a>
                 </div>
                 <div class="col-lg-1">
-                    <a href="addAuthors.jsp"><img src="Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" title="Authors" ></a>
+                    <a href="addAuthors.jsp"><img src="Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" title="Authors"></a>
                 </div>
                 <div class="col-lg-1">
                     <a href="#"><img src="Images/Page icons/Clients.png" class="image" width="100%" alt="Responsive image" title="Clients"></a>
@@ -62,9 +62,9 @@
                 </div>
             </div>    
             <div class="row">
-                <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image">
+                <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image"">
             </div>
-            <%-- end of sub menus--%>  
+            <%-- end of sub menus--%>           
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -73,7 +73,7 @@
                         <li>
                             <div id="topmenu">
                             <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation"><a href="addSuppliers.jsp"><font style="color: orange">Add Supplier</font></a></li>
+                                <li role="presentation"><a href="addAuppliers.jsp"><font style="color: orange">Add Supplier</font></a></li>
                                 <li role="presentation"><a href="modifySuppliers.jsp"><font style="color: orange">Modify Supplier</font></a></li>
                                 <li role="presentation" class="active"><a href="#">Remove Supplier</a></li>
                             </ul>
@@ -81,34 +81,49 @@
                         </li>
                     </ul>  
                 </div>
-            
                 <div class="col-lg-1">&nbsp;</div>
-                <%--left side navigation end--%>                         <div class="col-lg-9">
-                    <div class="row">&nbsp;</div>
-                    <div class="row">&nbsp;</div>
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <label><h4>Search Supplier to Remove</h4></label>
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div id="orange">
-                                      <div class="input-group">
-                                          <input type="text" class="form-control orange" placeholder="Search for..." name="removeSupplierSearch">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default orange" type="button">Search</button>
-                                        </span>
-                                    </div>  
-                                    </div>
-                                </div>
+                <%--left side navigation end--%>
+                
+                <%--Form--%>
+                <div class="col-lg-9">
+                    <br>
+                    <br>
+                    <form>
+                        <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Supplier Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Supplier Name" name="removeSupplierName" required>
                             </div>
                         </div>
-                        <br>
+                        <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Supplier Contact Number</label>
+                                <input type="text" class="form-control" placeholder="Enter Contact Number" name="removeSupplierContactNO" required>
+                            </div>
+                        </div>
                         
-                    </div>
+                                                <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Supplier Email</label>
+                                <input type="email" class="form-control" placeholder="Enter Email" data-error="Email address is invalid" name="removeSupplierEmail" required>
+                            </div>
+                        </div>
+                        
+                                                <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Supplier Address</label>
+                                <input type="text" class="form-control" placeholder="Address Line 1" required>
+                                <input type="text" class="form-control" placeholder="Address Line 2">
+                                <input type="text" class="form-control" placeholder="Address Line 3">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-default">Remove Supplier</button>
+                    </form>
                 </div>
-                                </div>
-                
-                            <div class="row">
+            </div>
+            <%--Form end--%>
+   <div class="row">
                 &nbsp;
             </div>
             <div class="row">
@@ -139,7 +154,6 @@
                     <li class="active">Data</li>
                 </ol>
             </div> 
-         
-                 </div>   
+        </div>
     </body>
 </html>
