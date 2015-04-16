@@ -5,7 +5,14 @@
  */
 package Classes;
 
+import com.mysql.jdbc.PreparedStatement;
 import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.script.*;
 
 /**
@@ -244,5 +251,71 @@ public class UserClass {
 
         // invoke the global function named "hello"
         inv.invokeFunction("Exception", msg);
+    }
+    public List searchClient() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        List clist = new ArrayList();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select u_Name from user where u_Name like ? and u_Privilege =1");
+                pstmt.setString(1,"%"+u_Name+"%");
+
+                System.out.println(pstmt);
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    clist.add(rs.getString("u_Name"));
+                }
+                pstmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return clist;
+        }
+        return null;
+    }
+
+    public void getUserDetails() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+         if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select * from user where u_Name = ? ");
+                pstmt.setString(1,u_Name);
+
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    this.u_Name=rs.getString("u_Name");
+                    if(rs.getString("u_RegDate")!=null||!"".equals(rs.getString("u_RegDate")))
+                        this.u_RegDate=rs.getString("u_RegDate").substring(0, 10);
+                    else
+                        this.u_RegDate="No Registration date for this person";
+                    this.u_Mail=rs.getString("u_Mail");
+                    if(rs.getString("u_addLine1")!=null)
+                        this.u_addLine1=rs.getString("u_addLine1");
+                    else
+                        this.u_addLine1="-";
+                    if(rs.getString("u_addLine2")!=null)
+                        this.u_addLine2=rs.getString("u_addLine2");
+                    else
+                        this.u_addLine2="-";
+                    if(rs.getString("u_addLine3")!=null)
+                        this.u_addLine3=rs.getString("u_addLine3");
+                    else
+                        this.u_addLine3="-";
+                    if(rs.getString("u_TPN")!=null)
+                        this.u_TPN=rs.getString("u_TPN");
+                    else
+                        this.u_TPN="No Telephone Number for this person";
+                }
+                pstmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
     }
 }

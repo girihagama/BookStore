@@ -42,8 +42,8 @@
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
                                     <li role="presentation" class="active"><a href="#">Add Book</a></li>
-                                    <li role="presentation"><a href="#"><font style="color: orange">Modify Book</font></a></li>
-                                    <li role="presentation"><a href="#"><font style="color: orange">Remove Book</font></a></li>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp"><font style="color: orange">Modify Book</font></a></li>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeBook1.jsp"><font style="color: orange">Remove Book</font></a></li>
                                 </ul>
                             </div>
                         </li>

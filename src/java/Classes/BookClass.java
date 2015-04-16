@@ -8,6 +8,7 @@ package Classes;
 import com.mysql.jdbc.PreparedStatement;
 import java.awt.Image;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -106,6 +107,7 @@ public class BookClass {
         this.a_ID = a_ID;
     }
 
+
     public int insertBook() {        
     PreparedStatement pstmt;
         DbClass db = new DbClass();
@@ -176,7 +178,7 @@ public class BookClass {
                     else
                         this.b_Year="No published year for this book";
                     this.a_ID=rs.getInt("a_ID");
-                    System.out.println("bID" +this.b_Edition);
+                    
                 }
                 pstmt.close();
                 db.endConnection();

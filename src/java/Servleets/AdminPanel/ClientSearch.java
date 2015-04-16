@@ -6,11 +6,11 @@
 
 package Servleets.AdminPanel;
 
-import Classes.AuthorClass;
 import Classes.BookClass;
+import Classes.UserClass;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Chami
  */
-@WebServlet(name = "ModifyBook2", urlPatterns = {"/ModifyBook2"})
-public class ModifyBook2 extends HttpServlet {
+@WebServlet(name = "ClientSearch", urlPatterns = {"/ClientSearch"})
+public class ClientSearch extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +42,10 @@ public class ModifyBook2 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ModifyBook2</title>");            
+            out.println("<title>Servlet ClientSearch</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ModifyBook2 at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ClientSearch at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -77,29 +77,19 @@ public class ModifyBook2 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         //processRequest(request, response);
-        OutputStream oImage; //for image
-        
-        
-        String bookSearchName= request.getParameter("bookName");
-        BookClass book = new BookClass();
-        AuthorClass author = new AuthorClass();
-        book.setB_Title(bookSearchName);//set book title
-        book.getBookDetails();//get details
-        author.findAutherName(book.getA_ID());//find author name
-        //set values.........
-        String authorName = author.getA_Name();
-        String bookEdition = book.getB_Edition();
-        String bookTitle = book.getB_Title();
-        String bookYear = book.getB_Year();
-        //need image
-        
-        //..............
-        request.setAttribute("searchedBookName", bookTitle);
-        request.setAttribute("searchedBookEdition", bookEdition);
-        request.setAttribute("searchedBookAName", authorName);
-        request.setAttribute("searchedBookYear", bookYear);
-        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifibook2.jsp");
+        String clientName = request.getParameter("searchName");
+        UserClass client = new UserClass();
+        client.setU_Name(clientName);
+        List cList = client.searchClient();
+        if (cList.isEmpty()) {
+            request.setAttribute("errorSearch", clientName);
+        } else {
+            request.setAttribute("cList", cList);
+        }
+
+        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/clientSearch.jsp");
         rd.forward(request, response);
     }
 

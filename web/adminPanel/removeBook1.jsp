@@ -39,8 +39,8 @@
                         <li>
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
-                                    <li role="presentation"><a href="#"><font style="color: orange">Add Book</font></a></li>
-                                    <li role="presentation"><a href="#"><font style="color: orange">Modify Book</font></a></li>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/addBook.jsp"><font style="color: orange">Add Book</font></a></li>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp"><font style="color: orange">Modify Book</font></a></li>
                                     <li role="presentation" class="active" ><a href="#">Remove Book</a></li>
                                 </ul>
                             </div>
@@ -74,7 +74,8 @@
                         </div>
                             <br>
                         <%!String bookName;%>
-                        <%!static int numberOfResult = 0;%> 
+                        <%!int numberOfResult;%> 
+                        <% numberOfResult=0;%>
                         <%if (request.getAttribute("bookList") != null) {
                             List results =(List) request.getAttribute("bookList");
                             Iterator it =results.iterator();
