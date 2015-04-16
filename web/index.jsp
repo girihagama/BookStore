@@ -41,7 +41,11 @@
             <h1>It's Nice To See You..!</h1>
             <h3>Welcome To Orchid Store</h3>
             <br>
+<<<<<<< HEAD
             <a href="Login.jsp" class="btn btn-dark btn-lg">                
+=======
+            <a href="LoginCheck" class="btn btn-dark btn-lg">                
+>>>>>>> d80cd2d375e1054004de650d4feff4e0da0fd368
                 <span class="glyphicon glyphicon glyphicon-play-circle"></span>
                 <br/>
                 Enter Orchid Store
@@ -53,6 +57,7 @@
     
     <!-- Footer -->
     <footer>
+        <a name="contact"></a>
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">

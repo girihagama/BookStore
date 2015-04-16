@@ -102,10 +102,18 @@
                     if (x !== "" || x !== null) {
                         document.getElementById('username').value = x;
                         sync();
+<<<<<<< HEAD
                         autoClick();
                     }                    
                     return false;
                     
+=======
+                    } else {
+                        return false;
+                    }
+                    return false;
+
+>>>>>>> d80cd2d375e1054004de650d4feff4e0da0fd368
                 } else {
                     return true;
                 }
@@ -114,11 +122,21 @@
             function autoClick() {
                 document.forms('passRecover').submit();
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> d80cd2d375e1054004de650d4feff4e0da0fd368
         </script>
 
         <!--internal JS end-->
     </head>
+<<<<<<< HEAD
     <body style="background-image: url(indunil_files/Resources/Graphics/clean-white-polygon-backgrounds-8.jpg); background-color: #B5B5B5;">	    
+=======
+    <body style="background-image: url(indunil_files/Resources/Graphics/clean-white-polygon-backgrounds-8.jpg); background-color: #B5B5B5;">
+
+        <jsp:include page='ShowErrorScript.jsp'></jsp:include>
+>>>>>>> d80cd2d375e1054004de650d4feff4e0da0fd368
 
         <div class="container" style="margin-top:40px;">
             <div class="row">

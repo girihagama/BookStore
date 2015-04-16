@@ -5,6 +5,7 @@
  */
 package Classes;
 
+<<<<<<< HEAD
 import com.mysql.jdbc.PreparedStatement;
 import java.awt.Image;
 import java.sql.ResultSet;
@@ -13,6 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+=======
+import com.mysql.jdbc.Statement;
+import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+>>>>>>> d80cd2d375e1054004de650d4feff4e0da0fd368
 import javax.script.*;
 
 /**
@@ -235,9 +242,9 @@ public class UserClass {
     public void setU_Image(Image u_Image) {
         this.u_Image = u_Image;
     }
-    
+
     //methods
-    protected void exceptionShow(String msg) throws Exception {
+    public void exceptionShow(String msg) throws Exception {
 
         ScriptEngineManager sem = new ScriptEngineManager();
         ScriptEngine scEng = sem.getEngineByName("JavaScript");
@@ -252,6 +259,7 @@ public class UserClass {
         // invoke the global function named "hello"
         inv.invokeFunction("Exception", msg);
     }
+<<<<<<< HEAD
     public List searchClient() {
         PreparedStatement pstmt;
         DbClass db = new DbClass();
@@ -318,4 +326,138 @@ public class UserClass {
             }
          }
     }
+=======
+
+    public Boolean chkMember(String username) throws Exception {
+        /*
+         This method will return true,
+         if user exist according to provided username
+         */
+        Boolean stat = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT COUNT(*) FROM user WHERE u_name='" + getU_Name() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int x = rs.getInt("COUNT(*)");
+
+                if (x == 1) {
+                    stat = true;
+                    System.out.println("User exist");
+                }
+                if (x == 0) {
+                    stat = false;
+                    System.out.println("User Doesn't exist");
+                }
+            }
+            db.endConnection();
+
+        } catch (Exception ex) {
+            exceptionShow(ex.getMessage());
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return stat;
+    }
+
+    public boolean login() throws SQLException, Exception {
+        /*
+         this method checks the user in the database
+         and returns whether the user exist or not
+         according to provided username and password.
+         */
+
+        boolean stat = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT COUNT(*) FROM user WHERE u_name='" + getU_Name() + "' AND u_pass='" + getU_Pass() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int x = rs.getInt("COUNT(*)");
+
+                if (x == 1) {
+                    stat = true;
+                    System.out.println("Login Success");
+                }
+                if (x == 0) {
+                    stat = false;
+                    System.out.println("Login Failed");
+                }
+            }
+            db.endConnection();
+
+        } catch (Exception ex) {
+            exceptionShow(ex.getMessage());
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return stat;
+    }
+
+    public int chkPrivilege() throws Exception {
+        /*
+         This method returns the privilege,
+         if the login() returns true
+         */
+        int prev = 0;
+
+        if (this.login() == true) {
+            try {
+                db.getConnection();
+
+                String query;
+                query = "SELECT u_Privilege FROM user WHERE u_name='" + getU_Name() + "' AND u_pass='" + getU_Pass() + "'";
+
+                Statement stmt = (Statement) db.conn.createStatement();
+
+                ResultSet rs = stmt.executeQuery(query);
+
+                while (rs.next()) {
+                    int x = rs.getInt("u_Privilege");
+
+                    if (x == 1) {
+                        prev = 1;
+                        System.out.println("Admin");
+                    }
+                    if (x == 0) {
+                        prev = 0;
+                        System.out.println("User");
+                    }
+                }
+                db.endConnection();
+
+            } catch (Exception ex) {
+                exceptionShow(ex.getMessage());
+            } finally {
+                if (db.conn != null) {
+                    db.endConnection();
+                }
+            }
+
+        }
+
+        return prev;
+    }
+
+>>>>>>> d80cd2d375e1054004de650d4feff4e0da0fd368
 }
