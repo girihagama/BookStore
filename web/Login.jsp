@@ -122,7 +122,7 @@
     </head>
     <body style="background-image: url(indunil_files/Resources/Graphics/clean-white-polygon-backgrounds-8.jpg); background-color: #B5B5B5;">
 
-        <jsp:include page='ShowErrorScript.jsp'></jsp:include>
+        <jsp:include page='include_ShowErrorScript.jsp'></jsp:include>
 
         <div class="container" style="margin-top:40px;">
             <div class="row">

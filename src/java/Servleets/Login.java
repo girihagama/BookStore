@@ -7,7 +7,6 @@ package Servleets;
 
 import Classes.UserClass;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -62,11 +61,8 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
         
-        
+        HttpSession session = request.getSession();    
         
         boolean rememberUser;
 
@@ -94,25 +90,20 @@ public class Login extends HttpServlet {
 
             if (login == true) {
                 session.setAttribute("Login", "True");
-
-                session.setAttribute("Username", username);
-                session.setAttribute("Password", password);
-
-                int chkPrivilege = x.chkPrivilege();
+                session.setAttribute("Username", username);               
 
                 if (rememberUser == true) {
                     Cookie loginCk = new Cookie("Login", "True");
                     Cookie userCk = new Cookie("Username", username);
-                    Cookie passCk = new Cookie("Password", password);
 
                     loginCk.setMaxAge(60 * 60 * 24 * 30);
                     userCk.setMaxAge(60 * 60 * 24 * 30);
-                    passCk.setMaxAge(60 * 60 * 24 * 30);
 
                     response.addCookie(loginCk);
                     response.addCookie(userCk);
-                    response.addCookie(passCk);
                 }
+                
+                int chkPrivilege = x.chkPrivilege();
 
                 if (chkPrivilege == 1) {
                     

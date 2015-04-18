@@ -33,8 +33,7 @@
     
 </head>
 
-<body>
-
+<body>    
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">

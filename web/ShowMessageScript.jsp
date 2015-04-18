@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ShowScript
-    Created on : Apr 9, 2015, 10:51:47 PM
+    Document   : ShowMessageScript
+    Created on : Apr 18, 2015, 11:42:18 AM
     Author     : Indunil
 --%>
 
@@ -18,14 +18,21 @@
         </script>
 
     </head>
+    
+    <%-- 
+        This page use the value of session named "Info"
+        and shows that value in Javascript alertbox..
+        You can use this page with JSP include.
+    --%>
+    
     <%        //showing session value via java script
-        if (session.getAttribute("Error") != null) {
-            String messege = (String) session.getAttribute("Error");
+        if (session.getAttribute("Info") != null) {
+            String messege = (String) session.getAttribute("Info");
             out.print("<body onload=\"myFunction('" + messege + "')\">"
                     + "</body>");
         }
     %>
     <%
-        session.setAttribute("Error", null);
+        session.setAttribute("Info", null);
     %>
 </html>

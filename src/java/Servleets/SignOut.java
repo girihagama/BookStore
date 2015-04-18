@@ -8,9 +8,11 @@ package Servleets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,18 +32,7 @@ public class SignOut extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SignOut</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SignOut at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +47,22 @@ public class SignOut extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            PrintWriter out=response.getWriter();
+            
+            //clears all cookies
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie : cookies) {
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+            //clears all sessions
+            HttpSession session = request.getSession();
+            session.invalidate();
+            
+            response.sendRedirect("index.jsp");            
+        } catch (Exception ex) {
+        }
     }
 
     /**

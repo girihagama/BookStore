@@ -8,6 +8,7 @@ package Servleets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +36,7 @@ public class MyProfile extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MyProfile</title>");            
+            out.println("<title>Servlet MyProfile</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet MyProfile at " + request.getContextPath() + "</h1>");
@@ -56,7 +57,9 @@ public class MyProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+
+        
     }
 
     /**

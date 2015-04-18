@@ -70,17 +70,17 @@
         %>
 
         <%
-            //get new messages
+            //gets new messages
             MessagesClass m = new MessagesClass();
             m.setU_Name(username);
             message = m.unreadedMessagesCount();
 
-            //get new notifications
+            //gets new notifications
             NotificationsClass n = new NotificationsClass();
             n.setU_Name(username);
             notification = n.unreadedNotificationCount();
 
-            //get no. of cart items
+            //gets no. of cart items
             CartClass c = new CartClass();
             c.setU_Name(username);
             cart = c.noOfItems();
