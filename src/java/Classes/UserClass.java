@@ -8,7 +8,10 @@ package Classes;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.script.*;
 
 /**
@@ -380,4 +383,81 @@ public class UserClass {
         return prev;
     }
 
+    public boolean chkUserName(String username) throws Exception {
+        boolean stat = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT COUNT(*) FROM user WHERE u_name='" + username + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int x = rs.getInt("COUNT(*)");
+
+                if (x == 1) {
+                    stat = true;
+                    System.out.println("Exist");
+                }
+                if (x == 0) {
+                    stat = false;
+                    System.out.println("Not Exist");
+                }
+            }
+            db.endConnection();
+
+        } catch (Exception ex) {
+            exceptionShow(ex.getMessage());
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return stat;
+
+    }
+
+    public void importProfile() {
+
+    }
+
+    public ArrayList loadProfile() {
+        ArrayList arrayList  = new ArrayList();
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT u_name, u_pass FROM user WHERE u_name='" + getU_Name() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+//            ResultSetMetaData metadata = rs.getMetaData();
+//            int numberOfColumns = metadata.getColumnCount();
+            
+            while (rs.next()) {
+                UserClass user =new UserClass();
+                user.setU_Name(rs.getString("u_name"));
+                user.setU_Pass(rs.getString("u_pass"));
+                arrayList.add(user);
+            }
+
+            db.endConnection();
+        } catch (Exception ex) {
+
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return arrayList;
+    }
 }

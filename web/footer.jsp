@@ -67,6 +67,7 @@
     </head>
     <body class="container-fluid">
         <div class="row">
+            <br/>
             <div class="col col-lg-12 alert-warning text-center" style="padding: 5px; font-family: calibri;">
                 <a href="index.jsp#contact" style="text-decoration: none;"> © ORCHID STORE Online Marketplace 2015</a>
             </div>

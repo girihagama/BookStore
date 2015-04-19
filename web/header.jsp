@@ -1,9 +1,3 @@
-<%-- 
-    Document   : header
-    Created on : Apr 12, 2015, 9:43:37 PM
-    Author     : Indunil
---%>
-
 <%@page import="Classes.CartClass"%>
 <%@page import="Classes.NotificationsClass"%>
 <%@page import="Classes.MessagesClass"%>
@@ -125,7 +119,7 @@
                             <li>
                                 <!--notifications btn-->
                                 <form action="ChkMessage" method="GET">
-                                    <button type="submit" class="btn btn-danger navbar-btn btn-block" style="border-radius:0px;">
+                                    <button type="submit" class="btn btn-sm btn-danger navbar-btn btn-block" style="border-radius:0px;">
                                         <span class="glyphicon glyphicon-envelope"></span>
                                         Messages
                                         <span class="badge"><%= message%></span>
@@ -137,7 +131,7 @@
                             <li>
                                 <!--messages btn-->
                                 <form action="ChkNotification" method="GET">
-                                    <button type="submit" class="btn btn-warning navbar-btn btn-block" style="border-radius:0px;">
+                                    <button type="submit" class="btn btn-sm btn-warning navbar-btn btn-block" style="border-radius:0px;">
                                         <span class="glyphicon glyphicon-bullhorn"></span>
                                         Notifications
                                         <span class="badge"><%= notification%></span>
@@ -149,7 +143,7 @@
                             <li>
                                 <!--shopping cart btn-->
                                 <form action="ChkCart" method="GET">
-                                    <button type="submit" class="btn btn-info navbar-btn btn-block" style="border-radius:0px;">
+                                    <button type="submit" class="btn btn-sm btn-info navbar-btn btn-block" style="border-radius:0px;">
                                         <span class="glyphicon glyphicon-shopping-cart"></span>
                                         Shopping Cart
                                         <span class="badge"><%= cart%></span>
@@ -158,26 +152,18 @@
                                 <!--shopping cart btn end-->
                             </li>
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Account 
-                                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                            <li>
+                                <a href="MyProfile">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    Profile
+                                </a>                          
+                            </li>
+
+                            <li>
+                                <a href="SignOut">
+                                    <span class="glyphicon glyphicon-off"></span>
+                                    Log Out
                                 </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="MyProfile">
-                                            <span class="glyphicon glyphicon-user"></span>
-                                            Profile
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="SignOut">
-                                            <span class="glyphicon glyphicon-off"></span>
-                                            Log Out
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
@@ -186,5 +172,6 @@
             </nav>            
 
         </div>
+        <br/>
     </body>
 </html>
