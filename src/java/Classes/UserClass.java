@@ -256,6 +256,10 @@ public class UserClass {
         // invoke the global function named "hello"
         inv.invokeFunction("Exception", msg);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
     public List searchClient() {
         PreparedStatement pstmt;
         DbClass db = new DbClass();
@@ -338,6 +342,10 @@ public class UserClass {
             }
          }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 
     public Boolean chkMember(String username) throws Exception {
         /*
@@ -469,4 +477,9 @@ public class UserClass {
 
         return prev;
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/master
 }
