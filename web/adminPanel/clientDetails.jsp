@@ -53,9 +53,7 @@
                 <%--Form--%>
                 <div class="col-lg-9">
                     <br>
-                    <% if (request.getAttribute("msg") != null) {
-                    %><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
-                    } else {%>
+                    
                     <label><h3>Client Details</h3></label>
                     <form id="Client" action="RemoveClient" method="POST">
                         <table border="0">
@@ -115,7 +113,7 @@
                                     <td></td>
                                 </tr>
                         </tbody>
-                    </form><%}%>
+                    </form>
                     <br>
                     <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#email" data-whatever="<%=request.getAttribute("searchedClientMail")%>">Send Email</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     
@@ -125,28 +123,34 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="text_box" id="exampleModalLabel" style="padding: 0px; text-align: left; font-size: 3em; ">New E-mail Address</h4>
+                                    <h4 class="text_box" id="exampleModalLabel" style="padding: 0px; text-align: left; font-size: 3em; ">New email to <%=request.getAttribute("searchedClientName")%></h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
+                                    <form action="ClientMail" id="ClientMail" method="POST">
                                         <div id ="orange">
                                         <div class="form-group orange" >
                                             <label for="recipient-name" class="control-label">Recipient:</label>
-                                            <input type="text" class="form-control" id="recipient-name">
+                                            <input type="text" class="form-control" id="recipient" name="recipient">
+                                        </div>
+                                        </div>
+                                        <div id ="orange">
+                                        <div class="form-group orange" >
+                                            <label for="subject" class="control-label">Message Subject:</label>
+                                            <input type="text" class="form-control" name="subject" id="subject">
                                         </div>
                                         </div>
                                         <div id ="orange">
                                         <div class="form-group orange">
                                             <label for="message-text" class="control-label">Message:</label>
-                                            <textarea class="form-control" id="message-text"></textarea>
+                                            <textarea class="form-control" id="content" name="content"></textarea>
                                         </div>
                                         </div>
-                                    </form>
-                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-warning">Send message</button>
+                                    <button type="submit" class="btn btn-warning">Send email</button>
                                 </div>
+                                </form>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -173,15 +177,35 @@
                             var button = $(event.relatedTarget) // Button that triggered the modal
                             var recipient = button.data('whatever') // Extract info from data-* attributes
                             var modal = $(this)
-                            modal.find('.text_box').text('New email to ' + recipient)
-                            modal.find('.modal-body input').val(recipient)
+                            modal.find('#recipient').val(recipient)
                             })
-                    </script>    
+                    </script>   
+                    <%-- email box validation--%>
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            var validator = $("#ClientMail").bootstrapValidator({
+                                fields: {
+                                    subject: {
+                                        validators: {
+                                            notEmpty: {
+                                                message: "Please provide a subject"
+                                            }
+                                        }
+                                    },
+                                    content: {
+                                        validators: {
+                                            notEmpty: {
+                                                message: "Please provide the content"
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    </script>
                 </div>
             </div>
             <%--Form end--%>
-            <% if (request.getAttribute("msg") != null) {
-            %>
             <div class="row">
                 &nbsp;
             </div>
@@ -191,26 +215,6 @@
             <div class="row">
                 &nbsp;
             </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <%} else {%>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <%}%>
             <div class="row">
                 &nbsp;
             </div>

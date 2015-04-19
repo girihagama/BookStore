@@ -5,7 +5,6 @@
  */
 package Classes;
 
-<<<<<<< HEAD
 import com.mysql.jdbc.PreparedStatement;
 import java.awt.Image;
 import java.sql.ResultSet;
@@ -14,12 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-=======
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
->>>>>>> d80cd2d375e1054004de650d4feff4e0da0fd368
 import javax.script.*;
 
 /**
@@ -259,7 +256,7 @@ public class UserClass {
         // invoke the global function named "hello"
         inv.invokeFunction("Exception", msg);
     }
-<<<<<<< HEAD
+
     public List searchClient() {
         PreparedStatement pstmt;
         DbClass db = new DbClass();
@@ -283,6 +280,22 @@ public class UserClass {
             return clist;
         }
         return null;
+    }
+    public ResultSet gteAllAdmins(){
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+         if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select * from user where u_Privilege = 1 order by admin_Level ");
+                
+                ResultSet rs = pstmt.executeQuery();
+                                                
+                return rs;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+         return null;
     }
 
     public void getUserDetails() {
@@ -326,7 +339,7 @@ public class UserClass {
             }
          }
     }
-=======
+
 
     public Boolean chkMember(String username) throws Exception {
         /*
@@ -459,5 +472,5 @@ public class UserClass {
         return prev;
     }
 
->>>>>>> d80cd2d375e1054004de650d4feff4e0da0fd368
+
 }

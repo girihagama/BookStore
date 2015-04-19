@@ -6,24 +6,37 @@
 
 package Servleets.AdminPanel;
 
-import Classes.AuthorClass;
-import Classes.BookClass;
+import Classes.EmailUtility;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  *
  * @author Chami
  */
-@WebServlet(name = "RemoveBook2", urlPatterns = {"/RemoveBook2"})
-public class RemoveBook2 extends HttpServlet {
-
+@WebServlet(name = "ClientMail", urlPatterns = {"/ClientMail"})
+public class ClientMail extends HttpServlet {
+    private String host;
+    private String port;
+    private String user;
+    private String pass;
+ 
+    public void init() {
+        // reads SMTP server setting from web.xml file
+        ServletContext context = getServletContext();
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        user = context.getInitParameter("user");
+        pass = context.getInitParameter("pass");
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,10 +54,10 @@ public class RemoveBook2 extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RemoveBook2</title>");            
+            out.println("<title>Servlet ClientMail</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RemoveBook2 at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ClientMail at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +75,7 @@ public class RemoveBook2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**
@@ -76,23 +89,25 @@ public class RemoveBook2 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       //processRequest(request, response);
-        String warningMsg=null;
-        String oldBookName=request.getParameter("oldName");
-        BookClass book = new BookClass();
-        book.setB_Title(oldBookName);
-        int result=book.removeBook();
-        
-        if(result==1){
-            warningMsg="Your book is removed successfully";
+        // reads form fields
+        String recipient = request.getParameter("recipient");
+        String subject = request.getParameter("subject");
+        String content = request.getParameter("content");
+ 
+        String resultMessage = "";
+ 
+        try {
+            EmailUtility.sendEmail(host, port, user, pass, recipient, subject,
+                    content);
+            resultMessage = "The e-mail was sent successfully";
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            resultMessage = "There were an error: " + ex.getMessage();
+        } finally {
+            request.setAttribute("msg", resultMessage);
+            RequestDispatcher rd = request.getRequestDispatcher("adminPanel/clientSearch.jsp");
+            rd.forward(request, response);
         }
-        else{
-            warningMsg="Your book is not removed due to an error. Please try again";
-        }
-        
-        request.setAttribute("msg", warningMsg);
-        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/removeBook1.jsp");
-        rd.include(request, response);
     }
 
     /**

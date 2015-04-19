@@ -54,9 +54,7 @@
                 <%--Form--%>
                 <div class="col-lg-9">
                     <br>
-                    <% if (request.getAttribute("msg") != null) {
-                    %><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
-                    } else {%>
+                    
                     <label><h3>Book Details</h3></label>
                     <form id="RemoveForm" action="RemoveBook2" method="POST">
                         <table border="0">
@@ -102,7 +100,7 @@
                                     <td></td>
                                 </tr>
                         </tbody>
-                    </form><%}%>
+                    </form>
                     <script type="text/javascript">
                         $(document).ready(function() {
                             var validator = $("#RemoveForm").bootstrapValidator({
