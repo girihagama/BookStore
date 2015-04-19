@@ -71,7 +71,7 @@
             </div>
         </div>    
         <div class="row">
-            <img src="http://localhost:8080/BookStore/adminPanel/Images/Orthers/orange line.png"width="100%" alt="Responsive image"">
+            <img src="http://localhost:8080/BookStore/adminPanel/Images/Orthers/orange line.png"width="100%" alt="Responsive image">
         </div>
         <script type="text/javascript">
                 $(function () {

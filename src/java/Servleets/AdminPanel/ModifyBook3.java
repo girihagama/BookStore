@@ -98,6 +98,7 @@ public class ModifyBook3 extends HttpServlet {
         AuthorClass author = new AuthorClass();
         author.findAutherID(ChangedAuthorName);
         int a_ID=author.getA_ID();
+        System.out.println("Auther" + ChangedAuthorName + "num" + a_ID);
         
         BookClass book = new BookClass();
         book.setB_Title(ChangedBookTitle);
@@ -117,7 +118,7 @@ public class ModifyBook3 extends HttpServlet {
         
         request.setAttribute("msg", warningMsg);
         request.setAttribute("action", "AddBook");
-        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifibook2.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifiBook1.jsp");
         rd.include(request, response);
     }
 
