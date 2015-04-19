@@ -56,7 +56,10 @@
                     <div class="row">&nbsp;</div>
                     <div class="col-lg-12">
                         <div class="row">
-                            <form id="Search" <%if (request.getAttribute("cList")!= null ||request.getAttribute("errorSearch")!=null ) {%>
+                            <% if (request.getAttribute("msg") != null) {
+                                %><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
+                            } %>
+                            <form id="Search" <%if (request.getAttribute("cList")!= null ||request.getAttribute("errorSearch")!=null||request.getAttribute("msg")!=null ) {%>
                                 action="ClientSearch"<%} else {%>
                                 action="../ClientSearch"<%}%> method="POST">
                                 <label><h4>Search Client For Get Details</h4></label>

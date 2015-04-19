@@ -91,7 +91,7 @@ public class RemoveBook2 extends HttpServlet {
         }
         
         request.setAttribute("msg", warningMsg);
-        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/removeBook2.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/removeBook1.jsp");
         rd.include(request, response);
     }
 
