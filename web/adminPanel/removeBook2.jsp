@@ -30,6 +30,14 @@
         <title>Admin Panel</title>
     </head>
     <body>
+         <script>
+            history.forward();
+        </script>
+        <%
+            if(request.getAttribute("searchedBookName")==null){
+                response.sendRedirect("http://localhost:8080/BookStore/adminPanel/removeBook1.jsp");
+            }
+            %>
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/bookHeader.jsp"%>           
             <div class="row">

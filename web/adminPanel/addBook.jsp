@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : subPage
     Created on : Mar 22, 2015, 6:08:29 PM
@@ -32,6 +31,10 @@
         <title>Admin Panel</title>
     </head>
     <body>
+        <%--for authentication--%>
+        <%! String level="L1";%>
+        <%-- ------------ --%>
+        
         <div class="container" style="background-color:#F5F5F0">
            <%@include file="HeaderFiles/bookHeader.jsp"%> 
             <div class="row">
@@ -43,8 +46,14 @@
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
                                     <li role="presentation" class="active"><a href="#">Add Book</a></li>
-                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp"><font style="color: orange">Modify Book</font></a></li>
-                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeBook1.jsp"><font style="color: orange">Remove Book</font></a></li>
+                                    <%if("L3".equals(level)){%>
+                                    <li role="presentation"><a href="" data-toggle="modal" data-target="#Modify" data-backdrop="static"><font style="color: orange">Modify Book</font></a></li>
+                                            <%}else{%>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp"><font style="color: orange">Modify Book</font></a></li><%}%>
+                                    <%if("L3".equals(level)){%>
+                                    <li role="presentation"><a href="" data-toggle="modal" data-target="#remove" data-backdrop="static"><font style="color: orange">Remove Book</font></a></li>
+                                    <%}else{%>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeBook1.jsp"><font style="color: orange">Remove Book</font></a></li><%}%>
                                 </ul>
                             </div>
                         </li>
@@ -132,6 +141,47 @@
                 </div>
             </div>
             <%--Form end--%>
+            
+            <%-- remove box--%>
+                    <div class="modal fade" id="remove" role="dialog" aria-hidden="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h2 class="modal-title"><strong>Sorry...!</strong></h2>
+                                </div>
+                                    <div class="modal-body">
+                                        <h4><p>You have no authentication for remove books.</p></h4>                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="span2">
+                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
+                                        </div>
+                                    </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    
+                    <%-- modify box--%>
+                    <div class="modal fade" id="Modify" role="dialog" aria-hidden="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h2 class="modal-title"><strong>Sorry...!</strong></h2>
+                                </div>
+                                    <div class="modal-body">
+                                        <h4><p>You have no authentication for modify books.</p></h4>                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="span2">
+                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
+                                        </div>
+                                    </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    
             <%--script for validation--%>
             <script type="text/javascript">
                 $(document).ready(function() {

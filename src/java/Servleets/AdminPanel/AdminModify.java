@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,37 +6,23 @@
 
 package Servleets.AdminPanel;
 
-import Classes.EmailUtility;
+import Classes.UserClass;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author Chami
  */
-@WebServlet(name = "ClientMail", urlPatterns = {"/ClientMail"})
-public class ClientMail extends HttpServlet {
-    private String host;
-    private String port;
-    private String user;
-    private String pass;
- 
-    public void init() {
-        // reads SMTP server setting from web.xml file
-        ServletContext context = getServletContext();
-        host = context.getInitParameter("host");
-        port = context.getInitParameter("port");
-        user = context.getInitParameter("user");
-        pass = context.getInitParameter("pass");
-    }
+@WebServlet(name = "AdminModify", urlPatterns = {"/AdminModify"})
+public class AdminModify extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -55,10 +40,10 @@ public class ClientMail extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ClientMail</title>");            
+            out.println("<title>Servlet AdminModify</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ClientMail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminModify at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -90,25 +75,27 @@ public class ClientMail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // reads form fields
-        String recipient = request.getParameter("recipient");
-        String subject = request.getParameter("subject");
-        String content = request.getParameter("content");
- 
-        String resultMessage = "";
- 
-        try {
-            EmailUtility.sendEmail(host, port, user, pass, recipient, subject,
-                    content);
-            resultMessage = "The e-mail was sent successfully to "+recipient;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            resultMessage = "There were an error: " + ex.getMessage();
-        } finally {
-            request.setAttribute("msg", resultMessage);
-            RequestDispatcher rd = request.getRequestDispatcher("adminPanel/clientSearch.jsp");
-            rd.forward(request, response);
-        }
+        String adminName = request.getParameter("adminName");
+        UserClass admin = new UserClass();
+        admin.setU_Name(adminName);//set client name
+        admin.getUserDetails();//get details
+        //set values.........
+        String adminMail = admin.getU_Mail();
+        String adminTPN = admin.getU_TPN();
+        String adminAdd1 = admin.getU_addLine1();
+        String adminAdd2 = admin.getU_addLine2();
+        String adminAdd3 = admin.getU_addLine3();
+        String adminLevel = admin.getA_Level();
+        //..............
+        request.setAttribute("searchedAdminName", adminName);
+        request.setAttribute("searchedAdminMail", adminMail);
+        request.setAttribute("searchedAdminTPN", adminTPN);
+        request.setAttribute("searchedAdminAdd1",adminAdd1);
+        request.setAttribute("searchedAdminAdd2",adminAdd2);
+        request.setAttribute("searchedAdminAdd3",adminAdd3);
+        request.setAttribute("searchedAdminLevel",adminLevel);
+        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifyAdmin.jsp");
+        rd.forward(request, response);
     }
 
     /**

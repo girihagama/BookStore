@@ -91,7 +91,7 @@
                         <br>
                         <form action="ClientDetails" method="POST">
                             <input type="hidden" name="clientName" value="<%=cName%>">
-                            <button type="submit" class="btn btn-default">Click here to modify <strong><%=cName%></strong></button>                                    
+                            <button type="submit" class="btn btn-default">Click here to contact <strong><%=cName%></strong></button>                                    
                         </form>
                         <%}%>
                         <%} else if(request.getAttribute("errorSearch")!=null) {%>

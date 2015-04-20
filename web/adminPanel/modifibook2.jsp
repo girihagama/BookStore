@@ -30,6 +30,14 @@
         <title>Admin Panel</title>
     </head>
     <body>
+        <script>
+            history.forward();
+        </script>
+        <%
+            if (request.getAttribute("searchedBookName") == null) {
+                response.sendRedirect("http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp");
+            }
+        %>
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/bookHeader.jsp"%>           
             <div class="row">
@@ -65,19 +73,19 @@
                             </div>
                         </div>
                         <jsp:useBean id="author" class="Classes.AuthorClass"></jsp:useBean>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Author Name : <%=request.getAttribute("searchedBookAName")%></label>
+                            <div id ="orange">
+                                <div class="form-group orange">
+                                    <label>Author Name : <%=request.getAttribute("searchedBookAName")%></label>
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <select name="changedAName" id="changedAName" class="form-control" >
                                             <option disabled selected value="0">Select a new author</option> 
-                                        <%
-                                            List results = author.getAlist();
-                                            Iterator it = results.iterator();
+                                            <%
+                                                List results = author.getAlist();
+                                                Iterator it = results.iterator();
                                                 while (it.hasNext()) {%>
-                                        <option><%=it.next()%></option>
-                                        <%}%>
+                                            <option><%=it.next()%></option>
+                                            <%}%>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
@@ -104,23 +112,18 @@
                                         <select name="changedYear" class="form-control" placeholder="Select year">
                                             <%  int year = Calendar.getInstance().get(Calendar.YEAR); %>
                                             <option disabled selected value="0">Select a new year</option>
-                                                <%for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
+                                            <%for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
                                         </select>
                                     </div>
                                 </div>                            
-                            </div
+                            </div>
                         </div>
-                         <div class="form-group orange">
-                                <label>Book Image : </label>
-                                <div class="row">
-                                    <%-- need image--%>
-                                </div>                            
-                           </div>
-                        <button type="submit" class="btn btn-default">Modify Book</button>
+                        <button type="submit" class="btn btn-default">Modify Book</button>&nbsp;&nbsp;&nbsp;
+                        <label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp" role="button">Cancel</a></label>
                     </form>
                 </div>
             </div>
-                <script type="text/javascript">
+            <script type="text/javascript">
                 $(document).ready(function() {
                     var validator = $("#ModifyBook").bootstrapValidator({
                         fields: {
@@ -176,13 +179,14 @@
             <div class="row">
                 &nbsp;
             </div>
-            <div class="row" >
-                <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
-                </ol>
-            </div> 
         </div>
-    </body>
+        <div class="row" >
+            <ol class="breadcrumb" style="background-color:#FF9933">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Library</a></li>
+                <li class="active">Data</li>
+            </ol>
+        </div> 
+    </div>
+</body>
 </html>

@@ -27,6 +27,14 @@
         <title>Admin Panel</title>
     </head>
     <body>
+         <script>
+            history.forward();
+        </script>
+        <%
+            if(request.getAttribute("searchedClientName")==null){
+                response.sendRedirect("http://localhost:8080/BookStore/adminPanel/clientSearch.jsp");
+            }
+            %>
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/clientHeader.jsp"%>           
             <div class="row">
@@ -55,7 +63,7 @@
                     <br>
                     
                     <label><h3>Client Details</h3></label>
-                    <form id="Client" action="RemoveClient" method="POST">
+                    <form id="Client" action="removeClient" method="POST">
                         <table border="0">
                             <tbody>
                                 <tr>
@@ -115,7 +123,9 @@
                         </tbody>
                     </form>
                     <br>
-                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#email" data-whatever="<%=request.getAttribute("searchedClientMail")%>">Send Email</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#email" data-whatever="<%=request.getAttribute("searchedClientMail")%>" data-backdrop="static">Send Email</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#message" data-whatever="<%=request.getAttribute("searchedClientName")%>" data-backdrop="static">Send Message</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#notification" data-whatever="<%=request.getAttribute("searchedClientName")%>" data-backdrop="static">Send Notification</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     
                     <%-- email send box--%>
                     <div class="modal fade" id="email" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -155,6 +165,74 @@
                         </div>
                     </div>
                     <%--end of email send box---%>
+                    
+                    <%-- message send box--%>
+                    <div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="text_box" id="exampleModalLabel" style="padding: 0px; text-align: left; font-size: 3em; ">New message to <%=request.getAttribute("searchedClientName")%></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="ClientMessage" id="ClientMessage" method="POST">
+                                        <div id ="orange">
+                                        <div class="form-group orange" >
+                                            <label for="recipient-name" class="control-label">Recipient: </label>
+                                            <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>">
+                                        </div>
+                                        </div>
+                                        
+                                        <div id ="orange">
+                                        <div class="form-group orange">
+                                            <label for="message-text" class="control-label">Message:</label>
+                                            <textarea class="form-control" id="content" name="content"></textarea>
+                                        </div>
+                                        </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-warning">Send message</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                </form>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%--end of message send box---%>
+                    
+                    <%-- notification send box--%>
+                    <div class="modal fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="text_box" id="exampleModalLabel" style="padding: 0px; text-align: left; font-size: 3em; ">New notification to <%=request.getAttribute("searchedClientName")%></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="ClientNotifiaction" id="ClientNotifiaction" method="POST">
+                                        <div id ="orange">
+                                        <div class="form-group orange" >
+                                            <label for="recipient-name" class="control-label">Recipient: </label>
+                                            <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>">
+                                        </div>
+                                        </div>
+                                        
+                                        <div id ="orange">
+                                        <div class="form-group orange">
+                                            <label for="message-text" class="control-label">Notification Conttent:</label>
+                                            <textarea class="form-control" id="content" name="content"></textarea>
+                                        </div>
+                                        </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-warning">Send notification</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                                </form>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%--end of notification send box---%>
                     
                     <script type="text/javascript">
                         $(document).ready(function() {

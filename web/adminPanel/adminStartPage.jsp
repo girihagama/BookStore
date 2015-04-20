@@ -10,8 +10,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+        
+        <%--Bootsrap CSS files--%>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrapValidator.css"/>
+        
+        <%--Bootsrap jS files--%>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrapValidator.js"></script>
+
+        <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
         <title>Admin Panel</title>
@@ -52,19 +62,19 @@
                 <div class="col-md-2">
                     <div class="picholder">
                         <img src="Images/StartPageIcons/Books.jpg" class="fancypics" alt="Responsive image">
-                        <div class="overlay"><a href="addBook.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
+                        <div class="overlay"><a href="http://localhost:8080/BookStore/adminPanel/addBook.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="picholder">
                     <img src="Images/StartPageIcons/Author.jpg" class="fancypics" alt="Responsive image">
-                    <div class="overlay"><a href="addAuthors.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
+                    <div class="overlay"><a href="http://localhost:8080/BookStore/adminPanel/addAuthors.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
                     </div>
                 </div>  
                 <div class="col-md-2">
                     <div class="picholder">
                     <img src="Images/StartPageIcons/Clients.jpg" class="fancypics" alt="Responsive image">
-                    <div class="overlay"><a href="#" style="text-decoration: none"><p class="text_box">Go</p></a></div>
+                    <div class="overlay"><a href="http://localhost:8080/BookStore/adminPanel/clientSearch.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
                     </div>
                 </div>
             </div>
@@ -77,19 +87,19 @@
                 <div class="col-md-2">
                     <div class="picholder">
                     <img src="Images/StartPageIcons/Admins.jpg" class="fancypics" alt="Responsive image">
-                    <div class="overlay"><a href="#" style="text-decoration: none"><p class="text_box">Go</p></a></div>
+                    <div class="overlay"><a href="http://localhost:8080/BookStore/adminPanel/adminDetails.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
                     </div>
                 </div>  
                 <div class="col-md-2">
                     <div class="picholder">
                     <img src="Images/StartPageIcons/Stocks.jpg" class="fancypics" alt="Responsive image">
-                    <div class="overlay"><a href="AddBookStocks.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
+                    <div class="overlay"><a href="http://localhost:8080/BookStore/adminPanel/AddBookStocks.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="picholder">
                     <img src="Images/StartPageIcons/Suppliers.jpg" class="fancypics" alt="Responsive image">
-                    <div class="overlay"><a href="addSuppliers.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
+                    <div class="overlay"><a href="http://localhost:8080/BookStore/adminPanel/addSuppliers.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
                     </div>
                 </div>  
                 <div class="col-md-2">

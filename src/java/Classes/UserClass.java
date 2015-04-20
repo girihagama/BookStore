@@ -43,12 +43,21 @@ public class UserClass {
     private String u_addLine3;
     private String u_CardNo;
     private Image u_Image;
+    private String a_Level;
 
     /**
      * @return the db
      */
     public DbClass getDb() {
         return db;
+    }
+
+    public String getA_Level() {
+        return a_Level;
+    }
+
+    public void setA_Level(String a_Level) {
+        this.a_Level = a_Level;
     }
 
     /**
@@ -263,7 +272,7 @@ public class UserClass {
         List clist = new ArrayList();
         if (db.getConnection() == true) {
             try {
-                pstmt = (PreparedStatement) db.conn.prepareStatement("select u_Name from user where u_Name like ? and u_Privilege =1");
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select u_Name from user where u_Name like ? and u_Privilege =0");
                 pstmt.setString(1,"%"+u_Name+"%");
 
                 System.out.println(pstmt);
@@ -318,18 +327,19 @@ public class UserClass {
                         this.u_addLine1=rs.getString("u_addLine1");
                     else
                         this.u_addLine1="-";
-                    if(rs.getString("u_addLine2")!=null)
+                    if(!"".equals(rs.getString("u_addLine2"))&&rs.getString("u_addLine2")!=null)
                         this.u_addLine2=rs.getString("u_addLine2");
                     else
-                        this.u_addLine2="-";
-                    if(rs.getString("u_addLine3")!=null)
+                        this.u_addLine2="---";
+                    if(!"".equals(rs.getString("u_addLine3"))&&rs.getString("u_addLine3")!=null)
                         this.u_addLine3=rs.getString("u_addLine3");
                     else
-                        this.u_addLine3="-";
+                        this.u_addLine3="---";
                     if(rs.getString("u_TPN")!=null)
                         this.u_TPN=rs.getString("u_TPN");
                     else
                         this.u_TPN="No Telephone Number for this person";
+                    this.a_Level=rs.getString("admin_Level");
                 }
                 pstmt.close();
                 db.endConnection();
@@ -471,4 +481,81 @@ public class UserClass {
         return prev;
     }
 
+    public int modifyAdmin(String oldAdminName) {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Update user set u_Name=?, u_Mail=?, u_TPN=?, u_addLine1=?, u_addLine2=?, u_addLine3=?, admin_Level=? where u_Name=?");
+                pstmt.setString(1, u_Name);
+                pstmt.setString(2, u_Mail);
+                pstmt.setString(3, u_TPN);
+                pstmt.setString(4, u_addLine1);
+                pstmt.setString(5, u_addLine2);
+                pstmt.setString(6, u_addLine3);
+                pstmt.setString(7, a_Level);
+                pstmt.setString(8, oldAdminName);
+                
+
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return 0;
+    }
+    public int removeUser() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("delete from user where u_Name=?");
+                pstmt.setString(1, u_Name);
+
+                int removed = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return removed;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1;
+    }
+
+    public int addAdmin() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into user(u_Name,u_Mail,u_TPN,u_addLine1,u_addLine2,u_addLine3,admin_Level,u_Pass,u_Privilege) values(?,?,?,?,?,?,?,?,?)");
+                pstmt.setString(1, u_Name);
+                pstmt.setString(2, u_Mail);
+                pstmt.setString(3, u_TPN);
+                pstmt.setString(4, u_addLine1);
+                pstmt.setString(5, u_addLine2);
+                pstmt.setString(6, u_addLine3);
+                pstmt.setString(7, a_Level);
+                pstmt.setString(8, u_Pass);
+                pstmt.setInt(9, 1);
+                
+
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1;
+    }
 }
