@@ -3,6 +3,17 @@
 <%@page import="java.util.Iterator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%
+    String un=null;
+    
+    try {
+        un = session.getAttribute("Username").toString();
+    }catch(Exception x){
+        response.sendRedirect("Login.jsp");
+    }
+
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -129,8 +140,7 @@
 
                             <li>
                                 <a href="MyProfile">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    <% String un = session.getAttribute("Username").toString();%>
+                                    <span class="glyphicon glyphicon-user"></span>                                    
                                     <font style="font-family: calibri;"><%= un.toUpperCase()%></font>
                                 </a>                          
                             </li>
