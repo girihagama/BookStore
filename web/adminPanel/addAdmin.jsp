@@ -27,6 +27,9 @@
         <title>Admin Panel</title>
     </head>
     <body>
+        <script>
+            history.forward();
+        </script>
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/admiinHeader.jsp"%>           
             <div class="row">
@@ -37,7 +40,7 @@
                         <li>
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
-                                    <li role="presentation" ><a href="#"><font style="color: orange">Admin Details</font></a></li>
+                                    <li role="presentation" ><a href="http://localhost:8080/BookStore/adminPanel/adminDetails.jsp"><font style="color: orange">Admin Details</font></a></li>
                                     <li role="presentation" class="active" ><a href="">Add Admin</a></li>
                                     <li>&nbsp;</li>
                                     <li>&nbsp;</li>
@@ -223,9 +226,6 @@
             </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
                 </ol>
             </div> 
         </div>

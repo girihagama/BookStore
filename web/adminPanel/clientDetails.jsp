@@ -140,7 +140,7 @@
                                         <div id ="orange">
                                         <div class="form-group orange" >
                                             <label for="recipient-name" class="control-label">Recipient:</label>
-                                            <input type="text" class="form-control" id="recipient" name="recipient">
+                                            <input type="text" class="form-control" id="recipient" name="recipient" disabled="true">
                                         </div>
                                         </div>
                                         <div id ="orange">
@@ -179,7 +179,7 @@
                                         <div id ="orange">
                                         <div class="form-group orange" >
                                             <label for="recipient-name" class="control-label">Recipient: </label>
-                                            <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>">
+                                            <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>" disabled="true">
                                         </div>
                                         </div>
                                         
@@ -213,7 +213,7 @@
                                         <div id ="orange">
                                         <div class="form-group orange" >
                                             <label for="recipient-name" class="control-label">Recipient: </label>
-                                            <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>">
+                                            <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>" disabled="true">
                                         </div>
                                         </div>
                                         
@@ -301,9 +301,6 @@
             </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
                 </ol>
             </div> 
         </div>

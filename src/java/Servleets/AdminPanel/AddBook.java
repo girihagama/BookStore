@@ -9,6 +9,7 @@ package Servleets.AdminPanel;
 import Classes.AuthorClass;
 import Classes.BookClass;
 import Classes.DbClass;
+import Classes.SupplierClass;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -89,6 +90,11 @@ public class AddBook extends HttpServlet {
         String authorName=request.getParameter("autherName");
         String edition=request.getParameter("bookEdition");
         String year=request.getParameter("year");
+        String supName=request.getParameter("supplierName");
+        double price=Double.parseDouble(request.getParameter("bookPrice"));
+        int bookQty=Integer.parseInt(request.getParameter("bookQuantity"));
+        
+        
         InputStream image = null; // input stream of the upload file
          
         // obtains the upload file part in this multipart request
@@ -103,12 +109,19 @@ public class AddBook extends HttpServlet {
         author.findAutherID(authorName);
         int a_ID=author.getA_ID();
         
+        SupplierClass sup = new SupplierClass();
+        sup.findSupplierID(supName);
+        int supplier_ID=sup.getSup_ID();
+        
         BookClass book = new BookClass();
         book.setB_Title(bookTitle);
         book.setB_Edition(edition);
         book.setB_Year(year);
         book.setB_Image(image);
         book.setA_ID(a_ID);
+        book.setB_Price(price);
+        book.setSup_ID(supplier_ID);
+        book.setB_Qty(bookQty);
         int result=book.insertBook();
         
         if(result==1){
@@ -120,6 +133,8 @@ public class AddBook extends HttpServlet {
             request.setAttribute("errorAuthor", authorName);
             request.setAttribute("errorYear", year);
             request.setAttribute("errorEdition", edition);
+            request.setAttribute("errorQuantity", bookQty);
+            request.setAttribute("errorPrice", price);
         }
         
         request.setAttribute("msg", warningMsg);

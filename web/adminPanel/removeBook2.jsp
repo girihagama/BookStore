@@ -87,6 +87,21 @@
                                     <td><label>:  <%=request.getAttribute("searchedBookYear")%></label></td>
                                     <td></td>
                                 </tr>
+                                <tr>
+                                    <td><label>Book Supplier Name </label>&nbsp;&nbsp;&nbsp; </td>
+                                    <td><label>:  <%=request.getAttribute("searchedBooksup")%></label></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Book Quantity </label>&nbsp;&nbsp;&nbsp; </td>
+                                    <td><label>:  <%=request.getAttribute("searchedBookQty")%></label></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><label>Book Price </label>&nbsp;&nbsp;&nbsp; </td>
+                                    <td><label>:&nbsp;  Rs.  <%=request.getAttribute("searchedBookPrice")%></label></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>                      
                         <input type="hidden" name="oldName" value="<%=request.getAttribute("searchedBookName")%>">
@@ -166,9 +181,7 @@
             </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
+                    
                 </ol>
             </div> 
         </div>

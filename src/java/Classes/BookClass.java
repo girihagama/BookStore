@@ -28,6 +28,10 @@ public class BookClass {
     private String b_Edition;
     private String b_Year;
     private int a_ID; //author ID
+    private int sup_ID; //supplier ID
+    private double b_Price;
+    private int b_Qty;
+    
 
     /**
      * @return the b_ID
@@ -107,18 +111,49 @@ public class BookClass {
         this.a_ID = a_ID;
     }
 
+    public int getSup_ID() {
+        return sup_ID;
+    }
+
+    public void setSup_ID(int sup_ID) {
+        this.sup_ID = sup_ID;
+    }
+
+    public double getB_Price() {
+        return b_Price;
+    }
+
+    public void setB_Price(double b_Price) {
+        this.b_Price = b_Price;
+    }
+
+    public int getB_Qty() {
+        return b_Qty;
+    }
+
+    public void setB_Qty(int b_Qty) {
+        this.b_Qty = b_Qty;
+    }
+    
+    
 
     public int insertBook() {        
     PreparedStatement pstmt;
         DbClass db = new DbClass();
         if (db.getConnection() == true) {
             try {
-                pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into book(b_Title,b_image,b_Edition,b_year,a_ID) values(?,?,?,?,?)");
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into book(b_Title,b_image,b_Edition,b_year,a_ID,sup_ID,Price,s_Qty) values(?,?,?,?,?,?,?,?)");
                 pstmt.setString(1, b_Title);
                 pstmt.setBlob(2, b_Image);
                 pstmt.setString(3, b_Edition);
                 pstmt.setString(4, b_Year);
                 pstmt.setInt(5, a_ID);
+                if(sup_ID==0)
+                 pstmt.setString(6, null);
+                else
+                  pstmt.setInt(6, sup_ID);  
+                pstmt.setDouble(7, b_Price);
+                pstmt.setInt(8, b_Qty);
 
                 System.out.println(pstmt);
                 int inserted = pstmt.executeUpdate();
@@ -168,7 +203,7 @@ public class BookClass {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     this.b_Title=rs.getString("b_Title");
-                    if(rs.getString("b_Edition")!=null||!"".equals(rs.getString("b_Edition")))
+                    if(rs.getString("b_Edition")!=null&&!"".equals(rs.getString("b_Edition")))
                         this.b_Edition=rs.getString("b_Edition");
                     else
                         this.b_Edition="No book edition for this book";
@@ -178,7 +213,13 @@ public class BookClass {
                     else
                         this.b_Year="No published year for this book";
                     this.a_ID=rs.getInt("a_ID");
-                    
+                    if(rs.getString("sup_ID")!=null)
+                        this.sup_ID=rs.getInt("sup_ID");
+                    else
+                        this.sup_ID=-1;
+                   
+                    this.b_Qty=rs.getInt("s_Qty");
+                    this.b_Price=rs.getInt("Price");
                 }
                 pstmt.close();
                 db.endConnection();
@@ -213,13 +254,19 @@ public class BookClass {
         DbClass db = new DbClass();
         if (db.getConnection() == true) {
             try {
-                pstmt = (PreparedStatement) db.conn.prepareStatement("Update book set b_Title=?, b_Edition = ?, b_year = ?, a_ID=? where b_ID=?");
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Update book set b_Title=?, b_Edition = ?, b_year = ?, a_ID=?, sup_ID=?, Price=?, s_Qty=? where b_ID=?");
                 pstmt.setString(1, b_Title);
                 //pstmt.setBlob(2, b_Image);
                 pstmt.setString(2, b_Edition);
                 pstmt.setString(3, b_Year);
                 pstmt.setInt(4, a_ID);
-                pstmt.setInt(5, b_ID);
+                if(sup_ID==0)
+                 pstmt.setString(5, null);
+                else
+                  pstmt.setInt(5, sup_ID); 
+                pstmt.setDouble(6, b_Price);
+                pstmt.setInt(7, b_Qty);
+                pstmt.setInt(8, b_ID);
 
                 System.out.println(pstmt);
                 int inserted = pstmt.executeUpdate();

@@ -28,6 +28,9 @@
         <title>Admin Panel</title>
     </head>
     <body>
+        <script>
+            history.forward();
+        </script>
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/bookHeader.jsp"%>          
             <div class="row">
@@ -142,9 +145,6 @@
             </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
                 </ol>
             </div>            
         </div>        

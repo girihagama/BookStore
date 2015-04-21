@@ -8,6 +8,7 @@ package Servleets.AdminPanel;
 
 import Classes.AuthorClass;
 import Classes.BookClass;
+import Classes.SupplierClass;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -85,6 +86,9 @@ public class ModifyBook3 extends HttpServlet {
         String ChangedAuthorName=request.getParameter("changedAName");
         String ChangedEdition=request.getParameter("changedEdition");
         String ChangedYear=request.getParameter("changedYear");
+        String supName=request.getParameter("supplierName");
+        double price=Double.parseDouble(request.getParameter("bookPrice"));
+        int bookQty=Integer.parseInt(request.getParameter("bookQuantity"));
 //        InputStream image = null; // input stream of the upload file
 //         
 //        // obtains the upload file part in this multipart request
@@ -98,7 +102,11 @@ public class ModifyBook3 extends HttpServlet {
         AuthorClass author = new AuthorClass();
         author.findAutherID(ChangedAuthorName);
         int a_ID=author.getA_ID();
-        System.out.println("Auther" + ChangedAuthorName + "num" + a_ID);
+        
+        SupplierClass sup = new SupplierClass();
+        sup.findSupplierID(supName);
+        int supplier_ID=sup.getSup_ID();
+        System.out.println("sup id 4 modify "+supplier_ID);
         
         BookClass book = new BookClass();
         book.setB_Title(ChangedBookTitle);
@@ -106,7 +114,11 @@ public class ModifyBook3 extends HttpServlet {
         book.setB_Year(ChangedYear);
         //book.setB_Image(image);
         book.setA_ID(a_ID);
+        book.setB_Qty(bookQty);
+        book.setSup_ID(supplier_ID);
+        book.setB_Price(price);
         book.getBookID(oldBookName);
+        
         int result=book.modifyBook();
         
         if(result==1){

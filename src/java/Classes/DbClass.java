@@ -24,7 +24,7 @@ public class DbClass {
     //sql url
     public static final String URL = "jdbc:mysql://localhost:3306/";
     //sql database name
-    public static String dbName = "javabookstore";
+    public static String dbName = "javabookstore(1)";
     //username
     public static String username = "root";
     //password

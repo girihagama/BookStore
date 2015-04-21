@@ -8,6 +8,7 @@ package Servleets.AdminPanel;
 
 import Classes.AuthorClass;
 import Classes.BookClass;
+import Classes.SupplierClass;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -83,15 +84,28 @@ public class ModifyBook2 extends HttpServlet {
         
         String bookSearchName= request.getParameter("bookName");
         BookClass book = new BookClass();
+        
         AuthorClass author = new AuthorClass();
         book.setB_Title(bookSearchName);//set book title
         book.getBookDetails();//get details
         author.findAutherName(book.getA_ID());//find author name
+        
+        System.out.println("sup is" + book.getSup_ID());
+        
+        SupplierClass sup = new SupplierClass();
+        sup.findSupplierName(book.getSup_ID());//find sup name
         //set values.........
         String authorName = author.getA_Name();
         String bookEdition = book.getB_Edition();
         String bookTitle = book.getB_Title();
         String bookYear = book.getB_Year();
+        double price = book.getB_Price();
+        String sup_Name;
+        if(sup.getSup_Name()!=null)
+            sup_Name = sup.getSup_Name();
+        else
+            sup_Name="There is no supplier for this book";
+        double b_qty =book.getB_Qty();
         //need image
         
         //..............
@@ -99,6 +113,9 @@ public class ModifyBook2 extends HttpServlet {
         request.setAttribute("searchedBookEdition", bookEdition);
         request.setAttribute("searchedBookAName", authorName);
         request.setAttribute("searchedBookYear", bookYear);
+        request.setAttribute("searchedBooksup", sup_Name);
+        request.setAttribute("searchedBookQty", b_qty);
+        request.setAttribute("searchedBookPrice", price);
         RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifibook2.jsp");
         rd.forward(request, response);
     }
