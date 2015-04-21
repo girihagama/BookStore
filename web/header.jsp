@@ -1,6 +1,6 @@
-<%@page import="Classes.CartClass"%>
-<%@page import="Classes.NotificationsClass"%>
-<%@page import="Classes.MessagesClass"%>
+<%@page import="Classes.UserClass"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -48,38 +48,6 @@
 
     <body class="container-fluid">
 
-        <%!
-            String username;
-            int message;
-            int notification;
-            int cart;
-        %>
-
-        <%
-            if (session.getAttribute("Login") != null && session.getAttribute("Login").toString() == "True") {
-                if (session.getAttribute("Username") != null) {
-                    username = session.getAttribute("Username").toString();
-                }
-            }
-        %>
-
-        <%
-            //gets new messages
-            MessagesClass m = new MessagesClass();
-            m.setU_Name(username);
-            message = m.unreadedMessagesCount();
-
-            //gets new notifications
-            NotificationsClass n = new NotificationsClass();
-            n.setU_Name(username);
-            notification = n.unreadedNotificationCount();
-
-            //gets no. of cart items
-            CartClass c = new CartClass();
-            c.setU_Name(username);
-            cart = c.noOfItems();
-        %>
-
         <!--also "container" class can be used-->
         <div class="row">
 
@@ -117,12 +85,21 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
+                                <!--list btn-->
+                                <form action="ChkSavedList" method="GET">
+                                    <button type="submit" class="btn btn-sm btn-success navbar-btn btn-block" style="border-radius:0px;">
+                                        <span class="glyphicon glyphicon-floppy-disk"></span>
+                                        My Saved List
+                                    </button>
+                                </form>
+                                <!--list btn end-->
+                            </li>
+                            <li>
                                 <!--notifications btn-->
                                 <form action="ChkMessage" method="GET">
                                     <button type="submit" class="btn btn-sm btn-danger navbar-btn btn-block" style="border-radius:0px;">
                                         <span class="glyphicon glyphicon-envelope"></span>
                                         Messages
-                                        <span class="badge"><%= message%></span>
                                     </button>
                                 </form>
                                 <!--notifications btn end-->
@@ -134,7 +111,6 @@
                                     <button type="submit" class="btn btn-sm btn-warning navbar-btn btn-block" style="border-radius:0px;">
                                         <span class="glyphicon glyphicon-bullhorn"></span>
                                         Notifications
-                                        <span class="badge"><%= notification%></span>
                                     </button>
                                 </form>
                                 <!--messages btn end-->
@@ -146,7 +122,6 @@
                                     <button type="submit" class="btn btn-sm btn-info navbar-btn btn-block" style="border-radius:0px;">
                                         <span class="glyphicon glyphicon-shopping-cart"></span>
                                         Shopping Cart
-                                        <span class="badge"><%= cart%></span>
                                     </button>
                                 </form>
                                 <!--shopping cart btn end-->
@@ -155,14 +130,15 @@
                             <li>
                                 <a href="MyProfile">
                                     <span class="glyphicon glyphicon-user"></span>
-                                    Profile
+                                    <% String un = session.getAttribute("Username").toString();%>
+                                    <font style="font-family: calibri;"><%= un.toUpperCase()%></font>
                                 </a>                          
                             </li>
 
                             <li>
                                 <a href="SignOut">
                                     <span class="glyphicon glyphicon-off"></span>
-                                    Log Out
+                                    <font style="font-family: calibri;">Log Out</font>
                                 </a>
                             </li>
                         </ul>

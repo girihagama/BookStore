@@ -40,6 +40,18 @@
         <servlet-name>Search</servlet-name>
         <servlet-class>Servleets.Search</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Header</servlet-name>
+        <servlet-class>Servleets.Header</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LatestBooks</servlet-name>
+        <servlet-class>Servleets.LatestBooks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChkSavedList</servlet-name>
+        <servlet-class>Servleets.ChkSavedList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -79,6 +91,18 @@
     <servlet-mapping>
         <servlet-name>Search</servlet-name>
         <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Header</servlet-name>
+        <url-pattern>/Header</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LatestBooks</servlet-name>
+        <url-pattern>/LatestBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChkSavedList</servlet-name>
+        <url-pattern>/ChkSavedList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -22,16 +22,6 @@
             response.sendRedirect("LoginCheck");
         }
     }
-
-    BookClass bk = new BookClass();
-    ResultSet rs = bk.latestBooks();
-
-    int i = 0;
-    ArrayList c = new ArrayList();
-
-    while (rs.next()) {
-        c.add(rs.getString("b_title"));
-    }
 %>
 
 <html>
@@ -70,76 +60,73 @@
         <!--internal JS end-->          
     </head>
 
-    <jsp:include page='header.jsp'></jsp:include>
 
-        <body> 
+
+    <body> 
+
+        <jsp:include page="header.jsp"></jsp:include>
 
             <div class="row container-fluid">
+                <div class="row">
+                    <!--Slider-->
+                    <div class="col-lg-9 img-responsive">
+                    <jsp:include page='Slider.jsp'></jsp:include>
+                    </div> 
 
-                <!--Slider-->
-                <div class="col-lg-9 img-responsive">
-                <jsp:include page='Slider.jsp'></jsp:include>
-                </div> 
+                    <div class="col-lg-3">
 
-                <div class="col-lg-3">
-
-                    <!--Panel 1-->
-                    <div class="col">
-                        <div class="panel panel-default text-center" style="box-shadow: #330066 px 0px 50px 50px;">
-                            <div class="panel-heading">
-                                <span class="glyphicon glyphicon-thumbs-up"></span>
-                                Easy
+                        <!--Panel 1-->
+                        <div class="col">
+                            <div class="panel panel-default text-center" style="box-shadow: #330066 px 0px 50px 50px;">
+                                <div class="panel-heading">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                    Easy
+                                </div>
+                                <div class="panel-body">
+                                    <img class="img-circle pull-left" src="indunil_files/Resources/Icons/easy.png" width="50px" height="50px"/>
+                                    Our customer support always cares users..
+                                </div>
                             </div>
-                            <div class="panel-body">
-                                <img class="img-circle pull-left" src="indunil_files/Resources/Icons/easy.png" width="50px" height="50px"/>
-                                Our customer support always cares users..
+                        </div>
+
+                        <!--Panel 2-->
+                        <div class="col">
+                            <div class="panel panel-default text-center" style="box-shadow: #330066 px 0px 50px 50px;">
+                                <div class="panel-heading">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                    Reliable
+                                </div>
+                                <div class="panel-body img-responsive">
+                                    <img class="img-circle pull-left" src="indunil_files/Resources/Icons/reliable.png" width="50px" height="50px"/>
+                                    We are serving customers with high reliable services..
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Panel 3-->
+                        <div class="col">
+                            <div class="panel panel-default text-center" style="box-shadow: #330066 px 0px 50px 50px;">
+                                <div class="panel-heading">
+                                    <span class="glyphicon glyphicon-lock"></span>
+                                    Safe
+                                </div>
+                                <div class="panel-body">
+                                    <img class="img-circle pull-left" src="indunil_files/Resources/Icons/safe.png" width="50px" height="50px"/>
+                                    Your payments are 100% protected..
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <!--Panel 2-->
-                    <div class="col">
-                        <div class="panel panel-default text-center" style="box-shadow: #330066 px 0px 50px 50px;">
-                            <div class="panel-heading">
-                                <span class="glyphicon glyphicon-refresh"></span>
-                                Reliable
-                            </div>
-                            <div class="panel-body img-responsive">
-                                <img class="img-circle pull-left" src="indunil_files/Resources/Icons/reliable.png" width="50px" height="50px"/>
-                                We are serving customers with high reliable services..
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Panel 3-->
-                    <div class="col">
-                        <div class="panel panel-default text-center" style="box-shadow: #330066 px 0px 50px 50px;">
-                            <div class="panel-heading">
-                                <span class="glyphicon glyphicon-lock"></span>
-                                Safe
-                            </div>
-                            <div class="panel-body">
-                                <img class="img-circle pull-left" src="indunil_files/Resources/Icons/safe.png" width="50px" height="50px"/>
-                                Your payments are 100% protected..
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
+                </div>                    
             </div>
-
-            <div class="row">
-            <%
-                for (int a = 0; a < c.size(); a++) {
-                    out.println(c.get(a));
-                }
-            %>
-        </div>
-        <div class="row">
-            
-        </div>
-    </body>    
-
+            <div class="container">
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <a style="font-family: calibri;" href="#" class="btn btn-lg btn-block btn-info" type="button">Contact Support</a>
+                    </div>
+                </div>
+            </div>
+                    <br/>
+        </body>
     <jsp:include page='footer.jsp'></jsp:include>
 </html>

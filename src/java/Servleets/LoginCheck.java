@@ -77,7 +77,8 @@ public class LoginCheck extends HttpServlet {
             }
         } else {
             response.sendRedirect("Login.jsp");
-        }
+        }       
+        
     }
 
     /**

@@ -6,12 +6,10 @@
 package Servleets;
 
 import Classes.UserClass;
-import java.awt.List;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Iterator;
-import javax.jms.Session;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Indunil
  */
-public class MyProfile extends HttpServlet {
+public class Header extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,6 +35,7 @@ public class MyProfile extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,21 +52,32 @@ public class MyProfile extends HttpServlet {
             throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
-
         HttpSession session = request.getSession();
-        String user = session.getAttribute("Username").toString();
+        String username = null;
 
-        UserClass x = new UserClass();
+        try {
+            if (session.getAttribute("Login") != null && session.getAttribute("Login").toString() == "True") {
 
-        x.setU_Name(user);
+                if (session.getAttribute("Username") != null) {
+                    username = session.getAttribute("Username").toString();
+                } else {
+                    response.sendRedirect("Login.jsp");
+                }
 
-        ArrayList profile = x.loadProfile();
-        
-        request.setAttribute("MyProfile", profile);
-        RequestDispatcher rd = request.getRequestDispatcher("viewprofile.jsp");
+                UserClass x = new UserClass();
+
+                if (x.chkUserName(username)) {
+                    session.setAttribute("Username", username);
+                } else {
+                    response.sendRedirect("Login.jsp");
+                }                
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Header.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        RequestDispatcher rd = request.getRequestDispatcher("header.jsp");
         rd.forward(request, response);
-
-        
     }
 
     /**
@@ -81,7 +91,7 @@ public class MyProfile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**

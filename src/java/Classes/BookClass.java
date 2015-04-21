@@ -6,14 +6,13 @@
 package Classes;
 
 import com.mysql.jdbc.PreparedStatement;
-import java.awt.Image;
-import java.awt.List;
-import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.stream.ImageOutputStream;
 
 /**
  *
@@ -26,7 +25,8 @@ public class BookClass {
 
     private int b_ID;
     private String b_Title;
-    private InputStream b_Image;
+    private ImageOutputStream b_Image;
+    private byte[] b_ImageBytes;
     private String b_Edition;
     private String b_Year;
     private int a_ID; //author ID
@@ -60,12 +60,18 @@ public class BookClass {
         this.b_Title = b_Title;
     }
 
-    public InputStream getB_Image() {
-        return b_Image;
+    /**
+     * @return the b_ImageBytes
+     */
+    public byte[] getB_ImageBytes() {
+        return b_ImageBytes;
     }
 
-    public void setB_Image(InputStream image) {
-        this.b_Image = image;
+    /**
+     * @param b_ImageBytes the b_ImageBytes to set
+     */
+    public void setB_ImageBytes(byte[] b_ImageBytes) {
+        this.b_ImageBytes = b_ImageBytes;
     }
 
     /**
@@ -116,7 +122,7 @@ public class BookClass {
             try {
                 pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into book(b_Title,b_image,b_Edition,b_year,a_ID) values(?,?,?,?,?)");
                 pstmt.setString(1, b_Title);
-                pstmt.setBlob(2, b_Image);
+                //pstmt.setBlob(2, b_Image);
                 pstmt.setString(3, b_Edition);
                 pstmt.setString(4, b_Year);
                 pstmt.setInt(5, a_ID);
@@ -134,37 +140,57 @@ public class BookClass {
         return -1;
     }
 
-    public ResultSet latestBooks() throws SQLException {
-        ResultSet rs = null;
+    public ArrayList latestBooks() throws SQLException {
+        ArrayList arrayList = new ArrayList();
 
         try {
             db.getConnection();
 
             String query;
-            query = "SELECT * FROM `book` ORDER BY b_id DESC LIMIT 3";
+            query = "SELECT * FROM book ORDER BY b_id DESC Limit 3";
 
-            Statement stmt = (Statement) db.conn.createStatement();
+            com.mysql.jdbc.Statement stmt = (com.mysql.jdbc.Statement) db.conn.createStatement();
 
-            rs = stmt.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(query);
 
-//            while (rs.next()) {
-//                String b_id = rs.getString("b_id");
-//                setB_id(b_id);
-//                String b_title = rs.getString("b_title");
-//                setB_title(b_title);
-//                String b_author = rs.getString("b_author");
-//                setB_author(b_author);
-//                String p_id = rs.getString("p_id");
-//                setP_id(p_id);
-//
-//                stat = 1;
-//            }
+//            ResultSetMetaData metadata = rs.getMetaData();
+//            int numberOfColumns = metadata.getColumnCount();
+            while (rs.next()) {
+                BookClass book=new BookClass();
+                
+                book.setB_ID(rs.getInt("b_ID"));
+                
+                Blob img=rs.getBlob("b_Image");
+                byte[] imageData = img.getBytes(1, (int) img.length());
+                book.setB_ImageBytes(imageData);
+                
+                arrayList.add(book);
+            }
+
+            db.endConnection();
+        } catch (Exception ex) {
+
         } finally {
             if (db.conn != null) {
-                //db.endConnection();
+                db.endConnection();
             }
         }
 
-        return rs;
+        return arrayList;
     }
+
+    /**
+     * @return the b_Image
+     */
+    public ImageOutputStream getB_Image() {
+        return b_Image;
+    }
+
+    /**
+     * @param b_Image the b_Image to set
+     */
+    public void setB_Image(ImageOutputStream b_Image) {
+        this.b_Image = b_Image;
+    }
+
 }

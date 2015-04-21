@@ -88,7 +88,7 @@ public class Login extends HttpServlet {
 
             boolean login = x.login();
 
-            if (login == true) {
+            if (login == true) {                
                 session.setAttribute("Login", "True");
                 session.setAttribute("Username", username);               
 

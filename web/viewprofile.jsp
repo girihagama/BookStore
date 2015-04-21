@@ -15,19 +15,21 @@
         <title>JSP Page</title>
     </head>
     <body>
-        Hello
         <%
-            ArrayList profile = (ArrayList)request.getAttribute("MyProfile");
-            
+            ArrayList profile = (ArrayList) request.getAttribute("MyProfile");
+
             Iterator itr = profile.iterator();
-            UserClass received=null;
+            UserClass received = null;
+            
             while (itr.hasNext()) {
                 Object a = itr.next();
-                received = (UserClass) a ;
+                received = (UserClass) a;
             }
         %>
-        <form method="GET">
-            <input value="<%= received.getU_Pass() %>"/>
+        <form action="myform" method="POST" enctype="multipart/form-data">
+            <input type="file" style="font-family: calibri;"/>
+            <input name="username" value="<%= received.getU_Name()%>"/>
+            <input name="password" value="<%= received.getU_Pass()%>"/>
             <input type="Submit">
         </form>
     </body>

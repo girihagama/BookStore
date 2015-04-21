@@ -8,10 +8,8 @@ package Classes;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.script.*;
 
 /**

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -107,7 +108,7 @@ public class AddBook extends HttpServlet {
         book.setB_Title(bookTitle);
         book.setB_Edition(edition);
         book.setB_Year(year);
-        book.setB_Image(image);
+        book.setB_Image((ImageOutputStream) image);
         book.setA_ID(a_ID);
         int result=book.insertBook();
         
