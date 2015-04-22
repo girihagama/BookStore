@@ -7,10 +7,6 @@ package Servleets;
 
 import Classes.UserClass;
 import java.io.IOException;
-<<<<<<< HEAD
-import java.io.PrintWriter;
-=======
->>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -65,16 +61,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        
-        
-=======
-        
-        HttpSession session = request.getSession();    
->>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
+        HttpSession session = request.getSession(); 
         
         boolean rememberUser;
 
@@ -99,36 +86,12 @@ public class Login extends HttpServlet {
             x.setU_Pass(password);
 
             boolean login = x.login();
-
-<<<<<<< HEAD
-            if (login == true) {
-                session.setAttribute("Login", "True");
-
-                session.setAttribute("Username", username);
-                session.setAttribute("Password", password);
-
-                int chkPrivilege = x.chkPrivilege();
-=======
             if (login == true) {                
                 session.setAttribute("Login", "True");
-                session.setAttribute("Username", username);               
->>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
-
+                session.setAttribute("Username", username);
                 if (rememberUser == true) {
                     Cookie loginCk = new Cookie("Login", "True");
                     Cookie userCk = new Cookie("Username", username);
-<<<<<<< HEAD
-                    Cookie passCk = new Cookie("Password", password);
-
-                    loginCk.setMaxAge(60 * 60 * 24 * 30);
-                    userCk.setMaxAge(60 * 60 * 24 * 30);
-                    passCk.setMaxAge(60 * 60 * 24 * 30);
-
-                    response.addCookie(loginCk);
-                    response.addCookie(userCk);
-                    response.addCookie(passCk);
-                }
-=======
 
                     loginCk.setMaxAge(60 * 60 * 24 * 30);
                     userCk.setMaxAge(60 * 60 * 24 * 30);
@@ -138,7 +101,6 @@ public class Login extends HttpServlet {
                 }
                 
                 int chkPrivilege = x.chkPrivilege();
->>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
 
                 if (chkPrivilege == 1) {
                     
