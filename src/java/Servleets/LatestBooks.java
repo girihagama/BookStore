@@ -5,13 +5,12 @@
  */
 package Servleets;
 
-import Classes.UserClass;
-import java.awt.List;
+import Classes.BookClass;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import javax.jms.Session;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Indunil
  */
-public class MyProfile extends HttpServlet {
+public class LatestBooks extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +35,7 @@ public class MyProfile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,23 +50,19 @@ public class MyProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            HttpSession session = request.getSession();
+            BookClass book = new BookClass();
+            ArrayList latest = book.latestBooks();
 
-        PrintWriter out = response.getWriter();
+            request.setAttribute("LatestItems", latest);
+            RequestDispatcher rd = request.getRequestDispatcher("latestItems.jsp");
+            rd.forward(request, response);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LatestBooks.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        HttpSession session = request.getSession();
-        String user = session.getAttribute("Username").toString();
-
-        UserClass x = new UserClass();
-
-        x.setU_Name(user);
-
-        ArrayList profile = x.loadProfile();
-        
-        request.setAttribute("MyProfile", profile);
-        RequestDispatcher rd = request.getRequestDispatcher("viewprofile.jsp");
-        rd.forward(request, response);
-
-        
     }
 
     /**

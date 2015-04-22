@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%-- 
     Document   : header
     Created on : Apr 12, 2015, 9:43:37 PM
@@ -9,6 +10,24 @@
 <%@page import="Classes.MessagesClass"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+=======
+<%@page import="Classes.UserClass"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    String un=null;
+    
+    try {
+        un = session.getAttribute("Username").toString();
+    }catch(Exception x){
+        response.sendRedirect("Login.jsp");
+    }
+
+%>
+
+>>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
 <!DOCTYPE html>
 <html>
     <head>
@@ -54,6 +73,7 @@
 
     <body class="container-fluid">
 
+<<<<<<< HEAD
         <%!
             String username;
             int message;
@@ -86,6 +106,8 @@
             cart = c.noOfItems();
         %>
 
+=======
+>>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
         <!--also "container" class can be used-->
         <div class="row">
 
@@ -123,12 +145,30 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
+<<<<<<< HEAD
                                 <!--notifications btn-->
                                 <form action="ChkMessage" method="GET">
                                     <button type="submit" class="btn btn-danger navbar-btn btn-block" style="border-radius:0px;">
                                         <span class="glyphicon glyphicon-envelope"></span>
                                         Messages
                                         <span class="badge"><%= message%></span>
+=======
+                                <!--list btn-->
+                                <form action="ChkSavedList" method="GET">
+                                    <button type="submit" class="btn btn-sm btn-success navbar-btn btn-block" style="border-radius:0px;">
+                                        <span class="glyphicon glyphicon-floppy-disk"></span>
+                                        My Saved List
+                                    </button>
+                                </form>
+                                <!--list btn end-->
+                            </li>
+                            <li>
+                                <!--notifications btn-->
+                                <form action="ChkMessage" method="GET">
+                                    <button type="submit" class="btn btn-sm btn-danger navbar-btn btn-block" style="border-radius:0px;">
+                                        <span class="glyphicon glyphicon-envelope"></span>
+                                        Messages
+>>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
                                     </button>
                                 </form>
                                 <!--notifications btn end-->
@@ -137,10 +177,16 @@
                             <li>
                                 <!--messages btn-->
                                 <form action="ChkNotification" method="GET">
+<<<<<<< HEAD
                                     <button type="submit" class="btn btn-warning navbar-btn btn-block" style="border-radius:0px;">
                                         <span class="glyphicon glyphicon-bullhorn"></span>
                                         Notifications
                                         <span class="badge"><%= notification%></span>
+=======
+                                    <button type="submit" class="btn btn-sm btn-warning navbar-btn btn-block" style="border-radius:0px;">
+                                        <span class="glyphicon glyphicon-bullhorn"></span>
+                                        Notifications
+>>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
                                     </button>
                                 </form>
                                 <!--messages btn end-->
@@ -149,15 +195,22 @@
                             <li>
                                 <!--shopping cart btn-->
                                 <form action="ChkCart" method="GET">
+<<<<<<< HEAD
                                     <button type="submit" class="btn btn-info navbar-btn btn-block" style="border-radius:0px;">
                                         <span class="glyphicon glyphicon-shopping-cart"></span>
                                         Shopping Cart
                                         <span class="badge"><%= cart%></span>
+=======
+                                    <button type="submit" class="btn btn-sm btn-info navbar-btn btn-block" style="border-radius:0px;">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                                        Shopping Cart
+>>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
                                     </button>
                                 </form>
                                 <!--shopping cart btn end-->
                             </li>
 
+<<<<<<< HEAD
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Account 
@@ -178,6 +231,20 @@
                                         </a>
                                     </li>
                                 </ul>
+=======
+                            <li>
+                                <a href="MyProfile">
+                                    <span class="glyphicon glyphicon-user"></span>                                    
+                                    <font style="font-family: calibri;"><%= un.toUpperCase()%></font>
+                                </a>                          
+                            </li>
+
+                            <li>
+                                <a href="SignOut">
+                                    <span class="glyphicon glyphicon-off"></span>
+                                    <font style="font-family: calibri;">Log Out</font>
+                                </a>
+>>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
                             </li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
@@ -186,5 +253,9 @@
             </nav>            
 
         </div>
+<<<<<<< HEAD
+=======
+        <br/>
+>>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
     </body>
 </html>

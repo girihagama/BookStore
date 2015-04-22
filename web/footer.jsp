@@ -67,6 +67,10 @@
     </head>
     <body class="container-fluid">
         <div class="row">
+<<<<<<< HEAD
+=======
+            <br/>
+>>>>>>> e62e6c5814147b0b921f94ae43cfa3c1dfdba5c5
             <div class="col col-lg-12 alert-warning text-center" style="padding: 5px; font-family: calibri;">
                 <a href="index.jsp#contact" style="text-decoration: none;"> © ORCHID STORE Online Marketplace 2015</a>
             </div>
