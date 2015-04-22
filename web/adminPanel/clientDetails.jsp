@@ -140,6 +140,7 @@
                                         <div id ="orange">
                                         <div class="form-group orange" >
                                             <label for="recipient-name" class="control-label">Recipient:</label>
+                                            <input type="hidden" class="form-control" name="email" value="<%=request.getAttribute("searchedClientMail")%>">
                                             <input type="text" class="form-control" id="recipient" name="recipient" disabled="true">
                                         </div>
                                         </div>
@@ -179,6 +180,7 @@
                                         <div id ="orange">
                                         <div class="form-group orange" >
                                             <label for="recipient-name" class="control-label">Recipient: </label>
+                                            <input type="hidden" class="form-control" name="name" value="<%=request.getAttribute("searchedClientName")%>" >
                                             <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>" disabled="true">
                                         </div>
                                         </div>
@@ -213,6 +215,7 @@
                                         <div id ="orange">
                                         <div class="form-group orange" >
                                             <label for="recipient-name" class="control-label">Recipient: </label>
+                                            <input type="hidden" class="form-control" name="name" value="<%=request.getAttribute("searchedClientName")%>" >
                                             <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>" disabled="true">
                                         </div>
                                         </div>

@@ -91,10 +91,10 @@ public class ClientMail extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // reads form fields
-        String recipient = request.getParameter("recipient");
+        String recipient = request.getParameter("email");
         String subject = request.getParameter("subject");
         String content = request.getParameter("content");
- 
+        System.out.println("emqil "+recipient);
         String resultMessage = "";
  
         try {

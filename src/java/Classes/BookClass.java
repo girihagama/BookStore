@@ -29,7 +29,7 @@ public class BookClass {
 
     private int b_ID;
     private String b_Title;
-    private ImageOutputStream b_Image;
+    private InputStream b_Image;
     private byte[] b_ImageBytes;
     private String b_Edition;
     private String b_Year;
@@ -37,6 +37,14 @@ public class BookClass {
     private int sup_ID; //supplier ID
     private double b_Price;
     private int b_Qty;
+
+    public InputStream getB_Image() {
+        return b_Image;
+    }
+
+    public void setB_Image(InputStream b_Image) {
+        this.b_Image = b_Image;
+    }
     
 
     /**
@@ -156,7 +164,7 @@ public class BookClass {
             try {
                 pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into book(b_Title,b_image,b_Edition,b_year,a_ID,sup_ID,Price,s_Qty) values(?,?,?,?,?,?,?,?)");
                 pstmt.setString(1, b_Title);
-                //pstmt.setBlob(2, b_Image);
+                pstmt.setBlob(2, b_Image);
                 pstmt.setString(3, b_Edition);
                 pstmt.setString(4, b_Year);
                 pstmt.setInt(5, a_ID);
@@ -231,7 +239,7 @@ public class BookClass {
                         this.sup_ID=-1;
                    
                     this.b_Qty=rs.getInt("s_Qty");
-                    this.b_Price=rs.getInt("Price");
+                    this.b_Price=rs.getDouble("Price");
                 }
                 pstmt.close();
                 db.endConnection();
@@ -350,19 +358,4 @@ public class BookClass {
 
         return arrayList;
     }
-
-    /**
-     * @return the b_Image
-     */
-    public ImageOutputStream getB_Image() {
-        return b_Image;
-    }
-
-    /**
-     * @param b_Image the b_Image to set
-     */
-    public void setB_Image(ImageOutputStream b_Image) {
-        this.b_Image = b_Image;
-    }
-
 }

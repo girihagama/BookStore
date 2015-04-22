@@ -84,7 +84,7 @@ public class AddBook extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+                 response.setContentType("text/html;charset=UTF-8");
         //processRequest(request, response);
         String warningMsg=null;
         String bookTitle=request.getParameter("bookTitle");
@@ -118,7 +118,7 @@ public class AddBook extends HttpServlet {
         book.setB_Title(bookTitle);
         book.setB_Edition(edition);
         book.setB_Year(year);
-        book.setB_Image((ImageOutputStream) image);
+        book.setB_Image(image);
         book.setA_ID(a_ID);
         book.setB_Price(price);
         book.setSup_ID(supplier_ID);
@@ -142,7 +142,6 @@ public class AddBook extends HttpServlet {
         request.setAttribute("action", "AddBook");
         RequestDispatcher rd = request.getRequestDispatcher("adminPanel/addBook.jsp");
         rd.include(request, response);
-        
     }
 
     /**

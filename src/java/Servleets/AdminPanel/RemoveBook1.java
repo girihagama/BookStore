@@ -101,7 +101,7 @@ public class RemoveBook1 extends HttpServlet {
             sup_Name = sup.getSup_Name();
         else
             sup_Name="There is no supplier for this book";
-        double b_qty =book.getB_Qty();
+        int b_qty =book.getB_Qty();
         //..............
         request.setAttribute("searchedBookName", bookTitle);
         request.setAttribute("searchedBookEdition", bookEdition);

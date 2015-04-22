@@ -35,7 +35,7 @@
         </script>
         
         <%--for authentication--%>
-        <%! String level="L2";%>
+        <%! String level="L1";%>
         <%-- ------------ --%>
         
         <div class="container" style="background-color:#F5F5F0">

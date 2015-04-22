@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
@@ -37,22 +36,6 @@
         <servlet-name>SignOut</servlet-name>
         <servlet-class>Servleets.SignOut</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>Search</servlet-name>
-        <servlet-class>Servleets.Search</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Header</servlet-name>
-        <servlet-class>Servleets.Header</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LatestBooks</servlet-name>
-        <servlet-class>Servleets.LatestBooks</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ChkSavedList</servlet-name>
-        <servlet-class>Servleets.ChkSavedList</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -89,22 +72,6 @@
         <servlet-name>SignOut</servlet-name>
         <url-pattern>/SignOut</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Search</servlet-name>
-        <url-pattern>/Search</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Header</servlet-name>
-        <url-pattern>/Header</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LatestBooks</servlet-name>
-        <url-pattern>/LatestBooks</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChkSavedList</servlet-name>
-        <url-pattern>/ChkSavedList</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -128,7 +95,7 @@
  
     <context-param>
         <param-name>pass</param-name>
-        <param-value>13.2developers</param-value>
+        <param-value>nsbmdevelopers13.2</param-value>
     </context-param>
  
     <welcome-file-list>

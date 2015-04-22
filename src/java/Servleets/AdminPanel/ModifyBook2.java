@@ -105,7 +105,7 @@ public class ModifyBook2 extends HttpServlet {
             sup_Name = sup.getSup_Name();
         else
             sup_Name="There is no supplier for this book";
-        double b_qty =book.getB_Qty();
+        int b_qty =book.getB_Qty();
         //need image
         
         //..............

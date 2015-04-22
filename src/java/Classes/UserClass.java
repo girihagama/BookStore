@@ -320,10 +320,10 @@ public class UserClass {
                     else
                         this.u_RegDate="No Registration date for this person";
                     this.u_Mail=rs.getString("u_Mail");
-                    if(rs.getString("u_addLine1")!=null)
+                    if(rs.getString("u_addLine1")!=null&&!"".equals(rs.getString("u_addLine2")))
                         this.u_addLine1=rs.getString("u_addLine1");
                     else
-                        this.u_addLine1="-";
+                        this.u_addLine1="---";
                     if(!"".equals(rs.getString("u_addLine2"))&&rs.getString("u_addLine2")!=null)
                         this.u_addLine2=rs.getString("u_addLine2");
                     else

@@ -148,6 +148,10 @@
                                 validators: {
                                     notEmpty: {
                                         message: "Please provide a admin name"
+                                    },
+                                    stringLength: {
+                                        max: 20,
+                                        message: "User name must be less than 20 characters long"
                                     }
                                 }
                             },
