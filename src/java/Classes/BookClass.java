@@ -380,4 +380,25 @@ public class BookClass {
         }
         return -1;
     }
+
+    void getBookName(int b_ID) {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+         if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select b_Title from book where b_ID = ?");
+                pstmt.setInt(1,b_ID);
+
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    this.b_Title=rs.getString("b_Title");
+                }
+                pstmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+    }
 }
