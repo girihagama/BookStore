@@ -78,7 +78,10 @@ public class AddAuthors extends HttpServlet {
         System.out.println("auther " + authorName);
         AuthorClass author = new AuthorClass();
         author.setA_Name(authorName);
+        if(year!=null && month!=null && date!=null)
         author.setA_DOB(year + "/" + month + "/" + date);
+        else
+            author.setA_DOB(null);
         author.setA_Desc(authorDesc);
         int result = author.insertAuthor();
 
@@ -96,7 +99,7 @@ public class AddAuthors extends HttpServlet {
         request.setAttribute("action", "AddAuthors");
         RequestDispatcher rd;
         System.out.println(backUrl);
-        if ("http://localhost:8080/BookStore/adminPanel/addBook.jsp".equals(backUrl)) {
+        if ("http://localhost:8080/BookStore/adminPanel/addBook.jsp".equals(backUrl)||"http://localhost:8080/BookStore/AddAuthors".equals(backUrl)) {
             rd = request.getRequestDispatcher("adminPanel/addBook.jsp");
         } else {
             rd = request.getRequestDispatcher("adminPanel/addAuthors.jsp");

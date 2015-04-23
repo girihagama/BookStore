@@ -4,6 +4,8 @@
     Author     : Chami
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,9 +31,12 @@
         <title>Admin Panel - Search Stock</title>
     </head>
     <body>
-         <%
-            if ("!http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {
-            System.out.println(request.getHeader("Referer").substring(0, 42));%>
+        <% if(request.getHeader("Referer").length()<42){%>
+           <script>
+                history.forward()
+        </script> 
+        <%} else
+            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
             <script>
                 history.forward()
         </script>

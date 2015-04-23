@@ -82,7 +82,7 @@ public class AddSupplier extends HttpServlet {
         int result=supplier.insertSupplier();
         
         if(result==1){
-            warningMsg="Supplier inserted to the system";
+            warningMsg="Supplier is inserted to the system";
         }
         else{
             warningMsg="Supplier is not inserted due to an error. Please try again";
@@ -94,10 +94,11 @@ public class AddSupplier extends HttpServlet {
             request.setAttribute("errorAddress3", supplierAddress3);
         }
         String backUrl = request.getParameter("back");
+        System.out.println("back url "+backUrl);
         request.setAttribute("msg", warningMsg);
         request.setAttribute("action", "AddSupplier");
         RequestDispatcher rd;
-        if ("http://localhost:8080/BookStore/adminPanel/addBook.jsp".equals(backUrl)) {
+        if ("http://localhost:8080/BookStore/adminPanel/addBook.jsp".equals(backUrl)||"http://localhost:8080/BookStore/AddSupplier".equals(backUrl)) {
             rd = request.getRequestDispatcher("adminPanel/addBook.jsp");
         } else {
             rd = request.getRequestDispatcher("adminPanel/addSuppliers.jsp");

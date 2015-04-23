@@ -31,9 +31,12 @@
         <title>Admin Panel - Modify Authors</title>
     </head>
     <body>
-         <%
-            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {
-            System.out.println(request.getHeader("Referer").substring(0, 42));%>
+        <% if(request.getHeader("Referer").length()<42){%>
+           <script>
+                history.forward()
+        </script> 
+        <%} else
+            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
             <script>
                 history.forward()
         </script>

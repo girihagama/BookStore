@@ -106,7 +106,7 @@ public class ModifyBook2 extends HttpServlet {
         else
             sup_Name="There is no supplier for this book";
         int b_qty =book.getB_Qty();
-        //need image
+        int b_ID = book.getB_ID();
         
         //..............
         request.setAttribute("searchedBookName", bookTitle);
@@ -116,6 +116,7 @@ public class ModifyBook2 extends HttpServlet {
         request.setAttribute("searchedBooksup", sup_Name);
         request.setAttribute("searchedBookQty", b_qty);
         request.setAttribute("searchedBookPrice", price);
+        request.setAttribute("searchedBookID", b_ID);
         RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifibook2.jsp");
         rd.forward(request, response);
     }

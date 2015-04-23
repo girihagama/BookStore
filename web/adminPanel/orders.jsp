@@ -29,12 +29,17 @@
         <title>Admin Panel - Orders</title>
     </head>
     <body>
-        <%
-            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {
-                System.out.println(request.getHeader("Referer").substring(0, 42));%>
-        <script>
-            history.forward()
+        <% if(request.getHeader("Referer").length()<42){%>
+           <script>
+                history.forward()
+        </script> 
+        <%} else
+            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
+            <script>
+                history.forward()
         </script>
+            
+        <%}%>
 
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/orderHeader.jsp"%>           

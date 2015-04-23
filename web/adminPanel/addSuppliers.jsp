@@ -33,9 +33,12 @@
         <%--for authentication--%>
         <%! String level = "L2";%>
         <%-- ------------ --%>
-         <%
-            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {
-            System.out.println(request.getHeader("Referer").substring(0, 42));%>
+        <% if(request.getHeader("Referer").length()<42){%>
+           <script>
+                history.forward()
+        </script> 
+        <%} else
+            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
             <script>
                 history.forward()
         </script>
@@ -73,8 +76,7 @@
                 <%--Form--%>
                 <div class="col-lg-9">
                     <% if (request.getAttribute("msg") != null) {
-                    %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br>
-                        If you want add another book fill below form and add a book.</div><%
+                    %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
                         } else {%>
                     <br><%}%>
                     <br>

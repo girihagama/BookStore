@@ -104,7 +104,7 @@ public class AdminAdd extends HttpServlet {
             warningMsg=newAdminName+ " is inserted successfully";
         }
         else{
-            warningMsg=newAdminName+ " is not inserted due to an error. Please try again";
+            warningMsg=newAdminName+ " is not inserted due to an error. Please try again with a diferent user name";
         }
         
         request.setAttribute("msg", warningMsg);

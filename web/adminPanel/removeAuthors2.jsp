@@ -11,7 +11,7 @@
     <head>
         <link rel="icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" type="image/x-icon" />
         <link rel="shortcut icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.ico" type="image/ico" />
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
 
@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrapValidator.css"/>
-        
+
         <%--Bootsrap jS files--%>
         <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.min.js"></script>
         <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
@@ -31,15 +31,17 @@
         <title>Admin Panel - Remove Authors</title>
     </head>
     <body>
-         <%
-            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {
-            System.out.println(request.getHeader("Referer").substring(0, 42));%>
-            <script>
-                history.forward()
+        <% if (request.getHeader("Referer").length() < 42) {%>
+        <script>
+            history.forward()
+        </script> 
+        <%} else if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
+        <script>
+            history.forward()
         </script>
-            
+
         <%}%>
-                 <div class="container" style="background-color:#F5F5F0">
+        <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/authorHeader.jsp"%> 
             <div class="row">
                 <%--left side navigation--%>
@@ -48,23 +50,23 @@
                         <li role="presentation" class="text_box" style="padding: 0px; text-align: left;">Authors</li>
                         <li>
                             <div id="topmenu">
-                            <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/addAuthors.jsp"><font style="color: orange">Add Author</font></a></li>
-                                <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifyAuthors.jsp"><font style="color: orange">Modify Author</font></a></li>
-                                <li role="presentation" class="active"><a href="#">Remove Author</a></li>
-                            </ul>
+                                <ul class="nav nav-pills nav-stacked topmenu">
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/addAuthors.jsp"><font style="color: orange">Add Author</font></a></li>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifyAuthors.jsp"><font style="color: orange">Modify Author</font></a></li>
+                                    <li role="presentation" class="active"><a href="#">Remove Author</a></li>
+                                </ul>
                             </div>
                         </li>
                     </ul>  
                 </div>
-            
+
                 <div class="col-lg-1">&nbsp;</div>
                 <%--left side navigation end--%>
                 <div class="col-lg-9">
                     <br>
                     <label><h3>Author Name</h3></label>
                     <form id="RemoveForm" action="RemoveAuthor3" method="POST">
-                    <table border="0">
+                        <table border="0">
                             <tbody>
                                 <tr>
                                     <td><label>Author Name</label></td>
@@ -77,7 +79,7 @@
                                     <td><label>:  <%=request.getAttribute("searchedAuthorDOB")%></label></td>
                                     <td></td>
                                 </tr>
-                                
+
                                 <tr>
                                     <td><label>Author Description</label></td>
                                     <td><label>: <%=request.getAttribute("searchedAuthorDesc")%></label></td>
@@ -99,15 +101,15 @@
                         </div>
                         <br>
                         <table>
-                        <tbody>
+                            <tbody>
                                 <tr>
                                     <td><label> <a class="btn btn-default" href="adminPanel/removeAuthors.jsp" role="button">Cancel</a></label></td>
-                                    <td><label><button type="submit" class="btn btn-default">Remove This Book</button></label></td>
+                                    <td>&nbsp;&nbsp;&nbsp;<label><button type="submit" class="btn btn-default">Remove This Book</button></label></td>
                                 </tr>
-                        </tbody>
+                            </tbody>
                         </table>
                     </form>
-                        <script type="text/javascript">
+                    <script type="text/javascript">
                         $(document).ready(function() {
                             var validator = $("#RemoveForm").bootstrapValidator({
                                 fields: {
@@ -124,7 +126,7 @@
                     </script>
                 </div>
             </div>
- <% if (request.getAttribute("msg") != null) {
+            <% if (request.getAttribute("msg") != null) {
             %>
             <div class="row">
                 &nbsp;
@@ -148,6 +150,7 @@
             <div class="row">
                 &nbsp;
             </div>
+
             <div class="row">
                 &nbsp;
             </div>
@@ -155,7 +158,13 @@
                 &nbsp;
             </div>
             <%}%>
-                <div class="row">
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
                 &nbsp;
             </div>
             <div class="row">
@@ -165,7 +174,7 @@
                 <ol class="breadcrumb" style="background-color:#FF9933">
                 </ol>
             </div> 
-         
-                 </div>
+
+        </div>
     </body>
 </html>
