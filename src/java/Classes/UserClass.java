@@ -35,7 +35,7 @@ public class UserClass {
     private String u_addLine2;
     private String u_addLine3;
     private String u_CardNo;
-    private Image u_Image;
+    private byte[] u_Image;
 
     /**
      * @return the db
@@ -217,20 +217,6 @@ public class UserClass {
      */
     public void setU_CardNo(String u_CardNo) {
         this.u_CardNo = u_CardNo;
-    }
-
-    /**
-     * @return the u_Image
-     */
-    public Image getU_Image() {
-        return u_Image;
-    }
-
-    /**
-     * @param u_Image the u_Image to set
-     */
-    public void setU_Image(Image u_Image) {
-        this.u_Image = u_Image;
     }
 
     //methods

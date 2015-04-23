@@ -21,40 +21,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Bootstrap</title>
-
-        <!-- Bootstrap CSS-->
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-theme.css" rel="stylesheet">
-        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-
-        <!--aditional CSS imports-->
-        <!-- IF online useage required
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-        Remove this comment tag-->
-        <!--aditional CSS imports end-->
-
-        <!--internal CSS-->
-
-        <!--internal CSS end-->
-
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="js/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>  
-
-        <!--aditional JS imports-->
-        <!-- IF online useage required
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        Remove this comment tag-->
-        <!--aditional JS imports end-->
-
-        <!--internal JS-->
-
-        <!--internal JS end-->          
+        <title>Header</title>
     </head>
 
     <body class="container-fluid">

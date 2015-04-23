@@ -50,32 +50,31 @@ public class Header extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        String username = null;
-
-        try {
-            if (session.getAttribute("Login") != null && session.getAttribute("Login").toString() == "True") {
-
-                if (session.getAttribute("Username") != null) {
-                    username = session.getAttribute("Username").toString();
-                } else {
-                    response.sendRedirect("Login.jsp");
-                }
-
-                UserClass x = new UserClass();
-
-                if (x.chkUserName(username)) {
-                    session.setAttribute("Username", username);
-                } else {
-                    response.sendRedirect("Login.jsp");
-                }                
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(Header.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+//
+//        PrintWriter out = response.getWriter();
+//        HttpSession session = request.getSession();
+//        String username = null;
+//
+//        try {
+//            if (session.getAttribute("Login") != null && session.getAttribute("Login").toString() == "True") {
+//
+//                if (session.getAttribute("Username") != null) {
+//                    username = session.getAttribute("Username").toString();
+//                } else {
+//                    response.sendRedirect("Login.jsp");
+//                }
+//
+//                UserClass x = new UserClass();
+//
+//                if (x.chkUserName(username)) {
+//                    session.setAttribute("Username", username);
+//                } else {
+//                    response.sendRedirect("Login.jsp");
+//                }                
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(Header.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         RequestDispatcher rd = request.getRequestDispatcher("header.jsp");
         rd.forward(request, response);
     }
