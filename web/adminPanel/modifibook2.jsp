@@ -86,7 +86,7 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
-                                        <a class="btn btn-default" href="#" role="button">Add Authors</a>
+                                        <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/addAuthors.jsp" role="button">Add Authors</a>
                                     </div>
                                 </div>                            
                             </div>
