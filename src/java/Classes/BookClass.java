@@ -6,7 +6,6 @@
 package Classes;
 
 import com.mysql.jdbc.PreparedStatement;
-import java.awt.Image;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;

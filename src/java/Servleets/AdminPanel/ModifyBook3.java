@@ -102,6 +102,7 @@ public class ModifyBook3 extends HttpServlet {
         AuthorClass author = new AuthorClass();
         author.findAutherID(ChangedAuthorName);
         int a_ID=author.getA_ID();
+        System.out.println("Auther" + ChangedAuthorName + "num" + a_ID);
         
         SupplierClass sup = new SupplierClass();
         sup.findSupplierID(supName);
