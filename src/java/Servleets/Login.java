@@ -5,12 +5,17 @@
  */
 package Servleets;
 
+import Classes.UserClass;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,19 +34,6 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */            
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +48,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**
@@ -70,7 +62,90 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        
+        
+        
+        boolean rememberUser;
+
+        try {
+            UserClass x = new UserClass();
+
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String remember = request.getParameter("Remember");
+
+            /*
+             remember me checkbox returns "Remember" if it is checked
+             Or returns "null" if it isn't checked
+             */
+            if (remember == null) {
+                rememberUser = false;
+            } else {
+                rememberUser = true;
+            }
+
+            x.setU_Name(username);
+            x.setU_Pass(password);
+
+            boolean login = x.login();
+
+            if (login == true) {
+                session.setAttribute("Login", "True");
+
+                session.setAttribute("Username", username);
+                session.setAttribute("Password", password);
+
+                int chkPrivilege = x.chkPrivilege();
+
+                if (rememberUser == true) {
+                    Cookie loginCk = new Cookie("Login", "True");
+                    Cookie userCk = new Cookie("Username", username);
+                    Cookie passCk = new Cookie("Password", password);
+
+                    loginCk.setMaxAge(60 * 60 * 24 * 30);
+                    userCk.setMaxAge(60 * 60 * 24 * 30);
+                    passCk.setMaxAge(60 * 60 * 24 * 30);
+
+                    response.addCookie(loginCk);
+                    response.addCookie(userCk);
+                    response.addCookie(passCk);
+                }
+
+                if (chkPrivilege == 1) {
+                    
+                    if (rememberUser == true) {
+                        Cookie loginTypeCk = new Cookie("Login_Type", "admin");
+                        loginTypeCk.setMaxAge(60 * 60 * 24 * 30);
+                        response.addCookie(loginTypeCk);
+                    }
+                    
+                    session.setAttribute("Login_Type", "admin");
+                    response.sendRedirect("adminPanel/adminStartPage.jsp");
+                }
+                if (chkPrivilege == 0) {                    
+                    
+                    if (rememberUser == true) {
+                        Cookie loginTypeCk = new Cookie("Login_Type", "user");
+                        loginTypeCk.setMaxAge(60 * 60 * 24 * 30);
+                        response.addCookie(loginTypeCk);
+                    }
+                    
+                    session.setAttribute("Login_Type", "user");
+                    response.sendRedirect("Home.jsp");
+                }
+            } else {
+                session.setAttribute("Login", "False");
+                session.setAttribute("Error", "Wrong Username");
+
+                response.sendRedirect("Login.jsp");
+            }
+        } catch (Exception ex) {
+            session.setAttribute("Login", null);
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

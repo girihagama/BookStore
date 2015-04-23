@@ -11,65 +11,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+
+        <%--Bootsrap CSS files--%>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrapValidator.css"/>
+
+        <%--Bootsrap jS files--%>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrapValidator.js"></script>
+
+        <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
         <title>Admin Panel</title>
     </head>
     <body>
          <div class="container" style="background-color:#F5F5F0">
-<<<<<<< HEAD
-            <div class="row"><div class="col-md-10">&nbsp;</div></div>
-            <div class="row">
-                <div class="col-md-11"></div>
-                <div class="col-md-1"><button type="button" class="btn btn-warning">Logout</button></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-1">
-                    <img src="Images/Page icons/BookIcon.png" class="img-responsive" width="100%"alt="Responsive image">
-                </div>
-                <div class="col-md-11">
-                    <font color=#FF7519><h1><strong>Orchid Book Store</strong><small>&nbsp; Admin Panel</small></h1></font>
-                </div>
-            </div>
-            <div class="row">
-                <img src="Images/Orthers/line.png" width="100%" alt="Responsive image">
-            </div>
-            <%-- sub menus--%>
-            <div class="row">
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Home.png" class="image" width="100%" alt="Responsive image" title="Home"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Books.png" class="image" width="100%" alt="Responsive image" title="Books"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="addAuthors.jsp"><img src="Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" title="Authors" style="opacity: 0.4"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Clients.png" class="image" width="100%" alt="Responsive image" title="Clients"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Admin.png" class="image" width="100%" alt="Responsive image" title="Admins"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" title="Stocks"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="addSuppliers.jsp"><img src="Images/Page icons/Suppliers.png" class="image" width="100%" alt="Responsive image" title="Suppliers"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" title="Orders"></a>
-                </div>
-            </div>    
-            <div class="row">
-                <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image">
-            </div>
-            <%-- end of sub menus--%>  
-=======
             <%@include file="HeaderFiles/authorHeader.jsp"%>
->>>>>>> chami1994-master
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -79,8 +39,8 @@
                             <div id="topmenu">
                             <ul class="nav nav-pills nav-stacked topmenu">
                                 <li role="presentation" class="active"><a href="#">Add Author</a></li>
-                                <li role="presentation"><a href="modifyAuthors.jsp"><font style="color: orange">Modify Author</font></a></li>
-                                <li role="presentation"><a href="removeAuthors.jsp"><font style="color: orange">Remove Author</font></a></li>
+                                <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifyAuthors.jsp"><font style="color: orange">Modify Author</font></a></li>
+                                <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeAuthors.jsp"><font style="color: orange">Remove Author</font></a></li>
                             </ul>
                             </div>
                         </li>
@@ -91,47 +51,56 @@
                 
                 <%--Form--%>
                 <div class="col-lg-9">
-                    <br>
-                    <br>
-                    <form>
+                  <% if (request.getAttribute("msg") != null) {
+                    %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br>
+                        If you want to add another author, fill the form below.</div><%
+                            } else {%>
+                    <br><%}%>
+                    <br>                                     
+                    <form id="AddForm" <%if (request.getAttribute("action") != null) {%>
+                          action="<%=request.getAttribute("action")%>"<%} else {%>
+                          action="../AddAuthors"<%}%>
+                          method="POST">
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Name</label>
-                                <input type="text" name="addAuthorName" class="form-control" placeholder="Enter Author Name" required>
+                                <input type="text" id="authorName" name="authorName" class="form-control" placeholder="Enter Author Name"
+                                       <%if (request.getAttribute("errorAuthorName") != null) {%>
+                                       value="<%=request.getAttribute("errorAuthorName")%>"<%}%>>                                       
                             </div>
                         </div>
-  
+                
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Date of Birth</label>
                                 <div class="row">
                                     <div class="col-lg-2">
-                                        <select class="form-control" placeholder="Select year" name="addYear">
+                                        <select class="form-control" placeholder="Select year" name="year">
                                             <option>Year</option>
                                             <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
                                                 for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
-                                        <select class="form-control" placeholder="Select year" name="addMonth">
-                                            <option>Month</option>
-                                            <option>January</option>
-                                            <option>February</option>
-                                            <option>March</option>
-                                            <option>April</option>
-                                            <option>May</option>
-                                            <option>June</option>
-                                            <option>July</option>
-                                            <option>August</option>
-                                            <option>September</option>
-                                            <option>October</option>
-                                            <option>November</option>
-                                            <option>December</option>                                            
+                                        <select class="form-control" placeholder="Select year" name="month">
+                                            <option disabled selected value="0">Month</option>
+                                            <option value="1">January</option>
+                                            <option value="2">February</option>
+                                            <option value="3">March</option>
+                                            <option value="4">April</option>
+                                            <option value="5">May</option>
+                                            <option value="6">June</option>
+                                            <option value="7">July</option>
+                                            <option value="8">August</option>
+                                            <option value="9">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>                                            
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
-                                        <select class="form-control" placeholder="Select year" name="addDate">
-                                            <option>Date</option>
+                                        <select class="form-control" placeholder="Select year" name="date">
+                                            <option disabled selected value="0">Date</option>
                                             <% 
                                                 for (int i = 0; i <31; i++) {%><option><%=i+1%></option><%}%>
                                         </select>
@@ -143,7 +112,10 @@
                            <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Description</label>
-                                <textarea class="form-control" rows="3" placeholder="Enter Description" name="addAuthorDesc"></textarea>
+                                <textarea class="form-control" rows="3" placeholder="Enter Description" name="authorDesc"
+                                             <%if (request.getAttribute("errorDesc") != null) {%>
+                                               value="<%=request.getAttribute("errorDesc")%>"<%}%>>                                   
+                                </textarea>
                             </div>
                         </div>
                         
@@ -152,6 +124,23 @@
                 </div>
             </div>
             <%--Form end--%>
+            <%--script for validation--%>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var validator = $("#AddForm").bootstrapValidator({
+                        fields: {
+                            authorName: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "Please provide an author name."
+                                    }
+                                }
+                            },
+
+                        }
+                    });
+                });
+            </script>
             <div class="row">
                 &nbsp;
             </div>

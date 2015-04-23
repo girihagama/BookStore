@@ -5,6 +5,9 @@
  */
 package Classes;
 
+import com.mysql.jdbc.Statement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author Indunil
@@ -15,6 +18,9 @@ public class CartClass {
     private String u_Name;
     private int B_ID;
     private int c_Qty;
+    
+    //DbClass object
+    private DbClass db = new DbClass();
 
     /**
      * @return the c_ID
@@ -72,4 +78,34 @@ public class CartClass {
         this.c_Qty = c_Qty;
     }
     
+    //methods
+    
+    public int noOfItems(){
+        int items=0;
+        
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT COUNT(*) FROM cart WHERE u_Name='" + getU_Name() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                items = rs.getInt("COUNT(*)");
+            }
+            db.endConnection();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+        
+        return items; 
+    }
 }

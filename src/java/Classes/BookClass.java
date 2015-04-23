@@ -6,7 +6,6 @@
 package Classes;
 
 import com.mysql.jdbc.PreparedStatement;
-import java.awt.Image;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -106,6 +105,7 @@ public class BookClass {
         this.a_ID = a_ID;
     }
 
+
     public int insertBook() {        
     PreparedStatement pstmt;
         DbClass db = new DbClass();
@@ -166,9 +166,17 @@ public class BookClass {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     this.b_Title=rs.getString("b_Title");
-                    this.b_Edition=rs.getString("b_Edition");
-                    this.b_Year=rs.getString("b_year").substring(0, 4);
+                    if(rs.getString("b_Edition")!=null||!"".equals(rs.getString("b_Edition")))
+                        this.b_Edition=rs.getString("b_Edition");
+                    else
+                        this.b_Edition="No book edition for this book";
+                    
+                    if(rs.getString("b_year")!=null)
+                        this.b_Year=rs.getString("b_year").substring(0, 4);
+                    else
+                        this.b_Year="No published year for this book";
                     this.a_ID=rs.getInt("a_ID");
+                    
                 }
                 pstmt.close();
                 db.endConnection();
@@ -217,6 +225,26 @@ public class BookClass {
                 db.endConnection();
 
                 return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1;
+    }
+
+    public int removeBook() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("delete from book where b_Title=?");
+                pstmt.setString(1, b_Title);
+
+                int removed = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return removed;
             } catch (SQLException ex) {
                 Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
             }

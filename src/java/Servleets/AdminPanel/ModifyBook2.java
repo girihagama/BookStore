@@ -9,6 +9,7 @@ package Servleets.AdminPanel;
 import Classes.AuthorClass;
 import Classes.BookClass;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -77,6 +78,9 @@ public class ModifyBook2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        OutputStream oImage; //for image
+        
+        
         String bookSearchName= request.getParameter("bookName");
         BookClass book = new BookClass();
         AuthorClass author = new AuthorClass();
@@ -88,12 +92,13 @@ public class ModifyBook2 extends HttpServlet {
         String bookEdition = book.getB_Edition();
         String bookTitle = book.getB_Title();
         String bookYear = book.getB_Year();
+        //need image
+        
         //..............
         request.setAttribute("searchedBookName", bookTitle);
         request.setAttribute("searchedBookEdition", bookEdition);
         request.setAttribute("searchedBookAName", authorName);
         request.setAttribute("searchedBookYear", bookYear);
-        System.out.println("a num "+request.getAttribute("searchedBookAName")+book.getA_ID());
         RequestDispatcher rd = request.getRequestDispatcher("adminPanel/modifibook2.jsp");
         rd.forward(request, response);
     }

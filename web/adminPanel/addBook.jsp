@@ -1,11 +1,12 @@
-<<<<<<< HEAD
-
 <%-- 
     Document   : subPage
     Created on : Mar 22, 2015, 6:08:29 PM
     Author     : Chami
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="Classes.AuthorClass"%>
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,61 +14,29 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+        
+        <%--Bootsrap CSS files--%>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrapValidator.css"/>
+        
+        <%--Bootsrap jS files--%>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrapValidator.js"></script>
+
+        <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
         <title>Admin Panel</title>
     </head>
     <body>
+        <%--for authentication--%>
+        <%! String level="L1";%>
+        <%-- ------------ --%>
+        
         <div class="container" style="background-color:#F5F5F0">
-            <div class="row"><div class="col-md-10">&nbsp;</div></div>
-            <div class="row">
-                <div class="col-md-11"></div>
-                <div class="col-md-1"><button type="button" class="btn btn-warning">Logout</button></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-1">
-                    <img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" class="img-responsive" width="100%"alt="Responsive image">
-                </div>
-                <div class="col-md-11">
-                    <font color=#FF7519><h1><strong>Orchid Book Store</strong><small>&nbsp; Admin Panel</small></h1></font>
-                </div>
-            </div>
-            <div class="row">
-                <img src="http://localhost:8080/BookStore/adminPanel/Images/Orthers/line.png" width="100%" alt="Responsive image">
-            </div>
-            <%-- sub menus--%>
-            <div class="row">
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Home.png" class="image" width="100%" alt="Responsive image" title="Home"></a>
-                </div>
-                <div class="col-lg-1">
-                    <img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Books.png" class="image" width="100%" alt="Responsive image" title="Books" style="opacity: 0.5">
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" title="Authors"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Clients.png" class="image" width="100%" alt="Responsive image" title="Clients"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Admin.png" class="image" width="100%" alt="Responsive image" title="Admins"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" title="Stocks"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Suppliers.png" class="image" width="100%" alt="Responsive image" title="Suppliers"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" title="Orders"></a>
-                </div>
-            </div>    
-            <div class="row">
-                <img src="http://localhost:8080/BookStore/adminPanel/Images/Orthers/orange line.png"width="100%" alt="Responsive image">
-            </div>
-            <%-- end of sub menus--%>           
+           <%@include file="HeaderFiles/bookHeader.jsp"%> 
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -75,11 +44,17 @@
                         <li role="presentation" class="text_box" style="padding: 0px; text-align: left;">Books</li>
                         <li>
                             <div id="topmenu">
-                            <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation" class="active"><a href="#">Add Book</a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Modify Book</font></a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Remove Book</font></a></li>
-                            </ul>
+                                <ul class="nav nav-pills nav-stacked topmenu">
+                                    <li role="presentation" class="active"><a href="#">Add Book</a></li>
+                                    <%if("L3".equals(level)){%>
+                                    <li role="presentation"><a href="" data-toggle="modal" data-target="#Modify" data-backdrop="static"><font style="color: orange">Modify Book</font></a></li>
+                                            <%}else{%>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp"><font style="color: orange">Modify Book</font></a></li><%}%>
+                                    <%if("L3".equals(level)){%>
+                                    <li role="presentation"><a href="" data-toggle="modal" data-target="#remove" data-backdrop="static"><font style="color: orange">Remove Book</font></a></li>
+                                    <%}else{%>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeBook1.jsp"><font style="color: orange">Remove Book</font></a></li><%}%>
+                                </ul>
                             </div>
                         </li>
                     </ul>  
@@ -88,39 +63,43 @@
                 <%--left side navigation end--%>
                 <%--Form--%>
                 <div class="col-lg-9">
-                    
                     <% if (request.getAttribute("msg") != null) {
                     %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br>
-                            If you want add another book fill below form and add a book.</div><%
-                }else{%>
+                        If you want add another book fill below form and add a book.</div><%
+                            } else {%>
                     <br><%}%>
                     <br>                 
-                    <form <%if(request.getAttribute("action")!=null){%>
-                                       action="<%=request.getAttribute("action")%>"<%}else{%>
-                                       action="../AddBook"<%}%>
-                                       method="POST" enctype="multipart/form-data">
+                    <form id="AddForm"<%if (request.getAttribute("action") != null) {%>
+                          action="<%=request.getAttribute("action")%>"<%} else {%>
+                          action="../AddBook"<%}%>
+                          method="POST" enctype="multipart/form-data">
                         <div id ="orange">
                             <div class="form-group orange">
-                                <label>Book Title</label>
-                                <input type="text" name="bookTitle" class="form-control" placeholder="Enter book title" required
-                                       <%if(request.getAttribute("errorBookTitle")!=null){%>
+                                <label for="bookTitle">Book Title</label>
+                                <input type="text" name="bookTitle" id="bookTitle" class="form-control" placeholder="Enter book title" 
+                                       <%if (request.getAttribute("errorBookTitle") != null) {%>
                                        value="<%=request.getAttribute("errorBookTitle")%>"<%}%>>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
-                           <div id ="orange">
+                        <jsp:useBean id="author" class="Classes.AuthorClass"></jsp:useBean>                        
+                        <div id ="orange">
                             <div class="form-group orange">
-                                <label>Author Name</label>
+                                <label for="autherName">Author Name</label>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <select name="autherName" class="form-control" placeholder="Select year" required
-                                                <%if(request.getAttribute("errorAuthor")!=null){%>
-                                                value="<%=request.getAttribute("errorAuthor")%>"<%}%>>
-                                            <option>Martin Wickramasinghe</option>
-                                        </select>
+                                        <select name="autherName" id="autherName" class="form-control" >
+                                            <option disabled selected value="0">Select an author</option> 
+                                        <%
+                                            List results = author.getAlist();
+                                            Iterator it = results.iterator();
+                                                while (it.hasNext()) {%>
+                                        <option><%=it.next()%></option>
+                                        <%}%>
+                                    </select>
                                     </div>
                                     <div class="col-lg-2">
-                                       <a class="btn btn-default" href="#" role="button">Add Authors</a>
+                                        <a class="btn btn-default" href="#" role="button">Add Authors</a>
                                     </div>
                                 </div>                            
                             </div>
@@ -129,11 +108,11 @@
                             <div class="form-group orange">
                                 <label>Book Edition</label>
                                 <div class="row">
-                                <div class="col-lg-4">
-                                    <input name="bookEdition" type="text" class="form-control" placeholder="Enter book edition"
-                                           <%if(request.getAttribute("errorEdition")!=null){%>
-                                       value="<%=request.getAttribute("errorEdition")%>"<%}%>>
-                                </div>
+                                    <div class="col-lg-4">
+                                        <input name="bookEdition" type="text" class="form-control" placeholder="Enter book edition"
+                                               <%if (request.getAttribute("errorEdition") != null) {%>
+                                               value="<%=request.getAttribute("errorEdition")%>"<%}%>>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -142,11 +121,10 @@
                                 <label>Book Published Year</label>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <select name="year" class="form-control" placeholder="Select year" 
-                                                <%if(request.getAttribute("errorYear")!=null){%>
-                                       value="<%=request.getAttribute("errorYear")%>"<%}%>>
-                                            <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
-                                    for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
+                                        <select name="year" class="form-control" placeholder="Select year">
+                                            <%  int year = Calendar.getInstance().get(Calendar.YEAR); %>
+                                            <option disabled selected value="0">Select a year</option>
+                                                <%for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
                                         </select>
                                     </div>
                                 </div>                            
@@ -163,224 +141,70 @@
                 </div>
             </div>
             <%--Form end--%>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row">
-                &nbsp;
-            </div>
-            <div class="row" >
-                <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
-                </ol>
-            </div> 
-        </div>
-    </body>
-</html>
-=======
-<%-- 
-    Document   : subPage
-    Created on : Mar 22, 2015, 6:08:29 PM
-    Author     : Chami
---%>
-
-<%@page import="java.util.Calendar"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
-        <title>Admin Panel</title>
-    </head>
-    <body>
-        <div class="container" style="background-color:#F5F5F0">
-<<<<<<< HEAD
-            <div class="row"><div class="col-md-10">&nbsp;</div></div>
-            <div class="row">
-                <div class="col-md-11"></div>
-                <div class="col-md-1"><button type="button" class="btn btn-warning">Logout</button></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-1">
-                    <img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" class="img-responsive" width="100%"alt="Responsive image">
-                </div>
-                <div class="col-md-11">
-                    <font color=#FF7519><h1><strong>Orchid Book Store</strong><small>&nbsp; Admin Panel</small></h1></font>
-                </div>
-            </div>
-            <div class="row">
-                <img src="http://localhost:8080/BookStore/adminPanel/Images/Orthers/line.png" width="100%" alt="Responsive image">
-            </div>
-            <%-- sub menus--%>
-            <div class="row">
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Home.png" class="image" width="100%" alt="Responsive image" title="Home"></a>
-                </div>
-                <div class="col-lg-1">
-                    <img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Books.png" class="image" width="100%" alt="Responsive image" title="Books" style="opacity: 0.5">
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" title="Authors"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Clients.png" class="image" width="100%" alt="Responsive image" title="Clients"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Admin.png" class="image" width="100%" alt="Responsive image" title="Admins"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" title="Stocks"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Suppliers.png" class="image" width="100%" alt="Responsive image" title="Suppliers"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" title="Orders"></a>
-                </div>
-            </div>    
-            <div class="row">
-                <img src="http://localhost:8080/BookStore/adminPanel/Images/Orthers/orange line.png"width="100%" alt="Responsive image"">
-            </div>
-            <%-- end of sub menus--%>           
-=======
-            <%@include file="HeaderFiles/bookHeader.jsp"%>
->>>>>>> 9b4e94a2fb0c725101359220ddfadc9067976088
-            <div class="row">
-                <%--left side navigation--%>
-                <div class="col-lg-2">
-                    <ul class="nav nav-pills nav-stacked ">
-                        <li role="presentation" class="text_box" style="padding: 0px; text-align: left;">Books</li>
-                        <li>
-                            <div id="topmenu">
-                            <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation" class="active"><a href="#">Add Book</a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Modify Book</font></a></li>
-                                <li role="presentation"><a href="#"><font style="color: orange">Remove Book</font></a></li>
-                            </ul>
-                            </div>
-                        </li>
-                    </ul>  
-                </div>
-                <div class="col-lg-1">&nbsp;</div>
-                <%--left side navigation end--%>
-                <%--Form--%>
-                <div class="col-lg-9">
+            
+            <%-- remove box--%>
+                    <div class="modal fade" id="remove" role="dialog" aria-hidden="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h2 class="modal-title"><strong>Sorry...!</strong></h2>
+                                </div>
+                                    <div class="modal-body">
+                                        <h4><p>You have no authentication for remove books.</p></h4>                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="span2">
+                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
+                                        </div>
+                                    </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
                     
-<<<<<<< HEAD
-                <% if("nknln".equals(request.getAttribute("result"))){
-                    %><p class="bg-warning"><%=request.getAttribute("result")%></p><%
-                }%>
-                    <br>
-                    <br>
-                    <form action="../AddBook" method="POST" enctype="multipart/form-data">
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Title</label>
-                                <input type="text" name="bookTitle" class="form-control" placeholder="Enter book title" required>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-
-=======
-                    <% if (request.getAttribute("msg") != null) {
-                    %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br>
-                            If you want add another book fill below form and add a book.</div><%
-                }else{%>
-                    <br><%}%>
-                    <br>                 
-                    <form <%if(request.getAttribute("action")!=null){%>
-                                       action="<%=request.getAttribute("action")%>"<%}else{%>
-                                       action="../AddBook"<%}%>
-                                       method="POST" enctype="multipart/form-data">
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Title</label>
-                                <input type="text" name="bookTitle" class="form-control" placeholder="Enter book title" required
-                                       <%if(request.getAttribute("errorBookTitle")!=null){%>
-                                       value="<%=request.getAttribute("errorBookTitle")%>"<%}%>>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
->>>>>>> 9b4e94a2fb0c725101359220ddfadc9067976088
-                           <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Author Name</label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-<<<<<<< HEAD
-                                        <select class="form-control" placeholder="Select year" >
-                                        <select class="form-control" placeholder="Select year" required >
-                                            <option>Author name</option>
-                                        <select name="autherName" class="form-control" placeholder="Select year" required >
-                                            <option>Martin Wickramasinghe</option>
-
-=======
-                                        <select name="autherName" class="form-control" placeholder="Select year" required
-                                                <%if(request.getAttribute("errorAuthor")!=null){%>
-                                                value="<%=request.getAttribute("errorAuthor")%>"<%}%>>
-                                            <option>Martin Wickramasinghe</option>
->>>>>>> 9b4e94a2fb0c725101359220ddfadc9067976088
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-2">
-                                       <a class="btn btn-default" href="#" role="button">Add Authors</a>
-                                    </div>
-                                </div>                            
-                            </div>
-                        </div> 
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Edition</label>
-                                <div class="row">
-                                <div class="col-lg-4">
-<<<<<<< HEAD
-                                    <input name="bookEdition" type="text" class="form-control" placeholder="Enter book edition">
-=======
-                                    <input name="bookEdition" type="text" class="form-control" placeholder="Enter book edition"
-                                           <%if(request.getAttribute("errorEdition")!=null){%>
-                                       value="<%=request.getAttribute("errorEdition")%>"<%}%>>
->>>>>>> 9b4e94a2fb0c725101359220ddfadc9067976088
+                    <%-- modify box--%>
+                    <div class="modal fade" id="Modify" role="dialog" aria-hidden="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h2 class="modal-title"><strong>Sorry...!</strong></h2>
                                 </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Published Year</label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-<<<<<<< HEAD
-                                        <select name="year" class="form-control" placeholder="Select year" >
-=======
-                                        <select name="year" class="form-control" placeholder="Select year" 
-                                                <%if(request.getAttribute("errorYear")!=null){%>
-                                       value="<%=request.getAttribute("errorYear")%>"<%}%>>
->>>>>>> 9b4e94a2fb0c725101359220ddfadc9067976088
-                                            <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
-                                    for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
-                                        </select>
+                                    <div class="modal-body">
+                                        <h4><p>You have no authentication for modify books.</p></h4>                                        
                                     </div>
-                                </div>                            
-                            </div>
-                        </div> 
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Book Image</label>
-                                <input name="image" type="file" style="border-color: orange">
-                            </div>  
-                        </div> 
-                        <button type="submit" class="btn btn-default">Add Book</button>
-                    </form>
-                </div>
-            </div>
-            <%--Form end--%>
+                                    <div class="modal-footer">
+                                        <div class="span2">
+                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
+                                        </div>
+                                    </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    
+            <%--script for validation--%>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    var validator = $("#AddForm").bootstrapValidator({
+                        fields: {
+                            bookTitle: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "Please provide a book title"
+                                    }
+                                }
+                            },
+                            autherName: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "Please provide an author. if there is no author, please add and select the author"
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
             <div class="row">
                 &nbsp;
             </div>
@@ -397,4 +221,5 @@
         </div>
     </body>
 </html>
->>>>>>> chami1994-master
+
+

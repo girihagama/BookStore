@@ -11,61 +11,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+
+        <%--Bootsrap CSS files--%>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrapValidator.css"/>
+        
+        <%--Bootsrap jS files--%>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrapValidator.js"></script>
+
+        <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
         <title>Admin Panel</title>
     </head>
     <body>
                  <div class="container" style="background-color:#F5F5F0">
-            <div class="row"><div class="col-md-10">&nbsp;</div></div>
-            <div class="row">
-                <div class="col-md-11"></div>
-                <div class="col-md-1"><button type="button" class="btn btn-warning">Logout</button></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-1">
-                    <img src="Images/Page icons/BookIcon.png" class="img-responsive" width="100%"alt="Responsive image">
-                </div>
-                <div class="col-md-11">
-                    <font color=#FF7519><h1><strong>Orchid Book Store</strong><small>&nbsp; Admin Panel</small></h1></font>
-                </div>
-            </div>
-            <div class="row">
-                <img src="Images/Orthers/line.png" width="100%" alt="Responsive image">
-            </div>
-            <%-- sub menus--%>
-            <div class="row">
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Home.png" class="image" width="100%" alt="Responsive image" title="Home"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Books.png" class="image" width="100%" alt="Responsive image" title="Books"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" title="Authors" style="opacity: 0.4"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Clients.png" class="image" width="100%" alt="Responsive image" title="Clients"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Admin.png" class="image" width="100%" alt="Responsive image" title="Admins"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" title="Stocks"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="addSuppliers.jsp"><img src="Images/Page icons/Suppliers.png" class="image" width="100%" alt="Responsive image" title="Suppliers" ></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" title="Orders"></a>
-                </div>
-            </div>    
-            <div class="row">
-                <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image">
-            </div>
-            <%-- end of sub menus--%>  
+            <%@include file="HeaderFiles/authorHeader.jsp"%> 
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -74,8 +38,8 @@
                         <li>
                             <div id="topmenu">
                             <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation"><a href="addAuthors.jsp"><font style="color: orange">Add Author</font></a></li>
-                                <li role="presentation"><a href="modifyAuthors.jsp"><font style="color: orange">Modify Author</font></a></li>
+                                <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/addAuthors.jsp"><font style="color: orange">Add Author</font></a></li>
+                                <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifyAuthors.jsp"><font style="color: orange">Modify Author</font></a></li>
                                 <li role="presentation" class="active"><a href="#">Remove Author</a></li>
                             </ul>
                             </div>
@@ -87,83 +51,99 @@
                 <%--left side navigation end--%>
                 <div class="col-lg-9">
                     <br>
-                    <br>
-                    <form>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Author Name</label>
-                                <input type="text" name="removeAuthorName" class="form-control" placeholder="Enter Author Name" required>
-                            </div>
-                        </div>
-  
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Author Date of Birth</label>
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <select class="form-control" placeholder="Select year" name="removeAuthorYear">
-                                            <option>Year</option>
-                                            <%  int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
-                                                for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
-                                        </select>
+                    <label><h3>Author Name</h3></label>
+                    <form id="RemoveForm" action="RemoveAuthor3" method="POST">
+                    <table border="0">
+                            <tbody>
+                                <tr>
+                                    <td><label>Author Name</label></td>
+                                    <td><label>: <%=request.getAttribute("searchedAuthorName")%></label></td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td><label>Author Date of Birth </label>&nbsp;&nbsp;&nbsp; </td>
+                                    <td><label>:  <%=request.getAttribute("searchedAuthorDOB")%></label></td>
+                                    <td></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><label>Author Description</label></td>
+                                    <td><label>: <%=request.getAttribute("searchedAuthorDesc")%></label></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>                      
+                        <input type="hidden" name="oldName" value="<%=request.getAttribute("searchedAuthorName")%>">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-5">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="checkbox" value="Choice #1" /> I want to remove this Author
+                                        </label>
                                     </div>
-                                    <div class="col-lg-2">
-                                        <select class="form-control" placeholder="Select year" name="removeAuthorMonth">
-                                            <option>Month</option>
-                                            <option>January</option>
-                                            <option>February</option>
-                                            <option>March</option>
-                                            <option>April</option>
-                                            <option>May</option>
-                                            <option>June</option>
-                                            <option>July</option>
-                                            <option>August</option>
-                                            <option>September</option>
-                                            <option>October</option>
-                                            <option>November</option>
-                                            <option>December</option>                                            
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <select class="form-control" placeholder="Select year" name="removeAuthorDate" >
-                                            <option>Date</option>
-                                            <% 
-                                                for (int i = 0; i <31; i++) {%><option><%=i+1%></option><%}%>
-                                        </select>
-                                    </div>
-                                        
-                                </div>                            
-                            </div>
-                        </div> 
-                           <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Author Description</label>
-                                <textarea class="form-control" rows="3" placeholder="Enter Description"></textarea>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-default">Remove Author</button>
-                    </form>
-                </div>
                                 </div>
-<div class="row">
+                            </div>
+                        </div>
+                        <br>
+                        <table>
+                        <tbody>
+                                <tr>
+                                    <td><label> <a class="btn btn-default" href="adminPanel/removeAuthors.jsp" role="button">Cancel</a></label></td>
+                                    <td><label><button type="submit" class="btn btn-default">Remove This Book</button></label></td>
+                                </tr>
+                        </tbody>
+                        </table>
+                    </form>
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                            var validator = $("#RemoveForm").bootstrapValidator({
+                                fields: {
+                                    checkbox: {
+                                        validators: {
+                                            notEmpty: {
+                                                message: "If you need to remove this author, please put a tick"
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+ <% if (request.getAttribute("msg") != null) {
+            %>
+            <div class="row">
                 &nbsp;
             </div>
             <div class="row">
                 &nbsp;
             </div>
-                <div class="row">
+            <div class="row">
                 &nbsp;
             </div>
             <div class="row">
                 &nbsp;
             </div>
-                <div class="row">
+            <div class="row">
                 &nbsp;
             </div>
             <div class="row">
                 &nbsp;
             </div>
+            <%} else {%>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <%}%>
                 <div class="row">
                 &nbsp;
             </div>

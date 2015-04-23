@@ -5,7 +5,18 @@
  */
 package Classes;
 
+import com.mysql.jdbc.PreparedStatement;
 import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import com.mysql.jdbc.Statement;
+import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.script.*;
 
 /**
@@ -32,12 +43,21 @@ public class UserClass {
     private String u_addLine3;
     private String u_CardNo;
     private Image u_Image;
+    private String a_Level;
 
     /**
      * @return the db
      */
     public DbClass getDb() {
         return db;
+    }
+
+    public String getA_Level() {
+        return a_Level;
+    }
+
+    public void setA_Level(String a_Level) {
+        this.a_Level = a_Level;
     }
 
     /**
@@ -228,9 +248,9 @@ public class UserClass {
     public void setU_Image(Image u_Image) {
         this.u_Image = u_Image;
     }
-    
+
     //methods
-    protected void exceptionShow(String msg) throws Exception {
+    public void exceptionShow(String msg) throws Exception {
 
         ScriptEngineManager sem = new ScriptEngineManager();
         ScriptEngine scEng = sem.getEngineByName("JavaScript");
@@ -244,5 +264,216 @@ public class UserClass {
 
         // invoke the global function named "hello"
         inv.invokeFunction("Exception", msg);
+    }
+
+    public List searchClient() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        List clist = new ArrayList();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select u_Name from user where u_Name like ? and u_Privilege =0");
+                pstmt.setString(1,"%"+u_Name+"%");
+
+                System.out.println(pstmt);
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    clist.add(rs.getString("u_Name"));
+                }
+                pstmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return clist;
+        }
+        return null;
+    }
+    public ResultSet gteAllAdmins(){
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+         if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select * from user where u_Privilege = 1 order by admin_Level ");
+                
+                ResultSet rs = pstmt.executeQuery();
+                                                
+                return rs;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+         return null;
+    }
+
+    public void getUserDetails() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+         if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select * from user where u_Name = ? ");
+                pstmt.setString(1,u_Name);
+
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    this.u_Name=rs.getString("u_Name");
+                    if(rs.getString("u_RegDate")!=null||!"".equals(rs.getString("u_RegDate")))
+                        this.u_RegDate=rs.getString("u_RegDate").substring(0, 10);
+                    else
+                        this.u_RegDate="No Registration date for this person";
+                    this.u_Mail=rs.getString("u_Mail");
+                    if(rs.getString("u_addLine1")!=null)
+                        this.u_addLine1=rs.getString("u_addLine1");
+                    else
+                        this.u_addLine1="-";
+                    if(!"".equals(rs.getString("u_addLine2"))&&rs.getString("u_addLine2")!=null)
+                        this.u_addLine2=rs.getString("u_addLine2");
+                    else
+                        this.u_addLine2="---";
+                    if(!"".equals(rs.getString("u_addLine3"))&&rs.getString("u_addLine3")!=null)
+                        this.u_addLine3=rs.getString("u_addLine3");
+                    else
+                        this.u_addLine3="---";
+                    if(rs.getString("u_TPN")!=null)
+                        this.u_TPN=rs.getString("u_TPN");
+                    else
+                        this.u_TPN="No Telephone Number for this person";
+                    this.a_Level=rs.getString("admin_Level");
+                }
+                pstmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+    }
+
+    public boolean login() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public int chkPrivilege() throws Exception {
+        /*
+         This method returns the privilege,
+         if the login() returns true
+         */
+        int prev = 0;
+
+        if (this.login() == true) {
+            try {
+                db.getConnection();
+
+                String query;
+                query = "SELECT u_Privilege FROM user WHERE u_name='" + getU_Name() + "' AND u_pass='" + getU_Pass() + "'";
+
+                Statement stmt = (Statement) db.conn.createStatement();
+
+                ResultSet rs = stmt.executeQuery(query);
+
+                while (rs.next()) {
+                    int x = rs.getInt("u_Privilege");
+
+                    if (x == 1) {
+                        prev = 1;
+                        System.out.println("Admin");
+                    }
+                    if (x == 0) {
+                        prev = 0;
+                        System.out.println("User");
+                    }
+                }
+                db.endConnection();
+
+            } catch (Exception ex) {
+                exceptionShow(ex.getMessage());
+            } finally {
+                if (db.conn != null) {
+                    db.endConnection();
+                }
+            }
+
+        }
+
+        return prev;
+    }
+
+    public int modifyAdmin(String oldAdminName) {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Update user set u_Name=?, u_Mail=?, u_TPN=?, u_addLine1=?, u_addLine2=?, u_addLine3=?, admin_Level=? where u_Name=?");
+                pstmt.setString(1, u_Name);
+                pstmt.setString(2, u_Mail);
+                pstmt.setString(3, u_TPN);
+                pstmt.setString(4, u_addLine1);
+                pstmt.setString(5, u_addLine2);
+                pstmt.setString(6, u_addLine3);
+                pstmt.setString(7, a_Level);
+                pstmt.setString(8, oldAdminName);
+                
+
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return 0;
+    }
+    public int removeUser() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("delete from user where u_Name=?");
+                pstmt.setString(1, u_Name);
+
+                int removed = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return removed;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1;
+    }
+
+    public int addAdmin() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into user(u_Name,u_Mail,u_TPN,u_addLine1,u_addLine2,u_addLine3,admin_Level,u_Pass,u_Privilege) values(?,?,?,?,?,?,?,?,?)");
+                pstmt.setString(1, u_Name);
+                pstmt.setString(2, u_Mail);
+                pstmt.setString(3, u_TPN);
+                pstmt.setString(4, u_addLine1);
+                pstmt.setString(5, u_addLine2);
+                pstmt.setString(6, u_addLine3);
+                pstmt.setString(7, a_Level);
+                pstmt.setString(8, u_Pass);
+                pstmt.setInt(9, 1);
+                
+
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1;
     }
 }
