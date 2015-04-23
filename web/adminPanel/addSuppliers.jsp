@@ -27,6 +27,17 @@
         <title>Admin Panel</title>
     </head>
     <body>
+        <%--for authentication--%>
+        <%! String level = "L2";%>
+        <%-- ------------ --%>
+         <%
+            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {
+            System.out.println(request.getHeader("Referer").substring(0, 42));%>
+            <script>
+                history.forward()
+        </script>
+            
+        <%}%>
         <%! String backSite = null;%>
         <% backSite = request.getHeader("Referer");%>
         <div class="container" style="background-color:#F5F5F0">
@@ -40,8 +51,14 @@
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
                                     <li role="presentation" class="active"><a href="#">Add Supplier</a></li>
-                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifySuppliers.jsp"><font style="color: orange">Modify Supplier</font></a></li>
-                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeSuppliers.jsp"><font style="color: orange">Remove Supplier</font></a></li>
+                                    <%if ("L3".equals(level)) {%>
+                                    <li role="presentation"><a href="" data-toggle="modal" data-target="#Modify" data-backdrop="static"><font style="color: orange">Modify Supplier</font></a></li>
+                                            <%} else {%>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifySuppliers.jsp"><font style="color: orange">Modify Supplier</font></a></li><%}%>
+                                            <%if ("L3".equals(level)) {%>
+                                    <li role="presentation"><a href="" data-toggle="modal" data-target="#remove" data-backdrop="static"><font style="color: orange">Remove Supplier</font></a></li>
+                                            <%} else {%>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeSuppliers.jsp"><font style="color: orange">Remove Supplier</font></a></li><%}%>
                                 </ul>
                             </div>
                         </li>
@@ -112,6 +129,47 @@
                 </div>
             </div>
             <%--Form end--%>
+            
+            <%-- remove box--%>
+            <div class="modal fade" id="remove" role="dialog" aria-hidden="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h2 class="modal-title"><strong>Sorry...!</strong></h2>
+                        </div>
+                        <div class="modal-body">
+                            <h4><p>You have no authentication for remove suppliers.</p></h4>                                        
+                        </div>
+                        <div class="modal-footer">
+                            <div class="span2">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <%-- modify box--%>
+            <div class="modal fade" id="Modify" role="dialog" aria-hidden="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h2 class="modal-title"><strong>Sorry...!</strong></h2>
+                        </div>
+                        <div class="modal-body">
+                            <h4><p>You have no authentication for modify suppliers.</p></h4>                                        
+                        </div>
+                        <div class="modal-footer">
+                            <div class="span2">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            
             <script type="text/javascript">
                 $(document).ready(function() {
                     var validator = $("#AddForm").bootstrapValidator({

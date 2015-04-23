@@ -26,6 +26,14 @@
         <title>Admin Panel</title>
     </head>
     <body>
+         <%
+            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {
+            System.out.println(request.getHeader("Referer").substring(0, 42));%>
+            <script>
+                history.forward()
+        </script>
+            
+        <%}%>
         <%
             if (request.getAttribute("searchedBookName") == null) {
                 response.sendRedirect("http://localhost:8080/BookStore/adminPanel/removeBook1.jsp");
@@ -122,8 +130,8 @@
                         <input type="hidden" name="oldName" value="<%=request.getAttribute("searchedBookName")%>">
                         <tbody>
                             <tr>
-                                <td><label><button type="submit" class="btn btn-default">Add Copies To This Book</button></label></td>
                                 <td><label> <a class="btn btn-default" href="adminPanel/searchStock.jsp" role="button">Cancel</a></label></td>
+                                <td><label><button type="submit" class="btn btn-default">Add Copies To This Book</button></label></td>
                                 <td></td>
                             </tr>
                         </tbody>
