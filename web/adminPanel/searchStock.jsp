@@ -4,6 +4,8 @@
     Author     : Chami
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

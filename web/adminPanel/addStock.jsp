@@ -122,8 +122,8 @@
                         <input type="hidden" name="oldName" value="<%=request.getAttribute("searchedBookName")%>">
                         <tbody>
                             <tr>
-                                <td><label> <a class="btn btn-default" href="adminPanel/searchStock.jsp" role="button">Cancel</a></label></td>
                                 <td><label><button type="submit" class="btn btn-default">Add Copies To This Book</button></label></td>
+                                <td><label> <a class="btn btn-default" href="adminPanel/searchStock.jsp" role="button">Cancel</a></label></td>
                                 <td></td>
                             </tr>
                         </tbody>
