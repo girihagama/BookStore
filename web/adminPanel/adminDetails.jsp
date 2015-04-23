@@ -30,12 +30,8 @@
         <title>Admin Panel</title>
     </head>
     <body>
-         <script>
-            history.forward();
-        </script>
-        
         <%--for authentication--%>
-        <%! String level="L2";%>
+        <%! String level="L1";%>
         <%-- ------------ --%>
         
         <div class="container" style="background-color:#F5F5F0">
@@ -281,9 +277,6 @@
             </div>
                 <div class="row" >
                     <ol class="breadcrumb" style="background-color:#FF9933">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Library</a></li>
-                        <li class="active">Data</li>
                     </ol>
                 </div> 
             </div>

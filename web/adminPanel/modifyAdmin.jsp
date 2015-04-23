@@ -43,7 +43,7 @@
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
                                     <li role="presentation" class="active"><a href="#">Modify Admin</a></li>
-                                    <li role="presentation"><a href=""><font style="color: orange">Add Admin</font></a></li>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/addAdmin.jsp"><font style="color: orange">Add Admin</font></a></li>
                                     <li>&nbsp;</li>
                                     <li>&nbsp;</li>
                                     <li>&nbsp;</li>
@@ -145,7 +145,13 @@
                                 </div>                            
                             </div>
                         </div> 
-                        <button type="submit" class="btn btn-default">Modify Admin</button>
+                        <tbody>
+                                <tr>
+                                    <td><label><button type="submit" class="btn btn-default">Modify Admin</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminDetails.jsp" role="button">Cancel</a></label></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
                     </form>
                 </div>
             </div>
@@ -234,9 +240,6 @@
             </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
                 </ol>
             </div> 
         </div>

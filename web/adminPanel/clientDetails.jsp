@@ -27,15 +27,11 @@
         <title>Admin Panel</title>
     </head>
     <body>
-         <script>
-            history.forward();
-        </script>
         <%
             if(request.getAttribute("searchedClientName")==null){
                 response.sendRedirect("http://localhost:8080/BookStore/adminPanel/clientSearch.jsp");
             }
             %>
-
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/clientHeader.jsp"%>           
             <div class="row">
@@ -64,7 +60,6 @@
                     <br>
                     
                     <label><h3>Client Details</h3></label>
-
                     <form id="Client" action="removeClient" method="POST">
                         <table border="0">
                             <tbody>
@@ -117,9 +112,10 @@
                                 </div>
                             </div>
                         </div><br>
-                        <tbody> 
+                        <tbody>
                                 <tr>
                                     <td><label><button type="submit" class="btn btn-default">Remove This Client</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/clientSearch.jsp" role="button">Cancel</a></label></td>
                                     <td></td>
                                 </tr>
                         </tbody>
@@ -142,7 +138,8 @@
                                         <div id ="orange">
                                         <div class="form-group orange" >
                                             <label for="recipient-name" class="control-label">Recipient:</label>
-                                            <input type="text" class="form-control" id="recipient" name="recipient">
+                                            <input type="hidden" class="form-control" name="email" value="<%=request.getAttribute("searchedClientMail")%>">
+                                            <input type="text" class="form-control" id="recipient" name="recipient" disabled="true">
                                         </div>
                                         </div>
                                         <div id ="orange">
@@ -181,7 +178,8 @@
                                         <div id ="orange">
                                         <div class="form-group orange" >
                                             <label for="recipient-name" class="control-label">Recipient: </label>
-                                            <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>">
+                                            <input type="hidden" class="form-control" name="name" value="<%=request.getAttribute("searchedClientName")%>" >
+                                            <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>" disabled="true">
                                         </div>
                                         </div>
                                         
@@ -215,7 +213,8 @@
                                         <div id ="orange">
                                         <div class="form-group orange" >
                                             <label for="recipient-name" class="control-label">Recipient: </label>
-                                            <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>">
+                                            <input type="hidden" class="form-control" name="name" value="<%=request.getAttribute("searchedClientName")%>" >
+                                            <input type="text" class="form-control" id="recipient" name="recipient" value="<%=request.getAttribute("searchedClientName")%>" disabled="true">
                                         </div>
                                         </div>
                                         
@@ -301,11 +300,11 @@
             <div class="row">
                 &nbsp;
             </div>
+            <div class="row">
+                &nbsp;
+            </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
                 </ol>
             </div> 
         </div>

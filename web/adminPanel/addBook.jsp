@@ -14,16 +14,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        
+
         <%--Bootsrap CSS files--%>
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrapValidator.css"/>
-        
+
         <%--Bootsrap jS files--%>
         <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.min.js"></script>
         <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrapValidator.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.maskMoney.js"></script>
+        
 
         <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
@@ -32,11 +34,11 @@
     </head>
     <body>
         <%--for authentication--%>
-        <%! String level="L1";%>
+        <%! String level = "L1";%>
         <%-- ------------ --%>
-        
+
         <div class="container" style="background-color:#F5F5F0">
-           <%@include file="HeaderFiles/bookHeader.jsp"%> 
+            <%@include file="HeaderFiles/bookHeader.jsp"%> 
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -46,13 +48,13 @@
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
                                     <li role="presentation" class="active"><a href="#">Add Book</a></li>
-                                    <%if("L3".equals(level)){%>
+                                        <%if ("L3".equals(level)) {%>
                                     <li role="presentation"><a href="" data-toggle="modal" data-target="#Modify" data-backdrop="static"><font style="color: orange">Modify Book</font></a></li>
-                                            <%}else{%>
+                                            <%} else {%>
                                     <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp"><font style="color: orange">Modify Book</font></a></li><%}%>
-                                    <%if("L3".equals(level)){%>
+                                            <%if ("L3".equals(level)) {%>
                                     <li role="presentation"><a href="" data-toggle="modal" data-target="#remove" data-backdrop="static"><font style="color: orange">Remove Book</font></a></li>
-                                    <%}else{%>
+                                            <%} else {%>
                                     <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeBook1.jsp"><font style="color: orange">Remove Book</font></a></li><%}%>
                                 </ul>
                             </div>
@@ -66,7 +68,7 @@
                     <% if (request.getAttribute("msg") != null) {
                     %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br>
                         If you want add another book fill below form and add a book.</div><%
-                            } else {%>
+                        } else {%>
                     <br><%}%>
                     <br>                 
                     <form id="AddForm"<%if (request.getAttribute("action") != null) {%>
@@ -83,23 +85,23 @@
                             </div>
                         </div>
                         <jsp:useBean id="author" class="Classes.AuthorClass"></jsp:useBean>                        
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label for="autherName">Author Name</label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <select name="autherName" id="autherName" class="form-control" >
-                                            <option disabled selected value="0">Select an author</option> 
-                                        <%
-                                            List results = author.getAlist();
-                                            Iterator it = results.iterator();
-                                                while (it.hasNext()) {%>
-                                        <option><%=it.next()%></option>
-                                        <%}%>
-                                    </select>
+                            <div id ="orange">
+                                <div class="form-group orange">
+                                    <label for="autherName">Author Name</label>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <select name="autherName" id="autherName" class="form-control" >
+                                                <option disabled selected value="0">Select an author</option> 
+                                            <%
+                                                List results = author.getAlist();
+                                                Iterator it = results.iterator();
+                                            while (it.hasNext()) {%>
+                                            <option><%=it.next()%></option>
+                                            <%}%>
+                                        </select>
                                     </div>
                                     <div class="col-lg-2">
-                                        <a class="btn btn-default" href="#" role="button">Add Authors</a>
+                                        <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/addAuthors.jsp" role="button">Add Authors</a>
                                     </div>
                                 </div>                            
                             </div>
@@ -124,64 +126,118 @@
                                         <select name="year" class="form-control" placeholder="Select year">
                                             <%  int year = Calendar.getInstance().get(Calendar.YEAR); %>
                                             <option disabled selected value="0">Select a year</option>
-                                                <%for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
+                                            <%for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
                                         </select>
+                                    </div>
+                                </div>                            
+                            </div>
+                        </div>
+                        <jsp:useBean id="sup" class="Classes.SupplierClass"></jsp:useBean>      
+                        <div id ="orange">
+                            <div class="form-group orange">
+                                <label for="supplierName">Supplier Name</label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <select name="supplierName" id="supplierName" class="form-control" >
+                                            <option disabled selected value="0">Select a supplier</option> 
+                                            <%
+                                                List result = sup.getSlist();
+                                                Iterator itr = result.iterator();
+                                            while (itr.hasNext()) {%>
+                                            <option><%=itr.next()%></option>
+                                            <%}%>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <a class="btn btn-default" href="#" role="button">Add Suppliers</a>
                                     </div>
                                 </div>                            
                             </div>
                         </div> 
                         <div id ="orange">
                             <div class="form-group orange">
+                                <label>Book Quantity</label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <input name="bookQuantity" id="bookQuantity" type="text" class="form-control" placeholder="Enter book quantity"
+                                               <%if (request.getAttribute("errorQuantity") != null) {%>
+                                               value="<%=request.getAttribute("errorQuantity")%>"<%}%>
+                                               required="required" pattern="^(\d*)$">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Book Price (Rs)</label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <input name="bookPrice" id="bookPrice" type="text" class="form-control" placeholder="Enter book price like 12345.67"
+                                               <%if (request.getAttribute("errorPrice") != null) {%>
+                                               value="<%=request.getAttribute("errorPrice")%>"<%}%>
+                                               required="required" pattern="^(\d*\.\d{2})?$">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id ="orange">
+                            <div class="form-group orange">
                                 <label>Book Image</label>
                                 <input name="image" type="file" style="border-color: orange">
                             </div>  
                         </div> 
-                        <button type="submit" class="btn btn-default">Add Book</button>
+                        <tbody>
+                                <tr>
+                                    <td><label><button type="submit" class="btn btn-default">Add Book</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminStartPage.jsp" role="button">Cancel</a></label></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
                     </form>
                 </div>
             </div>
             <%--Form end--%>
-            
+
             <%-- remove box--%>
-                    <div class="modal fade" id="remove" role="dialog" aria-hidden="false">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h2 class="modal-title"><strong>Sorry...!</strong></h2>
-                                </div>
-                                    <div class="modal-body">
-                                        <h4><p>You have no authentication for remove books.</p></h4>                                        
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="span2">
-                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
-                                        </div>
-                                    </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-                    
-                    <%-- modify box--%>
-                    <div class="modal fade" id="Modify" role="dialog" aria-hidden="false">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h2 class="modal-title"><strong>Sorry...!</strong></h2>
-                                </div>
-                                    <div class="modal-body">
-                                        <h4><p>You have no authentication for modify books.</p></h4>                                        
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="span2">
-                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
-                                        </div>
-                                    </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </div><!-- /.modal -->
-                    
+            <div class="modal fade" id="remove" role="dialog" aria-hidden="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h2 class="modal-title"><strong>Sorry...!</strong></h2>
+                        </div>
+                        <div class="modal-body">
+                            <h4><p>You have no authentication for remove books.</p></h4>                                        
+                        </div>
+                        <div class="modal-footer">
+                            <div class="span2">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <%-- modify box--%>
+            <div class="modal fade" id="Modify" role="dialog" aria-hidden="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h2 class="modal-title"><strong>Sorry...!</strong></h2>
+                        </div>
+                        <div class="modal-body">
+                            <h4><p>You have no authentication for modify books.</p></h4>                                        
+                        </div>
+                        <div class="modal-footer">
+                            <div class="span2">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
             <%--script for validation--%>
             <script type="text/javascript">
                 $(document).ready(function() {
@@ -213,9 +269,6 @@
             </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
                 </ol>
             </div> 
         </div>

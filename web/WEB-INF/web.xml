@@ -95,7 +95,7 @@
  
     <context-param>
         <param-name>pass</param-name>
-        <param-value>13.2developers</param-value>
+        <param-value>nsbmdevelopers13.2</param-value>
     </context-param>
  
     <welcome-file-list>

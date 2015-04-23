@@ -12,7 +12,6 @@
     
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-
         <%--Bootsrap CSS files--%>
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
@@ -54,7 +53,6 @@
                     <div class="row">&nbsp;</div>
                     <div class="col-lg-12">
                         <div class="row">
-
                             <% if (request.getAttribute("msg") != null) {
                                 %><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
                             }%>
@@ -142,11 +140,11 @@
             <div class="row">
                 &nbsp;
             </div>
+            <div class="row">
+                &nbsp;
+            </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
                 </ol>
             </div>            
         </div>        

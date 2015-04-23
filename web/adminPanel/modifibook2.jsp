@@ -30,9 +30,6 @@
         <title>Admin Panel</title>
     </head>
     <body>
-        <script>
-            history.forward();
-        </script>
         <%
             if (request.getAttribute("searchedBookName") == null) {
                 response.sendRedirect("http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp");
@@ -109,7 +106,7 @@
                                 <label>Book Published Year :  <%=request.getAttribute("searchedBookYear")%></label>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <select name="changedYear" class="form-control">
+                                        <select name="changedYear" class="form-control" placeholder="Select year">
                                             <%  int year = Calendar.getInstance().get(Calendar.YEAR); %>
                                             <option disabled selected value="0">Select a new year</option>
                                             <%for (int i = year; i > (year - 200); i--) {%><option><%=i%></option><%}%>
@@ -118,8 +115,55 @@
                                 </div>                            
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-default">Modify Book</button>&nbsp;&nbsp;&nbsp;
-                        <label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp" role="button">Cancel</a></label>
+                        <jsp:useBean id="sup" class="Classes.SupplierClass"></jsp:useBean>      
+                        <div id ="orange">
+                            <div class="form-group orange">
+                                <label for="supplierName">Supplier Name : <%=request.getAttribute("searchedBooksup")%></label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <select name="supplierName" id="supplierName" class="form-control" >
+                                            <option disabled selected value="0">Select a supplier</option> 
+                                            <%
+                                                List result = sup.getSlist();
+                                                Iterator itr = result.iterator();
+                                            while (itr.hasNext()) {%>
+                                            <option><%=itr.next()%></option>
+                                            <%}%>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <a class="btn btn-default" href="#" role="button">Add Suppliers</a>
+                                    </div>
+                                </div>                            
+                            </div>
+                        </div> 
+                        <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Book Quantity : <%=request.getAttribute("searchedBookQty")%> </label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <input name="bookQuantity" id="bookQuantity" type="text" class="form-control" placeholder="Enter book quantity" required="required" pattern="^(\d*)$">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id ="orange">
+                            <div class="form-group orange">
+                                <label>Book Price (Rs) : <%=request.getAttribute("searchedBookPrice")%></label>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <input name="bookPrice" id="bookPrice" type="text" class="form-control" placeholder="Enter book price like 12345.67" required="required" pattern="^(\d*\.\d{2})?$">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <tbody>
+                                <tr>
+                                    <td><label><button type="submit" class="btn btn-default">Modify Book</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp" role="button">Cancel</a></label></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
                     </form>
                 </div>
             </div>
@@ -179,12 +223,8 @@
             <div class="row">
                 &nbsp;
             </div>
-        </div>
         <div class="row" >
             <ol class="breadcrumb" style="background-color:#FF9933">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Library</a></li>
-                <li class="active">Data</li>
             </ol>
         </div> 
     </div>

@@ -323,10 +323,10 @@ public class UserClass {
                     else
                         this.u_RegDate="No Registration date for this person";
                     this.u_Mail=rs.getString("u_Mail");
-                    if(rs.getString("u_addLine1")!=null)
+                    if(rs.getString("u_addLine1")!=null&&!"".equals(rs.getString("u_addLine2")))
                         this.u_addLine1=rs.getString("u_addLine1");
                     else
-                        this.u_addLine1="-";
+                        this.u_addLine1="---";
                     if(!"".equals(rs.getString("u_addLine2"))&&rs.getString("u_addLine2")!=null)
                         this.u_addLine2=rs.getString("u_addLine2");
                     else
@@ -350,10 +350,92 @@ public class UserClass {
          }
     }
 
-    public boolean login() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean chkMember(String username) throws Exception {
+        /*
+         This method will return true,
+         if user exist according to provided username
+         */
+        Boolean stat = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT COUNT(*) FROM user WHERE u_name='" + getU_Name() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int x = rs.getInt("COUNT(*)");
+
+                if (x == 1) {
+                    stat = true;
+                    System.out.println("User exist");
+                }
+                if (x == 0) {
+                    stat = false;
+                    System.out.println("User Doesn't exist");
+                }
+            }
+            db.endConnection();
+
+        } catch (Exception ex) {
+            exceptionShow(ex.getMessage());
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return stat;
     }
-    
+
+    public boolean login() throws SQLException, Exception {
+        /*
+         this method checks the user in the database
+         and returns whether the user exist or not
+         according to provided username and password.
+         */
+
+        boolean stat = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT COUNT(*) FROM user WHERE u_name='" + getU_Name() + "' AND u_pass='" + getU_Pass() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int x = rs.getInt("COUNT(*)");
+
+                if (x == 1) {
+                    stat = true;
+                    System.out.println("Login Success");
+                }
+                if (x == 0) {
+                    stat = false;
+                    System.out.println("Login Failed");
+                }
+            }
+            db.endConnection();
+
+        } catch (Exception ex) {
+            exceptionShow(ex.getMessage());
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return stat;
+    }
+
     public int chkPrivilege() throws Exception {
         /*
          This method returns the privilege,
@@ -475,5 +557,82 @@ public class UserClass {
             }
         }
         return -1;
+    }
+    public boolean chkUserName(String username) throws Exception {
+        boolean stat = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT COUNT(*) FROM user WHERE u_name='" + username + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int x = rs.getInt("COUNT(*)");
+
+                if (x == 1) {
+                    stat = true;
+                    System.out.println("Exist");
+                }
+                if (x == 0) {
+                    stat = false;
+                    System.out.println("Not Exist");
+                }
+            }
+            db.endConnection();
+
+        } catch (Exception ex) {
+            exceptionShow(ex.getMessage());
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return stat;
+
+    }
+
+    public void importProfile() {
+
+    }
+
+    public ArrayList loadProfile() {
+        ArrayList arrayList  = new ArrayList();
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT u_name, u_pass FROM user WHERE u_name='" + getU_Name() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+//            ResultSetMetaData metadata = rs.getMetaData();
+//            int numberOfColumns = metadata.getColumnCount();
+            
+            while (rs.next()) {
+                UserClass user =new UserClass();
+                user.setU_Name(rs.getString("u_name"));
+                user.setU_Pass(rs.getString("u_pass"));
+                arrayList.add(user);
+            }
+
+            db.endConnection();
+        } catch (Exception ex) {
+
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return arrayList;
     }
 }
