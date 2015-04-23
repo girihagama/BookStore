@@ -278,29 +278,5 @@ public class AuthorClass {
         }
         return null;
     }
-    public List getAllAuthors() {
-        Statement stmt;
-        List authorlist = new ArrayList();
-        DbClass db = new DbClass();
-        if (db.getConnection() == true) {
-            try {
-                String query = "select a_Name from author order by a_Name";
-                stmt=db.conn.createStatement();
-
-                ResultSet rs = stmt.executeQuery(query);
-                while (rs.next()) {
-                    System.out.println(rs.getString("a_Name"));
-                    authorlist.add(rs.getString("a_Name"));
-                }
-                stmt.close();
-                db.endConnection();
-                return authorlist;
-
-            } catch (SQLException ex) {
-                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return null;
-    }
     
 }

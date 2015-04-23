@@ -226,6 +226,7 @@ public class SupplierClass {
                 Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
         public void getSupplierDetails(){
         PreparedStatement pstmt;
         DbClass db = new DbClass();
@@ -291,26 +292,7 @@ public class SupplierClass {
         return -1;
     }
     
-        public void findSupplierID(String sup_name){
-        PreparedStatement pstmt;
-        DbClass db = new DbClass();
-        if(db.getConnection()==true){
-            try {
-                pstmt = (PreparedStatement) db.conn.prepareStatement("select sup_ID from suplier where sup_Name=?");
-                pstmt.setString(1, sup_name);
-                
-                ResultSet rs = pstmt.executeQuery();
-                while(rs.next()){
-                    this.sup_ID=rs.getInt(1);
-                }
-                pstmt.close();
-                db.endConnection();
-            } catch (SQLException ex) {
-                Logger.getLogger(SupplierClass.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-        
+           
         public int removeSupplier() {
         PreparedStatement pstmt;
         DbClass db = new DbClass();
@@ -329,6 +311,32 @@ public class SupplierClass {
             }
         }
         return -1;
+    }
+
+    private List getAllSupliers() {
+        Statement stmt;
+        List authorlist = new ArrayList();
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                String query = "select sup_Name from suplier order by sup_Name";
+                stmt=db.conn.createStatement();
+
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    System.out.println(rs.getString("sup_Name"));
+                    authorlist.add(rs.getString("sup_Name"));
+                }
+                stmt.close();
+                db.endConnection();
+                return authorlist;
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+
     }
 }
         
