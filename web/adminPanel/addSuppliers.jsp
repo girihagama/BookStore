@@ -117,7 +117,7 @@
                                        value="<%=request.getAttribute("errorAddress3")%>"<%}%>>
                             </div>
                         </div>
-                        <input type ="text" name="back" value="<%=backSite%>">
+                        <input type ="hidden" name="back" value="<%=backSite%>">
                         <tbody>
                             <tr>
                                 <td><label><button type="submit" class="btn btn-default">Add Supplier</button></label></td>
@@ -214,9 +214,6 @@
             </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
                 </ol>
             </div> 
         </div>

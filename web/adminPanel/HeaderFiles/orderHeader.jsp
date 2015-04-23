@@ -50,7 +50,7 @@
                 <a href="http://localhost:8080/BookStore/adminPanel/adminStartPage.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Home.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Home"></a>
             </div>
             <div class="col-lg-1">
-                <a href="http://localhost:8080/BookStore/adminPanel/addBook.jsp#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Books.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Books" ></a>
+                <a href="http://localhost:8080/BookStore/adminPanel/addBook.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Books.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Books" ></a>
             </div>
             <div class="col-lg-1">
                 <a href="http://localhost:8080/BookStore/adminPanel/addAuthors.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Authors"></a>
