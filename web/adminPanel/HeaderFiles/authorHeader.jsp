@@ -67,7 +67,7 @@
                 <a href="http://localhost:8080/BookStore/adminPanel/addSuppliers.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Suppliers.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Suppliers"></a>
             </div>
             <div class="col-lg-1">
-                <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Orders"></a>
+                <a href="http://localhost:8080/BookStore/adminPanel/orders.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Orders"></a>
             </div>
         </div>    
         <div class="row">
