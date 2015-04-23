@@ -10,6 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.ico" type="image/ico" />
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
         
@@ -26,7 +29,7 @@
         <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
-        <title>Admin Panel</title>
+        <title>Admin Panel - Client Search</title>
     </head>
     <body>
          <%
@@ -66,7 +69,7 @@
                         <div class="row">
                             <% if (request.getAttribute("msg") != null) {
                                 %><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
-                            } %>
+                            }%>
                             <form id="Search" <%if (request.getAttribute("cList")!= null ||request.getAttribute("errorSearch")!=null||request.getAttribute("msg")!=null ) {%>
                                 action="ClientSearch"<%} else {%>
                                 action="../ClientSearch"<%}%> method="POST">
