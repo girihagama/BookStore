@@ -28,6 +28,14 @@
         <title>Admin Panel</title>
     
     <body>
+         <%
+            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {
+            System.out.println(request.getHeader("Referer").substring(0, 42));%>
+            <script>
+                history.forward()
+        </script>
+            
+        <%}%>
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/bookHeader.jsp"%>          
             <div class="row">

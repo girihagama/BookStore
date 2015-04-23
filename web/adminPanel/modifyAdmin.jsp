@@ -27,6 +27,14 @@
         <title>Admin Panel</title>
     </head>
     <body>
+         <%
+            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {
+            System.out.println(request.getHeader("Referer").substring(0, 42));%>
+            <script>
+                history.forward()
+        </script>
+            
+        <%}%>
         <%
             if(request.getAttribute("searchedAdminName")==null){
                 response.sendRedirect("http://localhost:8080/BookStore/adminPanel/adminDetails.jsp");
