@@ -156,7 +156,7 @@ public class SupplierClass {
 
                 return inserted;
             } catch (SQLException ex) {
-                Logger.getLogger(AuthorClass.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(SupplierClass.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return -1;
