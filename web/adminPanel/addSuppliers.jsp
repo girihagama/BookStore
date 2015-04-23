@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrapValidator.css"/>
-        
+
         <%--Bootsrap jS files--%>
         <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.min.js"></script>
         <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
@@ -27,8 +27,10 @@
         <title>Admin Panel</title>
     </head>
     <body>
+        <%! String backSite = null;%>
+        <% backSite = request.getHeader("Referer");%>
         <div class="container" style="background-color:#F5F5F0">
-           <%@include file="HeaderFiles/suppliersHeader.jsp"%> 
+            <%@include file="HeaderFiles/suppliersHeader.jsp"%> 
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -36,24 +38,24 @@
                         <li role="presentation" class="text_box" style="padding: 0px; text-align: left; font-size: 4em;">Suppliers</li>
                         <li>
                             <div id="topmenu">
-                            <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation" class="active"><a href="#">Add Supplier</a></li>
-                                <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifySuppliers.jsp"><font style="color: orange">Modify Supplier</font></a></li>
-                                <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeSuppliers.jsp"><font style="color: orange">Remove Supplier</font></a></li>
-                            </ul>
+                                <ul class="nav nav-pills nav-stacked topmenu">
+                                    <li role="presentation" class="active"><a href="#">Add Supplier</a></li>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifySuppliers.jsp"><font style="color: orange">Modify Supplier</font></a></li>
+                                    <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeSuppliers.jsp"><font style="color: orange">Remove Supplier</font></a></li>
+                                </ul>
                             </div>
                         </li>
                     </ul>  
                 </div>
                 <div class="col-lg-1">&nbsp;</div>
                 <%--left side navigation end--%>
-                
+
                 <%--Form--%>
                 <div class="col-lg-9">
-                                        <% if (request.getAttribute("msg") != null) {
+                    <% if (request.getAttribute("msg") != null) {
                     %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br>
                         If you want add another book fill below form and add a book.</div><%
-                            } else {%>
+                        } else {%>
                     <br><%}%>
                     <br>
                     <form id="AddForm"<%if (request.getAttribute("action") != null) {%>
@@ -72,35 +74,40 @@
                                 <label>Supplier Contact Number</label>
                                 <input type="text" class="form-control" name="addSupplierContactNO" placeholder="Enter Contact Number" 
                                        <%if (request.getAttribute("errorSupplierNO") != null) {%>
-                                               value="<%=request.getAttribute("errorSupplierNO")%>"<%}%>>
+                                       value="<%=request.getAttribute("errorSupplierNO")%>"<%}%>>
                             </div>
                         </div>
-                        
-                            <div id ="orange">
+
+                        <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Email</label>
                                 <input type="email" class="form-control" name="addSupplierEmail" placeholder="Enter Email" data-error="Email address is invalid" 
                                        <%if (request.getAttribute("errorEmail") != null) {%>
-                                               value="<%=request.getAttribute("errorEmail")%>"<%}%>>
+                                       value="<%=request.getAttribute("errorEmail")%>"<%}%>>
                             </div>
                         </div>
-                        
-                                                <div id ="orange">
+                        <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Address</label>
                                 <input type="text" name="addSupplierADD1" id="addSupplierADD1" class="form-control" placeholder="Address Line 1" 
                                        <%if (request.getAttribute("errorAddress1") != null) {%>
-                                               value="<%=request.getAttribute("errorAddress1")%>"<%}%>>
+                                       value="<%=request.getAttribute("errorAddress1")%>"<%}%>>
                                 <input type="text" name="addSupplierADD2" class="form-control" placeholder="Address Line 2"
                                        <%if (request.getAttribute("errorAddress2") != null) {%>
-                                               value="<%=request.getAttribute("errorAddress2")%>"<%}%>>
+                                       value="<%=request.getAttribute("errorAddress2")%>"<%}%>>
                                 <input type="text" name="addSupplierADD3" class="form-control" placeholder="Address Line 3"
                                        <%if (request.getAttribute("errorAddress3") != null) {%>
-                                               value="<%=request.getAttribute("errorAddress3")%>"<%}%>>
+                                       value="<%=request.getAttribute("errorAddress3")%>"<%}%>>
                             </div>
                         </div>
-                        
-                        <button type="submit" class="btn btn-default">Add Supplier</button>
+                        <input type ="text" name="back" value="<%=backSite%>">
+                        <tbody>
+                            <tr>
+                                <td><label><button type="submit" class="btn btn-default">Add Supplier</button></label></td>
+                                <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminStartPage.jsp" role="button">Cancel</a></label></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
                     </form>
                 </div>
             </div>

@@ -28,6 +28,9 @@
         <title>Admin Panel</title>
     </head>
     <body>
+        <%! String backSite=null;%>
+        <% backSite=request.getHeader("Referer");%>
+        
          <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/authorHeader.jsp"%>
             <div class="row">
@@ -118,8 +121,14 @@
                                 </textarea>
                             </div>
                         </div>
-                        
-                        <button type="submit" class="btn btn-default">Add Author</button>
+                                <input type ="hidden" name="back" value="<%=backSite%>">
+                        <tbody>
+                                <tr>
+                                    <td><label><button type="submit" class="btn btn-default">Add Author</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminStartPage.jsp" role="button">Cancel</a></label></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>  
                     </form>
                 </div>
             </div>

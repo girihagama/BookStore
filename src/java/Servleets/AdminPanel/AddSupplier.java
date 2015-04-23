@@ -93,10 +93,15 @@ public class AddSupplier extends HttpServlet {
             request.setAttribute("errorAddress2", supplierAddress2);
             request.setAttribute("errorAddress3", supplierAddress3);
         }
-        
+        String backUrl = request.getParameter("back");
         request.setAttribute("msg", warningMsg);
         request.setAttribute("action", "AddSupplier");
-        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/addSuppliers.jsp");
+        RequestDispatcher rd;
+        if ("http://localhost:8080/BookStore/adminPanel/addBook.jsp".equals(backUrl)) {
+            rd = request.getRequestDispatcher("adminPanel/addBook.jsp");
+        } else {
+            rd = request.getRequestDispatcher("adminPanel/addSuppliers.jsp");
+        }
         rd.include(request, response);
     }
 
