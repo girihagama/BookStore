@@ -31,7 +31,7 @@
     <body>
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/bookHeader.jsp"%>           
-            <div class="row">
+             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2" >
                     <ul class="nav nav-pills nav-stacked ">
@@ -144,9 +144,7 @@
             </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
+                    
                 </ol>
             </div>   
         </div>        

@@ -8,6 +8,7 @@ package Servleets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,18 +48,37 @@ public class LoginCheck extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        Cookie[] cookies = request.getCookies();
+        PrintWriter out = response.getWriter();
 
-        if (session.getAttribute("Login") != null && session.getAttribute("Login") == "True") {
-            if (session.getAttribute("Login_Type") == "admin") {
-                response.sendRedirect("adminPanel/adminStartPage.jsp");
-            } else if (session.getAttribute("Login_Type") == "user") {
-                response.sendRedirect("Home.jsp");
-            } else {
-                response.sendRedirect("Login.jsp");
+        if (cookies != null) {
+            for (int c = 0; c < cookies.length; c++) {
+                if ("Login".equals(cookies[c].getName())) {
+                    session.setAttribute("Login", cookies[c].getValue());
+                }
+
+                if ("Username".equals(cookies[c].getName())) {
+                    session.setAttribute("Username", cookies[c].getValue());
+                }
+
+                if ("Login_Type".equals(cookies[c].getName())) {
+                    session.setAttribute("Login_Type", cookies[c].getValue());
+                }
+            }
+        }
+
+        if (session.getAttribute("Login") != null && "True".equalsIgnoreCase(session.getAttribute("Login").toString())) {
+            if (session.getAttribute("Username") != null) {
+                if (session.getAttribute("Login_Type") != null && "admin".equalsIgnoreCase(session.getAttribute("Login_Type").toString())) {
+                    response.sendRedirect("adminPanel/adminStartPage.jsp");
+                } else if (session.getAttribute("Login_Type") != null && "user".equalsIgnoreCase(session.getAttribute("Login_Type").toString())) {
+                    response.sendRedirect("Home.jsp");
+                }
             }
         } else {
             response.sendRedirect("Login.jsp");
-        }
+        }       
+        
     }
 
     /**
@@ -72,7 +92,7 @@ public class LoginCheck extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**
@@ -85,4 +105,5 @@ public class LoginCheck extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    //this method returns true if Cookie exist according to provided name in provided cookie array, otherwise returns false
 }

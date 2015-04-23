@@ -76,7 +76,7 @@ public class ClientMessage extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String warningMsg=null;
-        String recieption=request.getParameter("recipient");
+        String recieption=request.getParameter("name");
         String content=request.getParameter("content");
         
         MessagesClass msg = new MessagesClass();

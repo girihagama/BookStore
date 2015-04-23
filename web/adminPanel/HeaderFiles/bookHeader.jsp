@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : bookHeader
     Created on : Mar 27, 2015, 12:57:06 PM
@@ -56,13 +55,13 @@
                 <a href="http://localhost:8080/BookStore/adminPanel/addAuthors.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Authors"></a>
             </div>
             <div class="col-lg-1">
-                <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Clients.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Clients"></a>
+                <a href="http://localhost:8080/BookStore/adminPanel/clientSearch.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Clients.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Clients"></a>
             </div>
             <div class="col-lg-1">
-                <a href="#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Admin.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Admins"></a>
+                <a href="http://localhost:8080/BookStore/adminPanel/adminDetails.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Admin.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Admins"></a>
             </div>
             <div class="col-lg-1">
-                <a href="http://localhost:8080/BookStore/adminPanel/AddBookStocks.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Stocks"></a>
+                <a href="http://localhost:8080/BookStore/adminPanel/searchStock.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Stocks"></a>
             </div>
             <div class="col-lg-1">
                 <a href="http://localhost:8080/BookStore/adminPanel/addSuppliers.jsp"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Suppliers.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Suppliers"></a>

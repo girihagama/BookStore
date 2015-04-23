@@ -6,7 +6,6 @@
 
 package Servleets.AdminPanel;
 
-import Classes.AuthorClass;
 import Classes.BookClass;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -88,7 +87,7 @@ public class RemoveBook extends HttpServlet {
         } else {
             request.setAttribute("bookList", bookList);
         }
-
+        
         RequestDispatcher rd = request.getRequestDispatcher("adminPanel/removeBook1.jsp");
         rd.forward(request, response);
     }

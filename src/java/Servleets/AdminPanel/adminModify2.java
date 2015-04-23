@@ -6,6 +6,8 @@
 
 package Servleets.AdminPanel;
 
+import Classes.AuthorClass;
+import Classes.BookClass;
 import Classes.UserClass;
 import java.io.IOException;
 import java.io.PrintWriter;

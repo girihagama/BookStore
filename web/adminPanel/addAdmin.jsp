@@ -37,7 +37,7 @@
                         <li>
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
-                                    <li role="presentation" ><a href="#"><font style="color: orange">Admin Details</font></a></li>
+                                    <li role="presentation" ><a href="http://localhost:8080/BookStore/adminPanel/adminDetails.jsp"><font style="color: orange">Admin Details</font></a></li>
                                     <li role="presentation" class="active" ><a href="">Add Admin</a></li>
                                     <li>&nbsp;</li>
                                     <li>&nbsp;</li>
@@ -133,7 +133,13 @@
                                 </div>                            
                             </div>
                         </div> 
-                        <button type="submit" class="btn btn-default">Add Admin</button>
+                        <tbody>
+                                <tr>
+                                    <td><label><button type="submit" class="btn btn-default">Add Admin</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminDetails.jsp" role="button">Cancel</a></label></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
                     </form>
                 </div>
             </div>
@@ -145,6 +151,10 @@
                                 validators: {
                                     notEmpty: {
                                         message: "Please provide a admin name"
+                                    },
+                                    stringLength: {
+                                        max: 20,
+                                        message: "User name must be less than 20 characters long"
                                     }
                                 }
                             },
@@ -223,9 +233,6 @@
             </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
                 </ol>
             </div> 
         </div>

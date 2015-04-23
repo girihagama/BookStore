@@ -27,6 +27,7 @@
         <title>Admin Panel</title>
     </head>
     <body>
+        <%}%>
         <div class="row"><div class="col-md-10">&nbsp;</div></div>
         <div class="row">
             <div class="col-md-11"></div>
