@@ -33,9 +33,6 @@
         <title>Admin Panel</title>
     </head>
     <body>
-        <script>
-            history.forward();
-        </script>
         <%--for authentication--%>
         <%! String level = "L1";%>
         <%-- ------------ --%>
@@ -104,7 +101,7 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
-                                        <a class="btn btn-default" href="#" role="button">Add Authors</a>
+                                        <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/addAuthors.jsp" role="button">Add Authors</a>
                                     </div>
                                 </div>                            
                             </div>
@@ -189,7 +186,13 @@
                                 <input name="image" type="file" style="border-color: orange">
                             </div>  
                         </div> 
-                        <button type="submit" class="btn btn-default">Add Book</button>
+                        <tbody>
+                                <tr>
+                                    <td><label><button type="submit" class="btn btn-default">Add Book</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminStartPage.jsp" role="button">Cancel</a></label></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
                     </form>
                 </div>
             </div>

@@ -358,4 +358,27 @@ public class BookClass {
 
         return arrayList;
     }
+
+    public int addCopies(int newCopies) {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Update book set s_Qty=s_Qty + ? where b_ID=?");
+                pstmt.setInt(1, newCopies);
+                pstmt.setInt(2, b_ID);
+                
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                
+                db.endConnection();
+
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1;
+    }
 }

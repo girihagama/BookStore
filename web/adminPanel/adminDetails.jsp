@@ -30,10 +30,6 @@
         <title>Admin Panel</title>
     </head>
     <body>
-         <script>
-            history.forward();
-        </script>
-        
         <%--for authentication--%>
         <%! String level="L1";%>
         <%-- ------------ --%>

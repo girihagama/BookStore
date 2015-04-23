@@ -30,9 +30,6 @@
         <title>Admin Panel</title>
     </head>
     <body>
-        <script>
-            history.forward();
-        </script>
         <%
             if (request.getAttribute("searchedBookName") == null) {
                 response.sendRedirect("http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp");
@@ -160,8 +157,13 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-default">Modify Book</button>&nbsp;&nbsp;&nbsp;
-                        <label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp" role="button">Cancel</a></label>
+                        <tbody>
+                                <tr>
+                                    <td><label><button type="submit" class="btn btn-default">Modify Book</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/modifiBook1.jsp" role="button">Cancel</a></label></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
                     </form>
                 </div>
             </div>

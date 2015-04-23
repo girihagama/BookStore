@@ -27,6 +27,7 @@
         <title>Admin Panel</title>
     </head>
     <body>
+        <%}%>
         <div class="row"><div class="col-md-10">&nbsp;</div></div>
         <div class="row">
             <div class="col-md-11"></div>
@@ -61,7 +62,7 @@
                 <a href="http://localhost:8080/BookStore/adminPanel/adminDetails.jsp#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Admin.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Admins"></a>
             </div>
             <div class="col-lg-1">
-                <a href="http://localhost:8080/BookStore/adminPanel/AddBookStocks.jsp#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Stocks"></a>
+                <a href="http://localhost:8080/BookStore/adminPanel/searchStock.jsp#"><img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Stocks"></a>
             </div>
             <div class="col-lg-1">
                 <img src="http://localhost:8080/BookStore/adminPanel/Images/Page icons/Suppliers.png#" class="image" width="100%" alt="Responsive image" data-toggle="tooltip" data-placement="bottom" title="Suppliers" style="opacity: 0.5">

@@ -27,9 +27,6 @@
         <title>Admin Panel</title>
     </head>
     <body>
-         <script>
-            history.forward();
-        </script>
         <%
             if(request.getAttribute("searchedClientName")==null){
                 response.sendRedirect("http://localhost:8080/BookStore/adminPanel/clientSearch.jsp");
@@ -115,9 +112,10 @@
                                 </div>
                             </div>
                         </div><br>
-                        <tbody> 
+                        <tbody>
                                 <tr>
                                     <td><label><button type="submit" class="btn btn-default">Remove This Client</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/clientSearch.jsp" role="button">Cancel</a></label></td>
                                     <td></td>
                                 </tr>
                         </tbody>
@@ -287,6 +285,9 @@
                 </div>
             </div>
             <%--Form end--%>
+            <div class="row">
+                &nbsp;
+            </div>
             <div class="row">
                 &nbsp;
             </div>

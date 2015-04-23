@@ -27,9 +27,6 @@
         <title>Admin Panel</title>
     </head>
     <body>
-        <script>
-            history.forward();
-        </script>
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/admiinHeader.jsp"%>           
             <div class="row">
@@ -136,7 +133,13 @@
                                 </div>                            
                             </div>
                         </div> 
-                        <button type="submit" class="btn btn-default">Add Admin</button>
+                        <tbody>
+                                <tr>
+                                    <td><label><button type="submit" class="btn btn-default">Add Admin</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminDetails.jsp" role="button">Cancel</a></label></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
                     </form>
                 </div>
             </div>

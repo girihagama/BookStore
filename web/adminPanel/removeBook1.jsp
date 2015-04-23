@@ -29,12 +29,9 @@
         <title>Admin Panel</title>
     </head>
     <body>
-        <script>
-            history.forward();
-        </script>
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/bookHeader.jsp"%>           
-            <div class="row">
+             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2" >
                     <ul class="nav nav-pills nav-stacked ">
