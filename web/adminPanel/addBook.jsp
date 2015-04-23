@@ -33,11 +33,13 @@
         <title>Admin Panel</title>
     </head>
     <body>
-        <%
-            if ("http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
-            <script>
+        <script>
                 history.forward();
             </script>
+        <%
+            if ("http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {
+            System.out.println(request.getHeader("Referer").substring(0, 42));%>
+            
         <%}%>
         <%--for authentication--%>
         <%! String level = "L1";%>
