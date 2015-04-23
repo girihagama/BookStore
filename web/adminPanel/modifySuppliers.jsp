@@ -10,6 +10,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.ico" type="image/ico" />
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
 
@@ -26,7 +29,7 @@
         <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
-        <title>Admin Panel</title>
+        <title>Admin Panel - Modify Suppliers</title>
     </head>
     <body>
          <%
@@ -147,11 +150,15 @@
             <div class="row">
                 &nbsp;
             </div>
+                <div class="row">
+                &nbsp;
+            </div>
+
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
                 </ol>
             </div> 
          
-                 </div>    
+             </div>    
     </body>
 </html>

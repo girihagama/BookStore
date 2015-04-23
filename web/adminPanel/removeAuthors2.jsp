@@ -9,6 +9,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.ico" type="image/ico" />
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
 
@@ -25,7 +28,7 @@
         <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
-        <title>Admin Panel</title>
+        <title>Admin Panel - Remove Authors</title>
     </head>
     <body>
          <%
