@@ -108,7 +108,7 @@
                 <div class="col-md-2">
                     <div class="picholder">
                     <img src="Images/StartPageIcons/Oders.jpg" class="fancypics" alt="Responsive image">
-                    <div class="overlay"><a href="#" style="text-decoration: none"><p class="text_box">Go</p></a></div>
+                    <div class="overlay"><a href="http://localhost:8080/BookStore/adminPanel/orders.jsp" style="text-decoration: none"><p class="text_box">Go</p></a></div>
                     </div>
                 </div>
             </div>
