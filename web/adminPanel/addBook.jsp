@@ -33,6 +33,12 @@
         <title>Admin Panel</title>
     </head>
     <body>
+        <%
+            if ("http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
+            <script>
+                history.forward();
+            </script>
+        <%}%>
         <%--for authentication--%>
         <%! String level = "L1";%>
         <%-- ------------ --%>
@@ -149,7 +155,7 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-2">
-                                        <a class="btn btn-default" href="#" role="button">Add Suppliers</a>
+                                        <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/addSuppliers.jsp" role="button">Add Suppliers</a>
                                     </div>
                                 </div>                            
                             </div>

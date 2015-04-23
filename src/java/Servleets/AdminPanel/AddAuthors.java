@@ -40,7 +40,7 @@ public class AddAuthors extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddAuthors</title>");            
+            out.println("<title>Servlet AddAuthors</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet AddAuthors at " + request.getContextPath() + "</h1>");
@@ -58,7 +58,6 @@ public class AddAuthors extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -70,33 +69,38 @@ public class AddAuthors extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String warningMsg=null;
-        String authorName=request.getParameter("authorName");
-        String year=request.getParameter("year");
-        String month=request.getParameter("month");
-        String date=request.getParameter("date");
-        String authorDesc=request.getParameter("authorDesc");
-        System.out.println("auther "+authorName );
+        String warningMsg = null;
+        String authorName = request.getParameter("authorName");
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
+        String date = request.getParameter("date");
+        String authorDesc = request.getParameter("authorDesc");
+        System.out.println("auther " + authorName);
         AuthorClass author = new AuthorClass();
         author.setA_Name(authorName);
-        author.setA_DOB(year+"/"+month+"/"+date);
+        author.setA_DOB(year + "/" + month + "/" + date);
         author.setA_Desc(authorDesc);
-        int result=author.insertAuthor();
-        
-        if(result==1){
-            warningMsg="Author inserted Successfully.";
-        }
-        else{
-            warningMsg="Author is not inserted due to an error. Please try again";
-            
+        int result = author.insertAuthor();
+
+        if (result == 1) {
+            warningMsg = "Author inserted Successfully.";
+        } else {
+            warningMsg = "Author is not inserted due to an error. Please try again";
+
             request.setAttribute("errorAuthorName", authorName);
-            request.setAttribute("errorYear", year+"/"+month+"/"+date);
+            request.setAttribute("errorYear", year + "/" + month + "/" + date);
             request.setAttribute("errorDesc", authorDesc);
         }
-        
+        String backUrl = request.getParameter("back");
         request.setAttribute("msg", warningMsg);
         request.setAttribute("action", "AddAuthors");
-        RequestDispatcher rd = request.getRequestDispatcher("adminPanel/addAuthors.jsp");
+        RequestDispatcher rd;
+        System.out.println(backUrl);
+        if ("http://localhost:8080/BookStore/adminPanel/addBook.jsp".equals(backUrl)) {
+            rd = request.getRequestDispatcher("adminPanel/addBook.jsp");
+        } else {
+            rd = request.getRequestDispatcher("adminPanel/addAuthors.jsp");
+        }
         rd.include(request, response);
     }
 

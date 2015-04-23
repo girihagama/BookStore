@@ -106,8 +106,13 @@
                                 <textarea class="form-control" rows="3" placeholder="Enter Description" name="changedDesc"></textarea>
                             </div>
                         </div>
-                        
-                        <button type="submit" class="btn btn-default">Modify Author</button>
+                        <tbody>
+                                <tr>
+                                    <td><label><button type="submit" class="btn btn-default">Modify Author</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/modifyAuthors.jsp" role="button">Cancel</a></label></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
                     </form>
                 </div>
             </div>

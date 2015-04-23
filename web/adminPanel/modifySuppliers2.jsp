@@ -84,8 +84,13 @@
                                 <input type="text" name="changedADD3" class="form-control" placeholder="Address Line 3">
                             </div>
                         </div>
-                        
-                        <button type="submit" class="btn btn-default">Modify Supplier</button>
+                        <tbody>
+                                <tr>
+                                    <td><label><button type="submit" class="btn btn-default">Modify Supplier</button></label></td>
+                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/modifySuppliers.jsp" role="button">Cancel</a></label></td>
+                                    <td></td>
+                                </tr>
+                        </tbody>
                     </form>
                 </div>
             </div>
