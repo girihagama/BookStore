@@ -14,7 +14,7 @@
     <head>
         <link rel="icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" type="image/x-icon" />
         <link rel="shortcut icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.ico" type="image/ico" />
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
 
@@ -28,7 +28,7 @@
         <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrapValidator.js"></script>
         <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.maskMoney.js"></script>
-        
+
 
         <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
@@ -36,19 +36,18 @@
         <title>Admin Panel - Add Book</title>
     </head>
     <body>
-        
-        <% if(request.getHeader("Referer").length()<42){%>
-           <script>
-                history.forward()
+
+        <% if (request.getHeader("Referer").length() < 42) {%>
+        <script>
+            history.forward()
         </script> 
-        <%} else
-            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
-            <script>
-                history.forward()
+        <%} else if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
+        <script>
+            history.forward()
         </script>
-            
+
         <%}%>
-        
+
         <%--for authentication--%>
         <%! String level = "L1";%>
         <%-- ------------ --%>
@@ -111,7 +110,7 @@
                                             <%
                                                 List results = author.getAlist();
                                                 Iterator it = results.iterator();
-                                            while (it.hasNext()) {%>
+                                                while (it.hasNext()) {%>
                                             <option><%=it.next()%></option>
                                             <%}%>
                                         </select>
@@ -149,17 +148,17 @@
                             </div>
                         </div>
                         <jsp:useBean id="sup" class="Classes.SupplierClass"></jsp:useBean>      
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label for="supplierName">Supplier Name</label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <select name="supplierName" id="supplierName" class="form-control" >
-                                            <option disabled selected value="0">Select a supplier</option> 
+                            <div id ="orange">
+                                <div class="form-group orange">
+                                    <label for="supplierName">Supplier Name</label>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <select name="supplierName" id="supplierName" class="form-control" >
+                                                <option disabled selected value="0">Select a supplier</option> 
                                             <%
                                                 List result = sup.getSlist();
                                                 Iterator itr = result.iterator();
-                                            while (itr.hasNext()) {%>
+                                                while (itr.hasNext()) {%>
                                             <option><%=itr.next()%></option>
                                             <%}%>
                                         </select>
@@ -199,15 +198,15 @@
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Book Image</label>
-                                <input name="image" type="file" style="border-color: orange">
+                                <input name="image" id="image" type="file" style="border-color: orange">
                             </div>  
                         </div> 
                         <tbody>
-                                <tr>
-                                    <td><label><button type="submit" class="btn btn-default">Add Book</button></label></td>
-                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminStartPage.jsp" role="button">Cancel</a></label></td>
-                                    <td></td>
-                                </tr>
+                            <tr>
+                                <td><label><button type="submit" class="btn btn-default">Add Book</button></label></td>
+                                <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminStartPage.jsp" role="button">Cancel</a></label></td>
+                                <td></td>
+                            </tr>
                         </tbody>
                     </form>
                 </div>
@@ -272,6 +271,16 @@
                                         message: "Please provide an author. if there is no author, please add and select the author"
                                     }
                                 }
+                            },
+                            image: {
+                                validators: {
+                                    file: {
+                                        extension: 'jpg',
+                                        maxSize: 1024 * 1024*2,
+                                        message: 'Please choose jpeg image with a size less than 2M.'
+                                    }
+                                }
+
                             }
                         }
                     });
