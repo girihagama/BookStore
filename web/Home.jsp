@@ -65,6 +65,7 @@
     </head>
 
     <jsp:include page='header.jsp'></jsp:include>
+    <jsp:include page="ShowMessageScript.jsp"></jsp:include>
 
         <body> 
             <div class="row container-fluid">

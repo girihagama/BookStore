@@ -83,12 +83,13 @@
         %>
 
         <jsp:include page="ShowMessageScript.jsp" />
-        
+
         <div class="container-fluid">
-            
+
             <div class="row clearfix">
                 <div class="col-md-12 column">
-                    <form method="Get" action="ManageCheckout" onsubmit="return Confirm();">
+                    <form method="POST" action="ManageCheckout" onsubmit="return Confirm();">
+                        <input type="hidden" name="Amount" value="<%= cart_amount%>">
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 <h3 class="panel-title" style="font-family:calibri;">

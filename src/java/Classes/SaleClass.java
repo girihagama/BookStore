@@ -5,6 +5,10 @@
  */
 package Classes;
 
+import com.mysql.jdbc.Statement;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author Indunil
@@ -14,10 +18,27 @@ public class SaleClass {
     private int s_ID;
     private String u_Name;
     private String s_Date;
-    private int u_ID;
+    private int b_ID;
     private int s_Qty;
     private int s_Amount;
+    
+    //DbClass object
+    private DbClass db = new DbClass();
 
+    /**
+     * @return the b_ID
+     */
+    public int getB_ID() {
+        return b_ID;
+    }
+
+    /**
+     * @param b_ID the b_ID to set
+     */
+    public void setB_ID(int b_ID) {
+        this.b_ID = b_ID;
+    }
+    
     /**
      * @return the s_ID
      */
@@ -61,20 +82,6 @@ public class SaleClass {
     }
 
     /**
-     * @return the u_ID
-     */
-    public int getU_ID() {
-        return u_ID;
-    }
-
-    /**
-     * @param u_ID the u_ID to set
-     */
-    public void setU_ID(int u_ID) {
-        this.u_ID = u_ID;
-    }
-
-    /**
      * @return the s_Qty
      */
     public int getS_Qty() {
@@ -101,4 +108,35 @@ public class SaleClass {
     public void setS_Amount(int s_Amount) {
         this.s_Amount = s_Amount;
     }
+    
+    //methods
+    
+    public boolean addItem() throws SQLException {
+        boolean res = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "INSERT INTO Sale(u_Name,b_ID,s_Qty) Values('"+getU_Name()+"',"+getB_ID()+","+getS_Qty()+")";
+            Statement stmt = (Statement) db.conn.createStatement();
+            
+            int x = stmt.executeUpdate(query);
+
+            if (x == 1) {
+                res = true;
+            } else {
+                res = false;
+            }
+
+            db.endConnection();
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return res;
+    }
+
 }

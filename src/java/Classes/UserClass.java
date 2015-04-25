@@ -6,7 +6,6 @@
 package Classes;
 
 import com.mysql.jdbc.Statement;
-import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,48 +37,6 @@ public class UserClass {
     private byte[] u_Image;
 
     /**
-     * @return the db
-     */
-    public DbClass getDb() {
-        return db;
-    }
-
-    /**
-     * @param db the db to set
-     */
-    public void setDb(DbClass db) {
-        this.db = db;
-    }
-
-    /**
-     * @return the manager
-     */
-    public ScriptEngineManager getManager() {
-        return manager;
-    }
-
-    /**
-     * @param manager the manager to set
-     */
-    public void setManager(ScriptEngineManager manager) {
-        this.manager = manager;
-    }
-
-    /**
-     * @return the engine
-     */
-    public ScriptEngine getEngine() {
-        return engine;
-    }
-
-    /**
-     * @param engine the engine to set
-     */
-    public void setEngine(ScriptEngine engine) {
-        this.engine = engine;
-    }
-
-    /**
      * @return the u_Name
      */
     public String getU_Name() {
@@ -105,6 +62,20 @@ public class UserClass {
      */
     public void setU_Pass(String u_Pass) {
         this.u_Pass = u_Pass;
+    }
+
+    /**
+     * @return the u_Image
+     */
+    public byte[] getU_Image() {
+        return u_Image;
+    }
+
+    /**
+     * @param u_Image the u_Image to set
+     */
+    public void setU_Image(byte[] u_Image) {
+        this.u_Image = u_Image;
     }
 
     /**
@@ -386,7 +357,7 @@ public class UserClass {
     }
 
     public ArrayList loadProfile() throws SQLException {
-        ArrayList arrayList  = new ArrayList();
+        ArrayList arrayList = new ArrayList();
 
         try {
             db.getConnection();
@@ -400,11 +371,50 @@ public class UserClass {
 
 //            ResultSetMetaData metadata = rs.getMetaData();
 //            int numberOfColumns = metadata.getColumnCount();
-            
             while (rs.next()) {
-                UserClass user =new UserClass();
+                UserClass user = new UserClass();
                 user.setU_Name(rs.getString("u_name"));
                 user.setU_Pass(rs.getString("u_pass"));
+                arrayList.add(user);
+            }
+
+            db.endConnection();
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return arrayList;
+    }
+
+    public ArrayList loadUser() throws SQLException {
+        ArrayList arrayList = new ArrayList();
+        ImageExchange ex = new ImageExchange();
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT * FROM user WHERE u_name='" + getU_Name() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                UserClass user = new UserClass();
+                user.setU_Name(rs.getString("u_Name"));
+                user.setU_RegDate(rs.getString("u_RegDate"));
+                user.setU_Mail(rs.getString("u_Mail"));
+                user.setU_TPN(rs.getString("u_TPN"));
+                user.setU_addLine1(rs.getString("u_addLine1"));
+                user.setU_addLine2(rs.getString("u_addLine2"));
+                user.setU_addLine3(rs.getString("u_addLine3"));
+                user.setU_CardNo(rs.getString("u_CardNo"));
+                if (rs.getBlob("u_image")!=null) {
+                    user.setU_Image(ex.getBytes(rs.getBlob("u_image")));
+                }
                 arrayList.add(user);
             }
 

@@ -68,6 +68,10 @@
         <servlet-name>ManageCheckout</servlet-name>
         <servlet-class>Servleets.ManageCheckout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PayCart</servlet-name>
+        <servlet-class>Servleets.PayCart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>ManageCheckout</servlet-name>
         <url-pattern>/ManageCheckout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PayCart</servlet-name>
+        <url-pattern>/PayCart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -15,6 +15,15 @@ import java.sql.Statement;
  * @author Indunil
  */
 public class ImageExchange {
+    
+    public byte[] getBytes(Blob img) throws SQLException {
+        
+        byte[] imgData = null;
+
+        imgData = img.getBytes(1, (int) img.length());
+        
+        return imgData;
+    }
 
     public byte[] bookImageBytes(String b_id) throws SQLException {
 
