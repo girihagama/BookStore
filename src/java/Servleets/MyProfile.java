@@ -6,12 +6,12 @@
 package Servleets;
 
 import Classes.UserClass;
-import java.awt.List;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import javax.jms.Session;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,22 +52,24 @@ public class MyProfile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        PrintWriter out = response.getWriter();
-
-        HttpSession session = request.getSession();
-        String user = session.getAttribute("Username").toString();
-
-        UserClass x = new UserClass();
-
-        x.setU_Name(user);
-
-        ArrayList profile = x.loadProfile();
-        
-        request.setAttribute("MyProfile", profile);
-        RequestDispatcher rd = request.getRequestDispatcher("viewprofile.jsp");
-        rd.forward(request, response);
-
-        
+        try {
+            PrintWriter out = response.getWriter();
+            
+            HttpSession session = request.getSession();
+            String user = session.getAttribute("Username").toString();
+            
+            UserClass x = new UserClass();
+            
+            x.setU_Name(user);
+            
+            ArrayList profile = x.loadProfile();
+            
+            request.setAttribute("MyProfile", profile);
+            RequestDispatcher rd = request.getRequestDispatcher("viewprofile.jsp");        
+            rd.forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(MyProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

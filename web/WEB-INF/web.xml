@@ -52,6 +52,22 @@
         <servlet-name>ChkSavedList</servlet-name>
         <servlet-class>Servleets.ChkSavedList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewMyProfile</servlet-name>
+        <servlet-class>Servleets.ViewMyProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageMessages</servlet-name>
+        <servlet-class>Servleets.ManageMessages</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageCart</servlet-name>
+        <servlet-class>Servleets.ManageCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageCheckout</servlet-name>
+        <servlet-class>Servleets.ManageCheckout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -104,9 +120,23 @@
         <servlet-name>ChkSavedList</servlet-name>
         <url-pattern>/ChkSavedList</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyProfile</servlet-name>
+        <url-pattern>/ViewMyProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageMessages</servlet-name>
+        <url-pattern>/ManageMessages</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageCart</servlet-name>
+        <url-pattern>/ManageCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageCheckout</servlet-name>
+        <url-pattern>/ManageCheckout</url-pattern>
+    </servlet-mapping>
     <session-config>
-        <session-timeout>
-            60
-        </session-timeout>
+        <session-timeout>30</session-timeout>
     </session-config>
 </web-app>

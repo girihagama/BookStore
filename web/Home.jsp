@@ -14,13 +14,17 @@
 <!DOCTYPE html>
 
 <%
-    if (session.getAttribute("Login") == null) {
-        response.sendRedirect("LoginCheck");
-    } else {
-        UserClass x = new UserClass();
-        if (x.chkUserName(session.getAttribute("Username").toString()) == false) {
+    try {
+        if (session.getAttribute("Login") == null) {
             response.sendRedirect("LoginCheck");
+        } else {
+            UserClass x = new UserClass();
+            if (x.chkUserName(session.getAttribute("Username").toString()) == false) {
+                response.sendRedirect("LoginCheck");
+            }
         }
+    }catch(Exception e){
+        response.sendRedirect("LoginCheck");
     }
 %>
 

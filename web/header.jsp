@@ -4,14 +4,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    String un=null;
-    
-    try {
-        un = session.getAttribute("Username").toString();
-    }catch(Exception x){
+    String user = null;
+
+    if (session.getAttribute("Username") != null) {
+        user = session.getAttribute("Username").toString();
+        UserClass x = new UserClass();
+        if (x.chkUserName(user) == false) {
+            response.sendRedirect("Login.jsp");
+        }
+    } else {
         response.sendRedirect("Login.jsp");
     }
-
 %>
 
 <!DOCTYPE html>
@@ -54,7 +57,7 @@
                             <div class="form-group">
                                 <input name="Search" type="text" class="form-control" placeholder="Search" required="" autofocus>          						
                             </div>
-                            <button type="submit" class="btn btn-primary">
+                            <button style="font-family:calibri;" type="submit" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-search"></span>
                                 Search Books
                             </button>  							
@@ -108,7 +111,7 @@
                             <li>
                                 <a href="MyProfile">
                                     <span class="glyphicon glyphicon-user"></span>                                    
-                                    <font style="font-family: calibri;"><%= un.toUpperCase()%></font>
+                                    <font style="font-family: calibri;"><%= user.toUpperCase()%></font>
                                 </a>                          
                             </li>
 

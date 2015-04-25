@@ -219,23 +219,6 @@ public class UserClass {
         this.u_CardNo = u_CardNo;
     }
 
-    //methods
-    public void exceptionShow(String msg) throws Exception {
-
-        ScriptEngineManager sem = new ScriptEngineManager();
-        ScriptEngine scEng = sem.getEngineByName("JavaScript");
-
-        // JavaScript code in a String
-        String script = "function exceptionShow(msg){ alert(arguments[0]); }";
-
-        // evaluate script
-        scEng.eval(script);
-        Invocable inv = (Invocable) scEng;
-
-        // invoke the global function named "hello"
-        inv.invokeFunction("Exception", msg);
-    }
-
     public Boolean chkMember(String username) throws Exception {
         /*
          This method will return true,
@@ -267,8 +250,6 @@ public class UserClass {
             }
             db.endConnection();
 
-        } catch (Exception ex) {
-            exceptionShow(ex.getMessage());
         } finally {
             if (db.conn != null) {
                 db.endConnection();
@@ -311,8 +292,6 @@ public class UserClass {
             }
             db.endConnection();
 
-        } catch (Exception ex) {
-            exceptionShow(ex.getMessage());
         } finally {
             if (db.conn != null) {
                 db.endConnection();
@@ -354,8 +333,6 @@ public class UserClass {
                 }
                 db.endConnection();
 
-            } catch (Exception ex) {
-                exceptionShow(ex.getMessage());
             } finally {
                 if (db.conn != null) {
                     db.endConnection();
@@ -394,8 +371,6 @@ public class UserClass {
             }
             db.endConnection();
 
-        } catch (Exception ex) {
-            exceptionShow(ex.getMessage());
         } finally {
             if (db.conn != null) {
                 db.endConnection();
@@ -410,7 +385,7 @@ public class UserClass {
 
     }
 
-    public ArrayList loadProfile() {
+    public ArrayList loadProfile() throws SQLException {
         ArrayList arrayList  = new ArrayList();
 
         try {
@@ -434,8 +409,6 @@ public class UserClass {
             }
 
             db.endConnection();
-        } catch (Exception ex) {
-
         } finally {
             if (db.conn != null) {
                 db.endConnection();
