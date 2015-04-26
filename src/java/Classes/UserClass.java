@@ -318,6 +318,7 @@ public class UserClass {
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     this.u_Name=rs.getString("u_Name");
+                    this.u_Pass=rs.getString("u_Pass");
                     if(rs.getString("u_RegDate")!=null||!"".equals(rs.getString("u_RegDate")))
                         this.u_RegDate=rs.getString("u_RegDate").substring(0, 10);
                     else
@@ -486,15 +487,14 @@ public class UserClass {
         DbClass db = new DbClass();
         if (db.getConnection() == true) {
             try {
-                pstmt = (PreparedStatement) db.conn.prepareStatement("Update user set u_Name=?, u_Mail=?, u_TPN=?, u_addLine1=?, u_addLine2=?, u_addLine3=?, admin_Level=? where u_Name=?");
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Update user set u_Name=?, u_Mail=?, u_TPN=?, u_addLine1=?, u_addLine2=?, u_addLine3=? where u_Name=?");
                 pstmt.setString(1, u_Name);
                 pstmt.setString(2, u_Mail);
                 pstmt.setString(3, u_TPN);
                 pstmt.setString(4, u_addLine1);
                 pstmt.setString(5, u_addLine2);
                 pstmt.setString(6, u_addLine3);
-                pstmt.setString(7, a_Level);
-                pstmt.setString(8, oldAdminName);
+                pstmt.setString(7, oldAdminName);
                 
 
                 System.out.println(pstmt);
@@ -634,6 +634,52 @@ public class UserClass {
         }
 
         return arrayList;
+    }
+
+    public int modifyAdminLevel(String oldAdminName) {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Update user set admin_Level=? where u_Name=?");
+                pstmt.setString(1, a_Level);
+                pstmt.setString(2, oldAdminName);
+                
+
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return 0;
+    }
+
+    public int changePassword(String newPass) {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Update user set u_Pass=? where u_Name=?");
+                pstmt.setString(1, newPass);
+                pstmt.setString(2, u_Name);
+                
+
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return 0;
     }
 
 }

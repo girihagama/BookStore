@@ -36,7 +36,6 @@
         <title>Admin Panel - Add Book</title>
     </head>
     <body>
-
         <% if (request.getHeader("Referer").length() < 42) {%>
         <script>
             history.forward()

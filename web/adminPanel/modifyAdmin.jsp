@@ -87,24 +87,16 @@
                             <div class="form-group orange">
                                 <label>Admin Name : <%=request.getAttribute("searchedAdminName")%></label>
                                 <input type="hidden" name="oldName" value="<%=request.getAttribute("searchedAdminName")%>">
-                                <input type="text" class="form-control" placeholder="Enter new admin name" name="changedName" id="changedName">
-                                <div class="help-block with-errors"></div>
                             </div>
                         </div>
                         <div id ="orange">
                             <div class="form-group orange">
-                                <label>Admin Email : <%=request.getAttribute("searchedAdminMail")%></label>
-                                <input type="text" class="form-control" placeholder="Enter new admin email" name="changedEmail" id="changedEmail">                          
+                                <label>Admin Email : <%=request.getAttribute("searchedAdminMail")%></label> 
                             </div>
                         </div> 
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Admin Contact Number : <%=request.getAttribute("searchedAdminTPN")%></label>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Enter new contact number" name="changedTPN" id="changedTPN">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div id ="orange">
@@ -127,13 +119,6 @@
                                     </table>
 
                                 </label>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <input type="text" class="form-control" placeholder="Enter new address line 1" name="add1" id="add1">
-                                        <input type="text" class="form-control" placeholder="Enter new address line 2" name="add2" id="add2">
-                                        <input type="text" class="form-control" placeholder="Enter new address line 3" name="add3" id="add3">
-                                    </div>
-                                </div>
                             </div>
                         </div>                      
                         <div id ="orange">

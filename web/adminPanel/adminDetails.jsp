@@ -130,12 +130,12 @@
                                     </tbody>
                                 </table>
                                 <div class="row">
-                                    <div class="col-lg-8"></div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-6"></div>
+                                    <div class="col-lg-6">
                                         <input type="hidden" name="adminName" value="<%=adminName%>">
                                         <button 
                                             <%if(!"L1".equals(level)){%>type="button" data-toggle="modal" data-target="#Modify" data-backdrop="static"<%}else{%>type="submit"<%}%>
-                                             class="btn btn-default">Modify</button> &nbsp;&nbsp;&nbsp;
+                                             class="btn btn-default">Change Admin Level</button> &nbsp;&nbsp;&nbsp;
                                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#remove" data-whatever="<%=adminName%>" data-backdrop="static">Remove</button>
                                     </div>
                                 </div>
