@@ -3,20 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
+package Servlets;
 
+import Classes.BookClass;
+import Classes.CartClass;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Indunil
  */
-public class Search extends HttpServlet {
+public class ChkCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,18 +38,7 @@ public class Search extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Search</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Search at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +53,38 @@ public class Search extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+
+        BookClass bk = new BookClass();
+        CartClass crt = new CartClass();
+        
+        try {
+            crt.removeNoQtyItems();
+            //removes all cart items which has 0 quantity
+        } catch (SQLException ex) {
+            Logger.getLogger(ChkCart.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String user = null;
+
+        if (session.getAttribute("Username") != null) {
+            user = session.getAttribute("Username").toString();
+        } else {
+            response.sendRedirect("Login.jsp");
+        }     
+
+        try {
+            crt.setU_Name(user);
+            ArrayList cart = crt.loadCart();
+            request.setAttribute("CartItems", cart);
+
+        RequestDispatcher rd = request.getRequestDispatcher("ShoppingCart.jsp");
+        rd.forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChkCart.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -9,6 +9,7 @@ import com.mysql.jdbc.PreparedStatement;
 import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +31,36 @@ public class BookClass {
     private String b_Edition;
     private String b_Year;
     private int a_ID; //author ID
-    private PreparedStatement pstmt;
+    private int s_Qty;
+    private double Price;
+    
+        /**
+     * @return the s_Qty
+     */
+    public int getS_Qty() {
+        return s_Qty;
+    }
+
+    /**
+     * @param s_Qty the s_Qty to set
+     */
+    public void setS_Qty(int s_Qty) {
+        this.s_Qty = s_Qty;
+    }
+
+    /**
+     * @return the Price
+     */
+    public double getPrice() {
+        return Price;
+    }
+
+    /**
+     * @param Price the Price to set
+     */
+    public void setPrice(double Price) {
+        this.Price = Price;
+    }
 
     /**
      * @return the b_ID
@@ -116,10 +146,25 @@ public class BookClass {
         this.a_ID = a_ID;
     }
 
+    /**
+     * @return the b_Image
+     */
+    public ImageOutputStream getB_Image() {
+        return b_Image;
+    }
+
+    /**
+     * @param b_Image the b_Image to set
+     */
+    public void setB_Image(ImageOutputStream b_Image) {
+        this.b_Image = b_Image;
+    }
+
     public int insertBook() {
         DbClass db = new DbClass();
         if (db.getConnection() == true) {
             try {
+                PreparedStatement pstmt= null;
                 pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into book(b_Title,b_image,b_Edition,b_year,a_ID) values(?,?,?,?,?)");
                 pstmt.setString(1, b_Title);
                 //pstmt.setBlob(2, b_Image);
@@ -156,14 +201,14 @@ public class BookClass {
 //            ResultSetMetaData metadata = rs.getMetaData();
 //            int numberOfColumns = metadata.getColumnCount();
             while (rs.next()) {
-                BookClass book=new BookClass();
-                
+                BookClass book = new BookClass();
+
                 book.setB_ID(rs.getInt("b_ID"));
-                
-                Blob img=rs.getBlob("b_Image");
+
+                Blob img = rs.getBlob("b_Image");
                 byte[] imageData = img.getBytes(1, (int) img.length());
                 book.setB_ImageBytes(imageData);
-                
+
                 arrayList.add(book);
             }
 
@@ -179,18 +224,81 @@ public class BookClass {
         return arrayList;
     }
 
-    /**
-     * @return the b_Image
-     */
-    public ImageOutputStream getB_Image() {
-        return b_Image;
-    }
+    public ArrayList searchBooks(String term) throws SQLException {
+        ArrayList arrayList = new ArrayList();
 
-    /**
-     * @param b_Image the b_Image to set
-     */
-    public void setB_Image(ImageOutputStream b_Image) {
-        this.b_Image = b_Image;
-    }
+        try {
+            db.getConnection();
 
+            String query;
+            query = "SELECT * FROM book Where b_title LIKE '%" + term + "%'";
+            Statement stmt = db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                BookClass book = new BookClass();
+
+                book.setB_ID(rs.getInt("b_ID"));
+//                Blob img = rs.getBlob("b_Image");
+//                byte[] imageData = img.getBytes(1, (int) img.length());
+//                book.setB_ImageBytes(imageData);
+                book.setB_Title(rs.getString("b_title"));
+                
+                if (rs.getString("b_Edition") != null) {
+                    book.setB_Edition(rs.getString("b_Edition"));
+                } else {
+                    book.setB_Edition("not defined");
+                }
+                
+                if (rs.getString("b_Year") != null) {
+                    book.setB_Year(rs.getString("b_Year"));
+                } else {
+                    book.setB_Edition("not defined");
+                }
+                
+                book.setS_Qty(rs.getInt("s_Qty"));
+                book.setPrice(rs.getDouble("Price"));
+
+                arrayList.add(book);
+            }
+
+            db.endConnection();
+        } catch (Exception ex) {
+
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return arrayList;
+    }
+    
+    public double getBookPrice() throws SQLException{
+        double x= 0.0;
+        
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT Price FROM book Where b_ID='"+getB_ID()+"'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while (rs.next()) {
+                x = rs.getDouble("Price");
+            }
+
+            db.endConnection();
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+        
+        return x;
+    }
 }

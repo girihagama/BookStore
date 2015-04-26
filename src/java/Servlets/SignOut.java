@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
+package Servlets;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Indunil
  */
-public class Header extends HttpServlet {
+public class SignOut extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,33 +47,22 @@ public class Header extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//
-//        PrintWriter out = response.getWriter();
-//        HttpSession session = request.getSession();
-//        String username = null;
-//
-//        try {
-//            if (session.getAttribute("Login") != null && session.getAttribute("Login").toString() == "True") {
-//
-//                if (session.getAttribute("Username") != null) {
-//                    username = session.getAttribute("Username").toString();
-//                } else {
-//                    response.sendRedirect("Login.jsp");
-//                }
-//
-//                UserClass x = new UserClass();
-//
-//                if (x.chkUserName(username)) {
-//                    session.setAttribute("Username", username);
-//                } else {
-//                    response.sendRedirect("Login.jsp");
-//                }                
-//            }
-//        } catch (Exception ex) {
-//            Logger.getLogger(Header.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        RequestDispatcher rd = request.getRequestDispatcher("header.jsp");
-        rd.forward(request, response);
+        try {
+            PrintWriter out=response.getWriter();
+            
+            //clears all cookies
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie : cookies) {
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+            //clears all sessions
+            HttpSession session = request.getSession();
+            session.invalidate();
+            
+            response.sendRedirect("index.jsp");            
+        } catch (Exception ex) {
+        }
     }
 
     /**
@@ -85,7 +76,7 @@ public class Header extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**

@@ -6,6 +6,7 @@
 package Classes;
 
 import com.mysql.jdbc.Statement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -188,6 +189,37 @@ public class CartClass {
             query = "Delete FROM cart WHERE c_ID = '" + getC_ID() + "'";
             Statement stmt = (Statement) db.conn.createStatement();
             int x = stmt.executeUpdate(query);
+
+            if (x == 1) {
+                res = true;
+            } else {
+                res = false;
+            }
+
+            db.endConnection();
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return res;
+    }
+
+    public boolean addToCart() throws SQLException {
+        boolean res = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "INSERT INTO `cart`(`u_Name`, `b_ID`, `c_Qty`) VALUES (?,?,?)";
+            PreparedStatement stmt = db.conn.prepareStatement(query);            
+            stmt.setString(1, getU_Name());
+            stmt.setInt(2, getB_ID());
+            stmt.setInt(3, getC_Qty());
+            
+            int x = stmt.executeUpdate();
 
             if (x == 1) {
                 res = true;

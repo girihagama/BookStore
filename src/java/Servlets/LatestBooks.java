@@ -3,21 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
+package Servlets;
 
+import Classes.BookClass;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Indunil
  */
-public class ChkSavedList extends HttpServlet {
+public class LatestBooks extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,7 +35,7 @@ public class ChkSavedList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -45,8 +50,19 @@ public class ChkSavedList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("SavedList.jsp");
-        rd.forward(request, response);
+        try {
+            HttpSession session = request.getSession();
+            BookClass book = new BookClass();
+            ArrayList latest = book.latestBooks();
+
+            request.setAttribute("LatestItems", latest);
+            RequestDispatcher rd = request.getRequestDispatcher("latestItems.jsp");
+            rd.forward(request, response);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LatestBooks.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**

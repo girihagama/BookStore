@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
+package Servlets;
 
-import Classes.CartClass;
+import Classes.UserClass;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Indunil
  */
-public class ManageCart extends HttpServlet {
+public class BuyItNow extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -50,7 +51,7 @@ public class ManageCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     /**
@@ -64,37 +65,29 @@ public class ManageCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        CartClass crt = new CartClass();
-
-        String user = null;
+        UserClass user = new UserClass();
+        String username = null;
 
         if (session.getAttribute("Username") != null) {
-            user = session.getAttribute("Username").toString();
+            username = session.getAttribute("Username").toString();
         } else {
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect("ClearAll");
         }
 
-        int id = Integer.parseInt(request.getParameter("ID"));
-
-        crt.setC_ID(id);
-
-        try {
-            boolean res = crt.removeItem();
-
-            if (res == true) {
-                session.setAttribute("Info", "Requested cart item removed.");
-                out.print("true");
-                response.sendRedirect("ChkCart");
-            } else {
-                session.setAttribute("Info", "Sorry, request cannot fulfill.");
-                out.print("true");
-                response.sendRedirect("ChkCart");
+        if (username != null) {
+            try {
+                user.setU_Name(username);
+                ArrayList userinfo = user.loadUser();
+                request.setAttribute("userinfo", userinfo);
+            } catch (SQLException ex) {
+                Logger.getLogger(ManageCheckout.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ManageCart.class.getName()).log(Level.SEVERE, null, ex);
+
+            RequestDispatcher rd = request.getRequestDispatcher("BuyItNow.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("Login.jsp");
         }
     }
 

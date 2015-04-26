@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
+package Servlets;
 
+import Classes.CartClass;
+import Classes.SaleClass;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Indunil
  */
-public class SignOut extends HttpServlet {
+public class PayCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,22 +52,7 @@ public class SignOut extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            PrintWriter out=response.getWriter();
-            
-            //clears all cookies
-            Cookie[] cookies = request.getCookies();
-            for (Cookie cookie : cookies) {
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-            }
-            //clears all sessions
-            HttpSession session = request.getSession();
-            session.invalidate();
-            
-            response.sendRedirect("index.jsp");            
-        } catch (Exception ex) {
-        }
+
     }
 
     /**
@@ -76,7 +66,47 @@ public class SignOut extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        try {
+            HttpSession session = request.getSession();
+            String username = null;
+
+            if (session.getAttribute("Username") != null) {
+                username = session.getAttribute("Username").toString();
+            } else {
+                response.sendRedirect("Login.jsp");
+            }
+
+            PrintWriter out = response.getWriter();
+            String req = request.getParameter("submit");
+            ArrayList cart = null;
+            CartClass crt = new CartClass();
+            SaleClass sl = new SaleClass();
+
+            if ("pay".equals(req)) {
+
+                crt.setU_Name(username);
+                cart = crt.loadCart();
+
+                for(int i=0;i<cart.size();i++){
+                    crt = (CartClass) cart.get(i); 
+                    
+                    sl.setB_ID(crt.getB_ID());
+                    sl.setS_Qty(crt.getC_Qty());
+                    sl.setU_Name(crt.getU_Name());
+
+                    sl.addItem();
+                    crt.removeItem();
+                }                
+
+                session.setAttribute("Info", "Payment Completed");
+                response.sendRedirect("Home.jsp");                
+            } else if ("editAddress".equals(req) || "editCard".equals(req)) {
+                response.sendRedirect("ViewMyProfile");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PayCart.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

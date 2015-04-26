@@ -64,17 +64,7 @@
                         </form>
                         <!--Search end-->      							
 
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <!--list btn-->
-                                <form action="ChkSavedList" method="GET">
-                                    <button type="submit" class="btn btn-sm btn-success navbar-btn btn-block" style="border-radius:0px;">
-                                        <span class="glyphicon glyphicon-floppy-disk"></span>
-                                        My Saved List
-                                    </button>
-                                </form>
-                                <!--list btn end-->
-                            </li>
+                        <ul class="nav navbar-nav navbar-right">                            
                             <li>
                                 <!--notifications btn-->
                                 <form action="ChkMessage" method="GET">

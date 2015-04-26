@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
+package Servlets;
 
-import Classes.UserClass;
+import Classes.CartClass;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Indunil
  */
-public class ViewMyProfile extends HttpServlet {
+public class Search extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +34,6 @@ public class ViewMyProfile extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
 
     }
 
@@ -52,30 +49,7 @@ public class ViewMyProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            PrintWriter out = response.getWriter();
-            HttpSession session = request.getSession();
-            UserClass usr = new UserClass();
-            String username = null;
-            ArrayList user = null;
 
-            if (session.getAttribute("Username") != null) {
-                username = session.getAttribute("Username").toString();
-                out.print(username);
-            } else {
-                response.sendRedirect("Login.jsp");
-            }
-
-            usr.setU_Name(username);
-            user = usr.loadUser();
-
-            request.setAttribute("ViewUserProfile", user);
-
-            RequestDispatcher rd = request.getRequestDispatcher("ViewMyProfile.jsp");
-            rd.forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewMyProfile.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -89,7 +63,44 @@ public class ViewMyProfile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String username = null;
 
+        if (session.getAttribute("Username") != null) {
+            username = session.getAttribute("Username").toString();
+        } else {
+            response.sendRedirect("ClearAll");
+        }
+
+        PrintWriter out = response.getWriter();
+        CartClass cart = new CartClass();
+
+        String req = request.getParameter("submit");
+        int qty = Integer.parseInt(request.getParameter("Qty"));
+        int id = Integer.parseInt(request.getParameter("BookID"));
+
+        if ("Cart".equals(req)) {
+            cart.setB_ID(id);
+            cart.setC_Qty(qty);
+            cart.setU_Name(username);
+
+            try {
+                boolean x = cart.addToCart();
+
+                if (x == true) {
+                    session.setAttribute("Info", "Item Added To The Cart.");
+                    response.sendRedirect("ChkCart");
+                } else {
+                    session.setAttribute("Info", "Item Cannot Add To The Cart.");
+                    response.sendRedirect("Home.jsp");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else if ("Buy".equals(req)) {
+            response.sendRedirect("BuyItNow" + "?" + "BookID=" + id + "&" + "Qty=" + qty);
+        }
     }
 
     /**

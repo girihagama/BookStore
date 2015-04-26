@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
+package Servlets;
 
+import Classes.SaleClass;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Indunil
  */
-public class LoginCheck extends HttpServlet {
+public class PayBuyItNow extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +34,6 @@ public class LoginCheck extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,39 +48,7 @@ public class LoginCheck extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        HttpSession session = request.getSession();
-        Cookie[] cookies = request.getCookies();
-        PrintWriter out = response.getWriter();
-
-        if (cookies != null) {
-            for (int c = 0; c < cookies.length; c++) {
-                if ("Login".equals(cookies[c].getName())) {
-                    session.setAttribute("Login", cookies[c].getValue());
-                }
-
-                if ("Username".equals(cookies[c].getName())) {
-                    session.setAttribute("Username", cookies[c].getValue());
-                }
-
-                if ("Login_Type".equals(cookies[c].getName())) {
-                    session.setAttribute("Login_Type", cookies[c].getValue());
-                }
-            }
-        }
-
-        if (session.getAttribute("Login") != null && "True".equalsIgnoreCase(session.getAttribute("Login").toString())) {
-            if (session.getAttribute("Username") != null) {
-                if (session.getAttribute("Login_Type") != null && "admin".equalsIgnoreCase(session.getAttribute("Login_Type").toString())) {
-                    response.sendRedirect("adminPanel/adminStartPage.jsp");
-                } else if (session.getAttribute("Login_Type") != null && "user".equalsIgnoreCase(session.getAttribute("Login_Type").toString())) {
-                    response.sendRedirect("Home.jsp");
-                }
-            }
-        } else {
-            response.sendRedirect("Login.jsp");
-        }       
-        
+        processRequest(request, response);
     }
 
     /**
@@ -92,7 +62,45 @@ public class LoginCheck extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+
+        HttpSession session = request.getSession();
+        PrintWriter out = response.getWriter();
+        
+        String username = null;
+
+        if (session.getAttribute("Username") != null) {
+            username = session.getAttribute("Username").toString();
+        } else {
+            response.sendRedirect("ClearAll");
+        }
+
+        String req = request.getParameter("submit");
+        int qty = Integer.parseInt(request.getParameter("Qty"));
+        int id = Integer.parseInt(request.getParameter("BookID"));
+        
+        if("Pay".equals(req)){
+            SaleClass sale= new SaleClass();
+            sale.setB_ID(id);
+            sale.setS_Qty(qty);
+            sale.setU_Name(username);
+            
+            try {
+                boolean x = sale.addItem();
+                
+                if(x==true){
+                    session.setAttribute("Info", "Order has been placed. Thank You!");
+                    response.sendRedirect("Home.jsp");
+                }else{
+                    session.setAttribute("Info", "Cannot place the order.");
+                    response.sendRedirect("Home.jsp");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PayBuyItNow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                        
+        }else{
+            response.sendRedirect("ViewMyProfile");
+        }
     }
 
     /**
@@ -105,5 +113,4 @@ public class LoginCheck extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    //this method returns true if Cookie exist according to provided name in provided cookie array, otherwise returns false
 }

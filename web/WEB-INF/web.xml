@@ -2,31 +2,31 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>Servleets.Login</servlet-class>
+        <servlet-class>Servlets.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginCheck</servlet-name>
-        <servlet-class>Servleets.LoginCheck</servlet-class>
+        <servlet-class>Servlets.LoginCheck</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ClearAll</servlet-name>
-        <servlet-class>Servleets.ClearAll</servlet-class>
+        <servlet-class>Servlets.ClearAll</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChkMessage</servlet-name>
-        <servlet-class>Servleets.ChkMessage</servlet-class>
+        <servlet-class>Servlets.ChkMessage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChkNotification</servlet-name>
-        <servlet-class>Servleets.ChkNotification</servlet-class>
+        <servlet-class>Servlets.ChkNotification</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChkCart</servlet-name>
-        <servlet-class>Servleets.ChkCart</servlet-class>
+        <servlet-class>Servlets.ChkCart</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SearchBook</servlet-name>
-        <servlet-class>Servleets.SearchBook</servlet-class>
+        <servlet-class>Servlets.SearchBook</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MyProfile</servlet-name>
@@ -34,51 +34,59 @@
     </servlet>
     <servlet>
         <servlet-name>SignOut</servlet-name>
-        <servlet-class>Servleets.SignOut</servlet-class>
+        <servlet-class>Servlets.SignOut</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Search</servlet-name>
-        <servlet-class>Servleets.Search</servlet-class>
+        <servlet-class>Servlets.Search</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Header</servlet-name>
-        <servlet-class>Servleets.Header</servlet-class>
+        <servlet-class>Servlets.Header</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LatestBooks</servlet-name>
-        <servlet-class>Servleets.LatestBooks</servlet-class>
+        <servlet-class>Servlets.LatestBooks</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChkSavedList</servlet-name>
-        <servlet-class>Servleets.ChkSavedList</servlet-class>
+        <servlet-class>Servlets.ChkSavedList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewMyProfile</servlet-name>
-        <servlet-class>Servleets.ViewMyProfile</servlet-class>
+        <servlet-class>Servlets.ViewMyProfile</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageMessages</servlet-name>
-        <servlet-class>Servleets.ManageMessages</servlet-class>
+        <servlet-class>Servlets.ManageMessages</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageCart</servlet-name>
-        <servlet-class>Servleets.ManageCart</servlet-class>
+        <servlet-class>Servlets.ManageCart</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageCheckout</servlet-name>
-        <servlet-class>Servleets.ManageCheckout</servlet-class>
+        <servlet-class>Servlets.ManageCheckout</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PayCart</servlet-name>
-        <servlet-class>Servleets.PayCart</servlet-class>
+        <servlet-class>Servlets.PayCart</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ManageProfile</servlet-name>
-        <servlet-class>Servleets.ManageProfile</servlet-class>
+        <servlet-class>Servlets.ManageProfile</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditProfile</servlet-name>
-        <servlet-class>Servleets.EditProfile</servlet-class>
+        <servlet-class>Servlets.EditProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuyItNow</servlet-name>
+        <servlet-class>Servlets.BuyItNow</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PayBuyItNow</servlet-name>
+        <servlet-class>Servlets.PayBuyItNow</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -159,6 +167,14 @@
     <servlet-mapping>
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/EditProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyItNow</servlet-name>
+        <url-pattern>/BuyItNow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PayBuyItNow</servlet-name>
+        <url-pattern>/PayBuyItNow</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

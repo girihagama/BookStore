@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
+package Servlets;
 
-import Classes.UserClass;
+import Classes.MessagesClass;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Indunil
  */
-public class ManageCheckout extends HttpServlet {
+public class ChkMessage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,7 +37,6 @@ public class ManageCheckout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,7 +51,31 @@ public class ManageCheckout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        MessagesClass x = new MessagesClass();
+
+        if (session.getAttribute("Username") != null) {
+            try {
+                String user = session.getAttribute("Username").toString();
+                x.setU_Name(user);
+
+                ArrayList unreaded = x.unreadedMessages();
+                ArrayList readed = x.readeddMessages();
+
+                request.setAttribute("unreaded", unreaded);
+                request.setAttribute("readed", readed);
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(ChkMessage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            response.sendRedirect("Login.jsp");
+        }
+
+        RequestDispatcher rd = request.getRequestDispatcher("Messages.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -66,30 +89,7 @@ public class ManageCheckout extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserClass user = new UserClass();
-        HttpSession session = request.getSession();
-        String username = null;
-
-        if (session.getAttribute("Username") != null) {
-            username = session.getAttribute("Username").toString();
-        } else {
-            response.sendRedirect("Login.jsp");
-        }
-
-        if (username != null) {
-            try {
-                user.setU_Name(username);
-                ArrayList userinfo = user.loadUser();
-                request.setAttribute("userinfo", userinfo);
-            } catch (SQLException ex) {
-                Logger.getLogger(ManageCheckout.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            RequestDispatcher rd = request.getRequestDispatcher("CompleteCheckout.jsp");
-            rd.forward(request, response);
-        } else {
-            response.sendRedirect("Login.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -1,18 +1,14 @@
+package Servlets;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
-
-import Classes.BookClass;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Indunil
  */
-public class LatestBooks extends HttpServlet {
+public class ClearAll extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +31,6 @@ public class LatestBooks extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,19 +45,25 @@ public class LatestBooks extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            HttpSession session = request.getSession();
-            BookClass book = new BookClass();
-            ArrayList latest = book.latestBooks();
 
-            request.setAttribute("LatestItems", latest);
-            RequestDispatcher rd = request.getRequestDispatcher("latestItems.jsp");
-            rd.forward(request, response);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(LatestBooks.class.getName()).log(Level.SEVERE, null, ex);
+        /*This Servlet Clears all Sessions & Cookies*/
+        //removing all sessions
+        HttpSession session = request.getSession();
+        session.invalidate();
+
+        PrintWriter out = response.getWriter();
+        out.print("<h1>All Sessions Removed!</h1>");
+
+        //removing all cookies
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
         }
 
+        out.print("<h1>All Cooikes Removed!</h1>");
+        
+        response.sendRedirect("index.jsp");
     }
 
     /**

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
+package Servlets;
 
-import Classes.MessagesClass;
+import Classes.UserClass;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Indunil
  */
-public class ChkMessage extends HttpServlet {
+public class ViewMyProfile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,6 +37,7 @@ public class ChkMessage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,31 +52,29 @@ public class ChkMessage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            PrintWriter out = response.getWriter();
+            HttpSession session = request.getSession();
+            UserClass usr = new UserClass();
+            String username = null;
+            ArrayList user = null;
 
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        MessagesClass x = new MessagesClass();
-
-        if (session.getAttribute("Username") != null) {
-            try {
-                String user = session.getAttribute("Username").toString();
-                x.setU_Name(user);
-
-                ArrayList unreaded = x.unreadedMessages();
-                ArrayList readed = x.readeddMessages();
-
-                request.setAttribute("unreaded", unreaded);
-                request.setAttribute("readed", readed);
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(ChkMessage.class.getName()).log(Level.SEVERE, null, ex);
+            if (session.getAttribute("Username") != null) {
+                username = session.getAttribute("Username").toString();
+            } else {
+                response.sendRedirect("Login.jsp");
             }
-        } else {
-            response.sendRedirect("Login.jsp");
-        }
 
-        RequestDispatcher rd = request.getRequestDispatcher("Messages.jsp");
-        rd.forward(request, response);
+            usr.setU_Name(username);
+            user = usr.loadUser();
+
+            request.setAttribute("ViewUserProfile", user);
+
+            RequestDispatcher rd = request.getRequestDispatcher("ViewMyProfile.jsp");
+            rd.forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewMyProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -89,7 +88,7 @@ public class ChkMessage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**

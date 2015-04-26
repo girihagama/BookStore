@@ -85,6 +85,10 @@
                     if (user.getU_TPN() == null || user.getU_TPN() == "null") {
                         user.setU_TPN("Not Yet Added");
                     }
+                    
+                    if (user.getU_CardNo() == null || user.getU_CardNo() == "null") {
+                        user.setU_CardNo("Not Yet Added");
+                    }
 
                     out.println("<form method='POST' action='ManageProfile' onsubmit='return Confirm();'>"
                             + "<div class='row clearfix'>"
@@ -99,6 +103,7 @@
                             + "<div class='col-md-12'>"
                             + "<div class='panel panel-default'>"
                             + "<div class='panel-body'>Email : " + user.getU_Mail() + "</div>"
+                            + "<div class='panel-body'>Card Number : " + user.getU_CardNo() + "</div>"
                             + "<div class='panel-body'>Address : " + address + "</div>"
                             + "<div class='panel-body'>Contact Number : " + user.getU_TPN() + "</div>"
                             + "<div class='panel-body'>Member Since : " + user.getU_RegDate() + "</div>"

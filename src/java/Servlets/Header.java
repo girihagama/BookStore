@@ -3,27 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servleets;
+package Servlets;
 
-import Classes.CartClass;
-import Classes.SaleClass;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Indunil
  */
-public class PayCart extends HttpServlet {
+public class Header extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,7 +45,33 @@ public class PayCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+//
+//        PrintWriter out = response.getWriter();
+//        HttpSession session = request.getSession();
+//        String username = null;
+//
+//        try {
+//            if (session.getAttribute("Login") != null && session.getAttribute("Login").toString() == "True") {
+//
+//                if (session.getAttribute("Username") != null) {
+//                    username = session.getAttribute("Username").toString();
+//                } else {
+//                    response.sendRedirect("Login.jsp");
+//                }
+//
+//                UserClass x = new UserClass();
+//
+//                if (x.chkUserName(username)) {
+//                    session.setAttribute("Username", username);
+//                } else {
+//                    response.sendRedirect("Login.jsp");
+//                }                
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(Header.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        RequestDispatcher rd = request.getRequestDispatcher("header.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -66,47 +85,7 @@ public class PayCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try {
-            HttpSession session = request.getSession();
-            String username = null;
-
-            if (session.getAttribute("Username") != null) {
-                username = session.getAttribute("Username").toString();
-            } else {
-                response.sendRedirect("Login.jsp");
-            }
-
-            PrintWriter out = response.getWriter();
-            String req = request.getParameter("submit");
-            ArrayList cart = null;
-            CartClass crt = new CartClass();
-            SaleClass sl = new SaleClass();
-
-            if ("pay".equals(req)) {
-
-                crt.setU_Name(username);
-                cart = crt.loadCart();
-
-                for(int i=0;i<cart.size();i++){
-                    crt = (CartClass) cart.get(i); 
-                    
-                    sl.setB_ID(crt.getB_ID());
-                    sl.setS_Qty(crt.getC_Qty());
-                    sl.setU_Name(crt.getU_Name());
-
-                    sl.addItem();
-                    crt.removeItem();
-                }                
-
-                session.setAttribute("Info", "Payment Completed");
-                response.sendRedirect("Home.jsp");                
-            } else if ("editAddress".equals(req) || "editCard".equals(req)) {
-                response.sendRedirect("ViewMyProfile");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PayCart.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //processRequest(request, response);
     }
 
     /**
