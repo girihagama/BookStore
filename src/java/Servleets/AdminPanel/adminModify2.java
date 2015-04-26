@@ -81,32 +81,20 @@ public class adminModify2 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          String warningMsg=null;
         String oldAdminName=request.getParameter("oldName");
-        String newAdminName=request.getParameter("changedName");
-        String newAdminMail=request.getParameter("changedEmail");
-        String newAdminTPN=request.getParameter("changedTPN");
-        String newAdminAdd1=request.getParameter("add1");
-        String newAdminAdd2=request.getParameter("add2");
-        String newAdminAdd3=request.getParameter("add3");
         String newAdminLevel=request.getParameter("changedLevel");
         
         UserClass admin = new UserClass();
         //set values to user class variables
         admin.setA_Level(newAdminLevel);
-        admin.setU_Mail(newAdminMail);
-        admin.setU_Name(newAdminName);
-        admin.setU_TPN(newAdminTPN);
-        admin.setU_addLine1(newAdminAdd1);
-        admin.setU_addLine2(newAdminAdd2);
-        admin.setU_addLine3(newAdminAdd3);
         //----------
         
-        int result=admin.modifyAdmin(oldAdminName);
+        int result=admin.modifyAdminLevel(oldAdminName);
         
         if(result==1){
-            warningMsg=oldAdminName+ " is modified successfully";
+            warningMsg=oldAdminName.toUpperCase()+ "'s admin level is modified successfully";
         }
         else{
-            warningMsg=oldAdminName+ " is not modified due to an error. Please try again";
+            warningMsg=oldAdminName.toUpperCase()+ "'s admin level is not modified due to an error. Please try again";
         }
         
         request.setAttribute("msg", warningMsg);

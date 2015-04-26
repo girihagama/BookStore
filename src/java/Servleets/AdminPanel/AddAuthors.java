@@ -96,7 +96,6 @@ public class AddAuthors extends HttpServlet {
         }
         String backUrl = request.getParameter("back");
         request.setAttribute("msg", warningMsg);
-        request.setAttribute("action", "AddAuthors");
         RequestDispatcher rd;
         System.out.println(backUrl);
         if ("http://localhost:8080/BookStore/adminPanel/addBook.jsp".equals(backUrl)||"http://localhost:8080/BookStore/AddAuthors".equals(backUrl)) {

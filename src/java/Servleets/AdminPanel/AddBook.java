@@ -139,7 +139,6 @@ public class AddBook extends HttpServlet {
         }
         
         request.setAttribute("msg", warningMsg);
-        request.setAttribute("action", "AddBook");
         RequestDispatcher rd = request.getRequestDispatcher("adminPanel/addBook.jsp");
         rd.include(request, response);
     }

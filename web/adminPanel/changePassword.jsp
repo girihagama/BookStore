@@ -42,7 +42,8 @@
 
         <%}%>
         <div class="container" style="background-color:#F5F5F0">
-            <%@include file="HeaderFiles/accountHeader.jsp"%>           
+            <%@include file="HeaderFiles/accountHeader.jsp"%>
+            
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -63,7 +64,7 @@
                 <%--Form--%>
                 <%
                     UserClass admin = new UserClass();
-                    admin.setU_Name("dushara vitiyala");
+                    admin.setU_Name(username);
                     admin.getUserDetails();
                 %>
                 <div class="col-lg-9">

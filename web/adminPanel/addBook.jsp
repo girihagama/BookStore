@@ -44,15 +44,13 @@
         <script>
             history.forward()
         </script>
-
         <%}%>
-
-        <%--for authentication--%>
-        <%! String level = "L1";%>
-        <%-- ------------ --%>
-
+        
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/bookHeader.jsp"%> 
+            <%--for authentication--%>
+            <%! String level = adminLevel;%>
+            <%-- ------------ --%>
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -85,8 +83,8 @@
                         } else {%>
                     <br><%}%>
                     <br>                 
-                    <form id="AddForm"<%if (request.getAttribute("action") != null) {%>
-                          action="<%=request.getAttribute("action")%>"<%} else {%>
+                    <form id="AddForm"<%if (request.getAttribute("msg") != null) {%>
+                          action="AddBook"<%} else {%>
                           action="../AddBook"<%}%>
                           method="POST" enctype="multipart/form-data">
                         <div id ="orange">
@@ -275,7 +273,7 @@
                                 validators: {
                                     file: {
                                         extension: 'jpg',
-                                        maxSize: 1024 * 1024*2,
+                                        maxSize: 1024 * 1024 * 2,
                                         message: 'Please choose jpeg image with a size less than 2M.'
                                     }
                                 }

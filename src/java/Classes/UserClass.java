@@ -635,7 +635,26 @@ public class UserClass {
 
         return arrayList;
     }
+    public void getAdminLevel(String username){
+         PreparedStatement pstmt;
+        DbClass db = new DbClass();
+         if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("select admin_Level from user where u_Name = ? ");
+                pstmt.setString(1,username);
 
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    this.a_Level=rs.getString("admin_Level");
+                }
+                pstmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
+    }
     public int modifyAdminLevel(String oldAdminName) {
         PreparedStatement pstmt;
         DbClass db = new DbClass();

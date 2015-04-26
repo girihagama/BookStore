@@ -64,7 +64,7 @@
                 <%--Form--%>
                 <%
                     UserClass admin = new UserClass();
-                    admin.setU_Name("dushara vitiyala");
+                    admin.setU_Name(username);
                     admin.getUserDetails();
                 %>
                 <div class="col-lg-9">

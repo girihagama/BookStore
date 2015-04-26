@@ -11,7 +11,7 @@
     <head>
         <link rel="icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" type="image/x-icon" />
         <link rel="shortcut icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.ico" type="image/ico" />
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
 
@@ -28,31 +28,31 @@
         <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
-        
-        
+
+
         <title>Admin Panel - Add Authors</title>
-        
+
     </head>
     <body>
-        <%--for authentication--%>
-        <%! String level = "L2";%>
-        <%-- ------------ --%>
-         <% if(request.getHeader("Referer").length()<42){%>
-           <script>
-                history.forward()
+        <% if (request.getHeader("Referer").length() < 42) {%>
+        <script>
+            history.forward()
         </script> 
-        <%} else
-            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
-            <script>
-                history.forward()
+        <%} else if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
+        <script>
+            history.forward()
         </script>
-            
+
         <%}%>
-        <%! String backSite=null;%>
-        <% backSite=request.getHeader("Referer");%>
-        
-         <div class="container" style="background-color:#F5F5F0">
+        <%! String backSite = null;%>
+        <% backSite = request.getHeader("Referer");%>
+
+        <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/authorHeader.jsp"%>
+
+            <%--for authentication--%>
+            <%! String level = adminLevel;%>
+            <%-- ------------ --%>
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -60,9 +60,9 @@
                         <li role="presentation" class="text_box" style="padding: 0px; text-align: left;">Authors</li>
                         <li>
                             <div id="topmenu">
-                            <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation" class="active"><a href="#">Add Author</a></li>
-                                <%if ("L3".equals(level)) {%>
+                                <ul class="nav nav-pills nav-stacked topmenu">
+                                    <li role="presentation" class="active"><a href="#">Add Author</a></li>
+                                        <%if ("L3".equals(level)) {%>
                                     <li role="presentation"><a href="" data-toggle="modal" data-target="#Modify" data-backdrop="static"><font style="color: orange">Modify Author</font></a></li>
                                             <%} else {%>
                                     <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifyAuthors.jsp"><font style="color: orange">Modify Author</font></a></li><%}%>
@@ -70,23 +70,23 @@
                                     <li role="presentation"><a href="" data-toggle="modal" data-target="#remove" data-backdrop="static"><font style="color: orange">Remove Author</font></a></li>
                                             <%} else {%>
                                     <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/removeAuthors.jsp"><font style="color: orange">Remove Author</font></a></li><%}%>
-                            </ul>
+                                </ul>
                             </div>
                         </li>
                     </ul>  
                 </div>
                 <div class="col-lg-1">&nbsp;</div>
                 <%--left side navigation end--%>
-                
+
                 <%--Form--%>
                 <div class="col-lg-9">
-                  <% if (request.getAttribute("msg") != null) {
+                    <% if (request.getAttribute("msg") != null) {
                     %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
-                            } else {%>
+                    } else {%>
                     <br><%}%>
                     <br>                                     
-                    <form id="AddForm" <%if (request.getAttribute("action") != null) {%>
-                          action="<%=request.getAttribute("action")%>"<%} else {%>
+                    <form id="AddForm" <%if (request.getAttribute("msg") != null) {%>
+                          action="AddAuthors"<%} else {%>
                           action="../AddAuthors"<%}%>
                           method="POST">
                         <div id ="orange">
@@ -97,7 +97,7 @@
                                        value="<%=request.getAttribute("errorAuthorName")%>"<%}%>>                                       
                             </div>
                         </div>
-                
+
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Date of Birth</label>
@@ -129,36 +129,36 @@
                                     <div class="col-lg-2">
                                         <select class="form-control" placeholder="Select year" name="date">
                                             <option disabled selected value="0">Date</option>
-                                            <% 
-                                                for (int i = 0; i <31; i++) {%><option><%=i+1%></option><%}%>
+                                            <%
+                                                for (int i = 0; i < 31; i++) {%><option><%=i + 1%></option><%}%>
                                         </select>
                                     </div>
-                                        
+
                                 </div>                            
                             </div>
                         </div> 
-                           <div id ="orange">
+                        <div id ="orange">
                             <div class="form-group orange">
                                 <label>Author Description</label>
                                 <textarea class="form-control" rows="3" placeholder="Enter Description" name="authorDesc"
-                                             <%if (request.getAttribute("errorDesc") != null) {%>
-                                               value="<%=request.getAttribute("errorDesc")%>"<%}%>>                                   
+                                          <%if (request.getAttribute("errorDesc") != null) {%>
+                                          value="<%=request.getAttribute("errorDesc")%>"<%}%>>                                   
                                 </textarea>
                             </div>
                         </div>
-                                <input type ="hidden" name="back" value="<%=backSite%>">
+                        <input type ="hidden" name="back" value="<%=backSite%>">
                         <tbody>
-                                <tr>
-                                    <td><label><button type="submit" class="btn btn-default">Add Author</button></label></td>
-                                    <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminStartPage.jsp" role="button">Cancel</a></label></td>
-                                    <td></td>
-                                </tr>
+                            <tr>
+                                <td><label><button type="submit" class="btn btn-default">Add Author</button></label></td>
+                                <td><label> <a class="btn btn-default" href="http://localhost:8080/BookStore/adminPanel/adminStartPage.jsp" role="button">Cancel</a></label></td>
+                                <td></td>
+                            </tr>
                         </tbody>  
                     </form>
                 </div>
             </div>
             <%--Form end--%>
-             <%-- remove box--%>
+            <%-- remove box--%>
             <div class="modal fade" id="remove" role="dialog" aria-hidden="false">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -209,7 +209,6 @@
                                     }
                                 }
                             },
-
                         }
                     });
                 });
@@ -227,6 +226,6 @@
                 <ol class="breadcrumb" style="background-color:#FF9933">
                 </ol>
             </div> 
-         </div>
+        </div>
     </body>
 </html>

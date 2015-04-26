@@ -10,7 +10,7 @@
     <head>
         <link rel="icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" type="image/x-icon" />
         <link rel="shortcut icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.ico" type="image/ico" />
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
 
@@ -30,24 +30,23 @@
         <title>Admin Panel - Add Suppliers</title>
     </head>
     <body>
-        <%--for authentication--%>
-        <%! String level = "L2";%>
-        <%-- ------------ --%>
-        <% if(request.getHeader("Referer").length()<42){%>
-           <script>
-                history.forward()
+        <% if (request.getHeader("Referer").length() < 42) {%>
+        <script>
+            history.forward()
         </script> 
-        <%} else
-            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
-            <script>
-                history.forward()
+        <%} else if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
+        <script>
+            history.forward()
         </script>
-            
+
         <%}%>
         <%! String backSite = null;%>
         <% backSite = request.getHeader("Referer");%>
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/suppliersHeader.jsp"%> 
+            <%--for authentication--%>
+            <%! String level = adminLevel;%>
+            <%-- ------------ --%>
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -57,7 +56,7 @@
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
                                     <li role="presentation" class="active"><a href="#">Add Supplier</a></li>
-                                    <%if ("L3".equals(level)) {%>
+                                        <%if ("L3".equals(level)) {%>
                                     <li role="presentation"><a href="" data-toggle="modal" data-target="#Modify" data-backdrop="static"><font style="color: orange">Modify Supplier</font></a></li>
                                             <%} else {%>
                                     <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifySuppliers.jsp"><font style="color: orange">Modify Supplier</font></a></li><%}%>
@@ -77,7 +76,7 @@
                 <div class="col-lg-9">
                     <% if (request.getAttribute("msg") != null) {
                     %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
-                        } else {%>
+                    } else {%>
                     <br><%}%>
                     <br>
                     <form id="AddForm"<%if (request.getAttribute("action") != null) {%>
@@ -96,10 +95,10 @@
                                 <label>Supplier Contact Number</label>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                <input type="text" class="form-control" name="addSupplierContactNO" placeholder="Enter Contact Number" 
-                                       <%if (request.getAttribute("errorSupplierNO") != null) {%>
-                                       value="<%=request.getAttribute("errorSupplierNO")%>"<%}%>
-                                       required="required" pattern="^(\d{10}||\d{13})?$">
+                                        <input type="text" class="form-control" name="addSupplierContactNO" placeholder="Enter Contact Number" 
+                                               <%if (request.getAttribute("errorSupplierNO") != null) {%>
+                                               value="<%=request.getAttribute("errorSupplierNO")%>"<%}%>
+                                               required="required" pattern="^(\d{10}||\d{13})?$">
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +138,7 @@
                 </div>
             </div>
             <%--Form end--%>
-            
+
             <%-- remove box--%>
             <div class="modal fade" id="remove" role="dialog" aria-hidden="false">
                 <div class="modal-dialog">
@@ -179,7 +178,7 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-            
+
             <script type="text/javascript">
                 $(document).ready(function() {
                     var validator = $("#AddForm").bootstrapValidator({

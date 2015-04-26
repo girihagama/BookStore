@@ -13,7 +13,7 @@
     <head>
         <link rel="icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" type="image/x-icon" />
         <link rel="shortcut icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.ico" type="image/ico" />
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
 
@@ -33,23 +33,22 @@
         <title>Admin Panel - Admin Details</title>
     </head>
     <body>
-        <% if(request.getHeader("Referer").length()<42){%>
-           <script>
-                history.forward()
+        <% if (request.getHeader("Referer").length() < 42) {%>
+        <script>
+            history.forward()
         </script> 
-        <%} else
-            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
-            <script>
-                history.forward()
+        <%} else if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
+        <script>
+            history.forward()
         </script>
-            
+
         <%}%>
-        <%--for authentication--%>
-        <%! String level="L1";%>
-        <%-- ------------ --%>
-        
+
         <div class="container" style="background-color:#F5F5F0">
-            <%@include file="HeaderFiles/admiinHeader.jsp"%>           
+            <%@include file="HeaderFiles/admiinHeader.jsp"%> 
+            <%--for authentication--%>
+            <%! String level = adminLevel;%>
+            <%-- ------------ --%>          
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -59,11 +58,11 @@
                             <div id="topmenu">
                                 <ul class="nav nav-pills nav-stacked topmenu">
                                     <li role="presentation" class="active"><a href="#">Admin Details</a></li>
-                                        <%if(!"L1".equals(level)){%>
+                                        <%if (!"L1".equals(level)) {%>
                                     <li role="presentation"><a href="" data-toggle="modal" data-target="#Add" data-backdrop="static"><font style="color: orange">Add Admin</font></a></li>
-                                        <%}else{%>
+                                            <%} else {%>
                                     <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/addAdmin.jsp"><font style="color: orange">Add Admin</font></a></li><%}%>
-                                            
+
                                     <li>&nbsp;</li>
                                     <li>&nbsp;</li>
                                     <li>&nbsp;</li>
@@ -79,7 +78,7 @@
                     <% if (request.getAttribute("msg") != null) {
                     %><div class="row">
                         <div class="col-lg-9">
-                    <br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div>
+                            <br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div>
                         </div>
                     </div><%
                         }%>
@@ -134,8 +133,8 @@
                                     <div class="col-lg-6">
                                         <input type="hidden" name="adminName" value="<%=adminName%>">
                                         <button 
-                                            <%if(!"L1".equals(level)){%>type="button" data-toggle="modal" data-target="#Modify" data-backdrop="static"<%}else{%>type="submit"<%}%>
-                                             class="btn btn-default">Change Admin Level</button> &nbsp;&nbsp;&nbsp;
+                                            <%if (!"L1".equals(level)) {%>type="button" data-toggle="modal" data-target="#Modify" data-backdrop="static"<%} else {%>type="submit"<%}%>
+                                            class="btn btn-default">Change Admin Level</button> &nbsp;&nbsp;&nbsp;
                                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#remove" data-whatever="<%=adminName%>" data-backdrop="static">Remove</button>
                                     </div>
                                 </div>
@@ -148,7 +147,7 @@
                             %>
                         </div>
                     </div>
-                    
+
                     <%-- add box--%>
                     <div class="modal fade" id="Add" role="dialog" aria-hidden="false">
                         <div class="modal-dialog">
@@ -157,18 +156,18 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h2 class="modal-title"><strong>Sorry...!</strong></h2>
                                 </div>
-                                    <div class="modal-body">
-                                        <h4><p>You have no authentication for add admins.</p></h4>                                        
+                                <div class="modal-body">
+                                    <h4><p>You have no authentication for add admins.</p></h4>                                        
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="span2">
+                                        <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
                                     </div>
-                                    <div class="modal-footer">
-                                        <div class="span2">
-                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
-                                        </div>
-                                    </div>
+                                </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
-                    
+
                     <%-- modify box--%>
                     <div class="modal fade" id="Modify" role="dialog" aria-hidden="false">
                         <div class="modal-dialog">
@@ -177,22 +176,22 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h2 class="modal-title"><strong>Sorry...!</strong></h2>
                                 </div>
-                                    <div class="modal-body">
-                                        <h4><p>You have no authentication for modify admins.</p></h4>                                        
+                                <div class="modal-body">
+                                    <h4><p>You have no authentication for modify admins.</p></h4>                                        
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="span2">
+                                        <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
                                     </div>
-                                    <div class="modal-footer">
-                                        <div class="span2">
-                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
-                                        </div>
-                                    </div>
+                                </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
-                    
+
                     <%-- remove box--%>
                     <div class="modal fade" id="remove" role="dialog" aria-hidden="false">
                         <div class="modal-dialog">
-                            <%if("L1".equals(level)){%>
+                            <%if ("L1".equals(level)) {%>
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -219,20 +218,20 @@
                                     </div>
                                 </form>
                             </div><!-- /.modal-content -->
-                            <%}else{%>
+                            <%} else {%>
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h2 class="modal-title"><strong>Sorry...!</strong></h2>
                                 </div>
-                                    <div class="modal-body">
-                                        <h4><p>You have no authentication for remove admins.</p></h4>                                        
+                                <div class="modal-body">
+                                    <h4><p>You have no authentication for remove admins.</p></h4>                                        
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="span2">
+                                        <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
                                     </div>
-                                    <div class="modal-footer">
-                                        <div class="span2">
-                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
-                                        </div>
-                                    </div>
+                                </div>
                             </div><%}%>
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
@@ -293,11 +292,11 @@
                     &nbsp;
                 </div>
             </div>
-                <div class="row" >
-                    <ol class="breadcrumb" style="background-color:#FF9933">
-                    </ol>
-                </div> 
-            </div>
+            <div class="row" >
+                <ol class="breadcrumb" style="background-color:#FF9933">
+                </ol>
+            </div> 
         </div>
-    </body>
+    </div>
+</body>
 </html>
