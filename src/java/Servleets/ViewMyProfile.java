@@ -5,12 +5,19 @@
  */
 package Servleets;
 
+import Classes.UserClass;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,18 +37,7 @@ public class ViewMyProfile extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ViewMyProfile</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ViewMyProfile at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,7 +52,30 @@ public class ViewMyProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            PrintWriter out = response.getWriter();
+            HttpSession session = request.getSession();
+            UserClass usr = new UserClass();
+            String username = null;
+            ArrayList user = null;
+
+            if (session.getAttribute("Username") != null) {
+                username = session.getAttribute("Username").toString();
+                out.print(username);
+            } else {
+                response.sendRedirect("Login.jsp");
+            }
+
+            usr.setU_Name(username);
+            user = usr.loadUser();
+
+            request.setAttribute("ViewUserProfile", user);
+
+            RequestDispatcher rd = request.getRequestDispatcher("ViewMyProfile.jsp");
+            rd.forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewMyProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -70,7 +89,7 @@ public class ViewMyProfile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**

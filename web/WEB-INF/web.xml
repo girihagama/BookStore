@@ -72,6 +72,14 @@
         <servlet-name>PayCart</servlet-name>
         <servlet-class>Servleets.PayCart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageProfile</servlet-name>
+        <servlet-class>Servleets.ManageProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfile</servlet-name>
+        <servlet-class>Servleets.EditProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -143,6 +151,14 @@
     <servlet-mapping>
         <servlet-name>PayCart</servlet-name>
         <url-pattern>/PayCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageProfile</servlet-name>
+        <url-pattern>/ManageProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfile</servlet-name>
+        <url-pattern>/EditProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

@@ -6,6 +6,8 @@
 package Classes;
 
 import com.mysql.jdbc.Statement;
+import java.io.InputStream;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class UserClass {
     private String u_addLine3;
     private String u_CardNo;
     private byte[] u_Image;
+    private InputStream u_ImageInput;
 
     /**
      * @return the u_Name
@@ -62,6 +65,20 @@ public class UserClass {
      */
     public void setU_Pass(String u_Pass) {
         this.u_Pass = u_Pass;
+    }
+
+    /**
+     * @return the u_ImageInput
+     */
+    public InputStream getU_ImageInput() {
+        return u_ImageInput;
+    }
+
+    /**
+     * @param u_ImageInput the u_ImageInput to set
+     */
+    public void setU_ImageInput(InputStream u_ImageInput) {
+        this.u_ImageInput = u_ImageInput;
     }
 
     /**
@@ -412,8 +429,11 @@ public class UserClass {
                 user.setU_addLine2(rs.getString("u_addLine2"));
                 user.setU_addLine3(rs.getString("u_addLine3"));
                 user.setU_CardNo(rs.getString("u_CardNo"));
-                if (rs.getBlob("u_image")!=null) {
+
+                if (rs.getBlob("u_image") != null) {
                     user.setU_Image(ex.getBytes(rs.getBlob("u_image")));
+                } else {
+                    user.setU_Image(null);
                 }
                 arrayList.add(user);
             }
@@ -426,5 +446,85 @@ public class UserClass {
         }
 
         return arrayList;
+    }
+
+    public boolean deactivateAccount() throws SQLException {
+        boolean x = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "Delete FROM user WHERE u_name='" + getU_Name() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            int res = stmt.executeUpdate(query);
+
+            if (res == 1) {
+                x = true;
+            }
+
+            db.endConnection();
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return x;
+    }
+
+    public boolean editProfile() throws SQLException {
+        boolean x = false;
+
+        try {
+            db.getConnection();
+
+            if (getU_ImageInput() != null) {
+                String query;
+                query = "UPDATE user SET u_image=?, u_Mail=?, u_TPN=?, u_CardNo=?, u_addLine1=?, u_addLine2=?, u_addLine3=? where u_name='" + getU_Name() + "'";
+
+                PreparedStatement stmt = db.conn.prepareStatement(query);
+                stmt.setBlob(1, getU_ImageInput());
+                stmt.setString(2, getU_Mail());
+                stmt.setString(3, getU_TPN());
+                stmt.setString(4, getU_CardNo());
+                stmt.setString(5, getU_addLine1());
+                stmt.setString(6, getU_addLine2());
+                stmt.setString(7, getU_addLine3());
+
+                int res = stmt.executeUpdate();
+
+                if (res == 1) {
+                    x = true;
+                }
+            } else {
+                String query;
+                query = "UPDATE user SET u_Mail=?, u_TPN=?, u_CardNo=?, u_addLine1=?, u_addLine2=?, u_addLine3=? where u_name='" + getU_Name() + "'";
+
+                PreparedStatement stmt = db.conn.prepareStatement(query);
+                stmt.setString(1, getU_Mail());
+                stmt.setString(2, getU_TPN());
+                stmt.setString(3, getU_CardNo());
+                stmt.setString(4, getU_addLine1());
+                stmt.setString(5, getU_addLine2());
+                stmt.setString(6, getU_addLine3());
+
+                int res = stmt.executeUpdate();
+
+                if (res == 1) {
+                    x = true;
+                }
+            }
+
+            db.endConnection();
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return x;
     }
 }

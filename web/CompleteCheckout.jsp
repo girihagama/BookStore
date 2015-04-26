@@ -74,10 +74,9 @@
         if (usr.getU_addLine3() == null || usr.getU_addLine3() == "null") {
             usr.setU_addLine3("");
         }
-
         if (usr.getU_CardNo().length() != 16) {
             session.setAttribute("Info", "Invalid card number");
-            response.sendRedirect("EditProfile");
+            response.sendRedirect("ViewMyProfile");
         }
     %>
     <body>

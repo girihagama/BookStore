@@ -130,5 +130,7 @@
             </div>
             <br/>
         </body>
+    
     <jsp:include page='footer.jsp'></jsp:include>
+    
 </html>

@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Indunil
  */
-public class MyProfile extends HttpServlet {
+public class ManageProfile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,25 +52,26 @@ public class MyProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
-            PrintWriter out = response.getWriter();
-            
             HttpSession session = request.getSession();
-            String user = session.getAttribute("Username").toString();
-            
-            UserClass x = new UserClass();
-            
-            x.setU_Name(user);
-            
-            ArrayList profile = x.loadProfile();
-            
-            request.setAttribute("MyProfile", profile);
-            RequestDispatcher rd = request.getRequestDispatcher("viewprofile.jsp");        
+            UserClass user = new UserClass();
+            String username = null;
+
+            if (session.getAttribute("Username") != null) {
+                username = session.getAttribute("Username").toString();
+            } else {
+                response.sendRedirect("Login.jsp");
+            }
+
+            ArrayList editInfo = user.loadUser();
+            request.setAttribute("editInfo", editInfo);
+
+            RequestDispatcher rd = request.getRequestDispatcher("EditProfile.jsp");
             rd.forward(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(MyProfile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManageProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /**
@@ -83,7 +85,40 @@ public class MyProfile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        try {
+            HttpSession session = request.getSession();
+            UserClass user = new UserClass();
+            String username = null;
+
+            if (session.getAttribute("Username") != null) {
+                username = session.getAttribute("Username").toString();
+            } else {
+                response.sendRedirect("Login.jsp");
+            }
+
+            PrintWriter out = response.getWriter();
+            String req = request.getParameter("submit");
+
+            if ("Edit".equals(req)) {
+                user.setU_Name(username);
+                ArrayList editInfo = user.loadUser();
+                request.setAttribute("editInfo", editInfo);
+
+                RequestDispatcher rd = request.getRequestDispatcher("EditProfile.jsp");
+                rd.forward(request, response);
+            } else if ("Deactivate".equals(req)) {
+                user.setU_Name(username);
+                boolean res = user.deactivateAccount();
+
+                if (res == true || res == false) {
+                    out.print("<h1 style='font-family:calibri;'>Please Close The Browser</h1>");
+                    response.sendRedirect("ClearAll");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ManageProfile.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

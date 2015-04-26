@@ -109,7 +109,7 @@
                             </li>
 
                             <li>
-                                <a href="MyProfile">
+                                <a href="ViewMyProfile">
                                     <span class="glyphicon glyphicon-user"></span>                                    
                                     <font style="font-family: calibri;"><%= user.toUpperCase()%></font>
                                 </a>                          

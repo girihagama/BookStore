@@ -62,6 +62,8 @@ public class ClearAll extends HttpServlet {
         }
 
         out.print("<h1>All Cooikes Removed!</h1>");
+        
+        response.sendRedirect("index.jsp");
     }
 
     /**
