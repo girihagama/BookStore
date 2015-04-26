@@ -7,8 +7,8 @@
 <%@include file="userNameAndAdminLeve.jsp"%> 
 <div class="row"><div class="col-md-10">&nbsp;</div></div>
 <div class="row">
-    <div class="col-md-10"></div>
-    <div class="col-md-2">
+    <div class="col-md-9"></div>
+    <div class="col-md-3" style="text-align: right">
         <!-- Split button -->
         <div class="btn-group">
             <button type="button" class="btn btn-warning"><%=username%></button>

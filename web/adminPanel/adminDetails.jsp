@@ -47,7 +47,8 @@
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/admiinHeader.jsp"%> 
             <%--for authentication--%>
-            <%! String level = adminLevel;%>
+            <%!String level;%>
+            <% level = adminLevel;%>
             <%-- ------------ --%>          
             <div class="row">
                 <%--left side navigation--%>
@@ -88,7 +89,7 @@
 
                             <%! ResultSet result;%>
                             <%! String adminDetails;%>
-                            <%! String adminLevel;%>
+                            <%! String adminLevelForResult;%>
                             <%! String adminName;%>
 
                             <%
@@ -102,17 +103,17 @@
                                                 + "<br> Have authority to add, modify and remove books, authors and suppliers."
                                                 + "<br> Have authority to add books copies."
                                                 + "<br> Have authority to manage clients and orders.";
-                                        adminLevel = "Level 1 admin";
+                                        adminLevelForResult = "Level 1 admin";
                                     } else if ("L2".equalsIgnoreCase(result.getString("admin_Level"))) {
                                         adminDetails = "Have authority to add, modify and remove books, authors and suppliers."
                                                 + "<br>Have authority to add books copies."
                                                 + "<br>Have authority to manage clients and orders.";
-                                        adminLevel = "Level 2 admin";
+                                        adminLevelForResult = "Level 2 admin";
                                     } else if ("L3".equalsIgnoreCase(result.getString("admin_Level"))) {
                                         adminDetails = "Have authority to only add books, authors and suppliers."
                                                 + "<br>Have authority to add books copies."
                                                 + "<br>Have authority to manage clients and orders.";
-                                        adminLevel = "Level 3 admin";
+                                        adminLevelForResult = "Level 3 admin";
                                     }
                             %>
                             <form <%if (request.getAttribute("msg") != null) {%>
@@ -121,7 +122,7 @@
                                 <table border="0">
                                     <tbody>
                                         <tr>
-                                            <td><h4><strong><%=adminName.toUpperCase()%></strong><small>&nbsp; <%=adminLevel%></small></h4></td>
+                                            <td><h4><strong><%=adminName.toUpperCase()%></strong><small>&nbsp; <%=adminLevelForResult%></small></h4></td>
                                         </tr>
                                         <tr>
                                             <td><%=adminDetails%></td>

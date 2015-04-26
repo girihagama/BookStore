@@ -49,7 +49,9 @@
         <div class="container" style="background-color:#F5F5F0">
             <%@include file="HeaderFiles/bookHeader.jsp"%> 
             <%--for authentication--%>
-            <%! String level = adminLevel;%>
+            <%!String level;%>
+            <% level = adminLevel;%>
+            <% System.out.println("admin level "+level+adminLevel); %>
             <%-- ------------ --%>
             <div class="row">
                 <%--left side navigation--%>

@@ -51,7 +51,8 @@
             <%@include file="HeaderFiles/authorHeader.jsp"%>
 
             <%--for authentication--%>
-            <%! String level = adminLevel;%>
+            <%!String level;%>
+            <% level = adminLevel;%>
             <%-- ------------ --%>
             <div class="row">
                 <%--left side navigation--%>
