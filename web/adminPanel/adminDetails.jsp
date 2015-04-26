@@ -77,7 +77,11 @@
 
                 <div class="col-lg-9">
                     <% if (request.getAttribute("msg") != null) {
-                    %><br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div><%
+                    %><div class="row">
+                        <div class="col-lg-9">
+                    <br><div class="alert alert-warning" role="alert"><strong><%=request.getAttribute("msg")%>.</strong><br></div>
+                        </div>
+                    </div><%
                         }%>
                     <label><h3>Admins</h3></label>
                     <div class="row">

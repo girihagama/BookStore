@@ -94,9 +94,14 @@
                         <div id ="orange">
                             <div class="form-group orange">
                                 <label>Supplier Contact Number</label>
+                                <div class="row">
+                                    <div class="col-lg-4">
                                 <input type="text" class="form-control" name="addSupplierContactNO" placeholder="Enter Contact Number" 
                                        <%if (request.getAttribute("errorSupplierNO") != null) {%>
-                                       value="<%=request.getAttribute("errorSupplierNO")%>"<%}%>>
+                                       value="<%=request.getAttribute("errorSupplierNO")%>"<%}%>
+                                       required="required" pattern="^(\d{10}||\d{13})?$">
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

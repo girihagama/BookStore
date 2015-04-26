@@ -78,7 +78,7 @@ public class ShiftOrders extends HttpServlet {
         String warningMsg = null;
         String sDate = request.getParameter("sDate");
         String sQty = request.getParameter("sQty");
-        String sAmount = request.getParameter("sAmount ");
+        String sAmount = request.getParameter("sAmount");
         String bookName = request.getParameter("bName");
         String userName = request.getParameter("uName");
         int orderID =Integer.parseInt(request.getParameter("sID"));
@@ -98,9 +98,9 @@ public class ShiftOrders extends HttpServlet {
 
         int result = msg.sendMsg();
         if (result == 1) {
-            warningMsg = "Your Order is shifted successfully ";
+            warningMsg = "Your order is shifted successfully ";
         } else {
-            warningMsg = "Your Order is not shifted due to an error. Please try again";
+            warningMsg = "Your order is not shifted due to an error. Please try again";
         }
 
         request.setAttribute("msg", warningMsg);

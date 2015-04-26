@@ -388,7 +388,7 @@ public class BookClass {
             try {
                 pstmt = (PreparedStatement) db.conn.prepareStatement("select b_Title from book where b_ID = ?");
                 pstmt.setInt(1,b_ID);
-
+                System.out.println("BOOK NAME   "+pstmt);
                 ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     this.b_Title=rs.getString("b_Title");

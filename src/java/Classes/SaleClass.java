@@ -5,10 +5,13 @@
  */
 package Classes;
 
+import com.mysql.jdbc.PreparedStatement;
 import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +27,7 @@ public class SaleClass {
     private int s_Amount;
     private int b_ID;
     private String b_Title;
+    private String State;
 
     /**
      * @return the s_ID
@@ -124,6 +128,15 @@ public class SaleClass {
     public void setS_Amount(int s_Amount) {
         this.s_Amount = s_Amount;
     }
+
+    public String getState() {
+        return State;
+    }
+
+    public void setState(String State) {
+        this.State = State;
+    }
+    
     
     public ArrayList Orders() throws SQLException {
         ArrayList arrayList = new ArrayList();
@@ -132,7 +145,7 @@ public class SaleClass {
             db.getConnection();
 
             String query;
-            query = "SELECT * FROM sale ORDER BY s_Date";
+            query = "SELECT * FROM sale where State='Ordered' ORDER BY s_Date ";
 
             com.mysql.jdbc.Statement stmt = (com.mysql.jdbc.Statement) db.conn.createStatement();
 
@@ -146,13 +159,13 @@ public class SaleClass {
                 UserClass user=new UserClass();
                 
                 sale.setS_Amount(rs.getInt("s_Amount"));
-                sale.setS_Date(rs.getString("s_Date").substring(0,8));
+                sale.setS_Date(rs.getString("s_Date").substring(0,10));
                 sale.setS_ID(rs.getInt("s_ID"));
                 sale.setU_Name(rs.getString("u_Name"));
                 sale.setS_Qty(rs.getInt("s_Qty"));
                 sale.setB_ID(rs.getInt("b_ID"));
                 
-                book.getBookName(b_ID);
+                book.getBookName(rs.getInt("b_ID"));
                 sale.setB_Title(book.getB_Title());
                 
                 arrayList.add(sale);
@@ -171,6 +184,20 @@ public class SaleClass {
     }
 
     public void shiftOrder(int orderID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Update Sale set State='Dispatched' where S_ID=?");
+                pstmt.setInt(1, orderID);
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
