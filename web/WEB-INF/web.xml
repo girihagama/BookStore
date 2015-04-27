@@ -88,6 +88,10 @@
         <servlet-name>PayBuyItNow</servlet-name>
         <servlet-class>Servlets.PayBuyItNow</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageNotifications</servlet-name>
+        <servlet-class>Servlets.ManageNotifications</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>PayBuyItNow</servlet-name>
         <url-pattern>/PayBuyItNow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageNotifications</servlet-name>
+        <url-pattern>/ManageNotifications</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
