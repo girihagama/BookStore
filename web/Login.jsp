@@ -4,6 +4,20 @@
     Author     : Indunil
 --%>
 
+<%
+
+    /*This Servlet Clears all Sessions & Cookies*/
+    //removing all sessions
+    session.invalidate();
+
+    //removing all cookies
+    Cookie[] cookies = request.getCookies();
+    for (Cookie cookie : cookies) {
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+    }
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>    
