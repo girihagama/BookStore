@@ -46,7 +46,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="http://localhost:8080/BookStore/adminPanel/modifyAccountDetails.jsp">My Account</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="../Logout">Logout</a></li>
                     </ul>
                 </div>
                 </div>
