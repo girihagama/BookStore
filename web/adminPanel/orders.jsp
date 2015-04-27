@@ -82,7 +82,7 @@
                                 itr = order.Orders().iterator();
                                 SaleClass received = null;
                                 if (!itr.hasNext()) {%>
-                            <div class="alert alert-warning" role="alert"><strong>No orders to be shifted.</strong><br></div>
+                            <div class="alert alert-warning" role="alert"><strong>No orders to be shipped.</strong><br></div>
                             <div class="row">&nbsp;</div><div class="row">&nbsp;</div><div class="row">&nbsp;</div>
                             <div class="row">&nbsp;</div><div class="row">&nbsp;</div>
                             <%if (request.getAttribute("msg") == null){%>
@@ -144,7 +144,7 @@
                                         <input type="hidden" name="sAmount" value="<%=received.getS_Amount()%>">
                                         <input type="hidden" name="sID" value="<%=received.getS_ID()%>">
 
-                                        <button type="submit" class="btn btn-default">Shift Order</button> &nbsp;&nbsp;&nbsp;
+                                        <button type="submit" class="btn btn-default">Ship Order</button> &nbsp;&nbsp;&nbsp;
                                     </div>
                                 </div>
                             </div>

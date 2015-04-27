@@ -118,7 +118,7 @@ public class AddBook extends HttpServlet {
         book.setB_Title(bookTitle);
         book.setB_Edition(edition);
         book.setB_Year(year);
-        book.setB_Image((ImageOutputStream) image);
+        book.setB_Image(image);
         book.setA_ID(a_ID);
         book.setB_Price(price);
         book.setSup_ID(supplier_ID);

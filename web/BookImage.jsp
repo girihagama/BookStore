@@ -6,6 +6,11 @@
 
 <%@page import="Classes.ImageExchange"%>
 <%@page import="java.io.OutputStream"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Blob"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 
 <%
     try {            

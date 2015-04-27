@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : index
     Created on : Mar 15, 2015, 5:36:23 PM
@@ -33,14 +34,15 @@
     
 </head>
 
-<body>    
+<body>
+
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
             <h1>It's Nice To See You..!</h1>
             <h3>Welcome To Orchid Store</h3>
             <br>
-            <a href="LoginCheck" class="btn btn-dark btn-lg">                
+            <a href="LoginCheck" class="btn btn-dark btn-lg">  
                 <span class="glyphicon glyphicon glyphicon-play-circle"></span>
                 <br/>
                 Enter Orchid Store

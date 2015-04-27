@@ -98,9 +98,9 @@ public class ShiftOrders extends HttpServlet {
 
         int result = msg.sendMsg();
         if (result == 1) {
-            warningMsg = "Your order is shifted successfully ";
+            warningMsg = "Your order is shipped successfully ";
         } else {
-            warningMsg = "Your order is not shifted due to an error. Please try again";
+            warningMsg = "Your order is not shipped due to an error. Please try again";
         }
 
         request.setAttribute("msg", warningMsg);

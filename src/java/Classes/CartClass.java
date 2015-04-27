@@ -6,23 +6,19 @@
 package Classes;
 
 import com.mysql.jdbc.Statement;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  *
  * @author Indunil
  */
 public class CartClass {
-
+    
     private int c_ID;
     private String u_Name;
     private int B_ID;
     private int c_Qty;
-    private double amount;
-
+    
     //DbClass object
     private DbClass db = new DbClass();
 
@@ -81,25 +77,12 @@ public class CartClass {
     public void setC_Qty(int c_Qty) {
         this.c_Qty = c_Qty;
     }
-
-    /**
-     * @return the amount
-     */
-    public double getAmount() {
-        return amount;
-    }
-
-    /**
-     * @param amount the amount to set
-     */
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
+    
     //methods
-    public int noOfItems() {
-        int items = 0;
-
+    
+    public int noOfItems(){
+        int items=0;
+        
         try {
             db.getConnection();
 
@@ -122,118 +105,7 @@ public class CartClass {
                 db.endConnection();
             }
         }
-
-        return items;
-    }
-
-    public ArrayList loadCart() throws SQLException {
-
-        ArrayList cart = new ArrayList();
-
-        try {
-            db.getConnection();
-
-            String query;
-            query = "SELECT * FROM cart WHERE u_name='" + getU_Name() + "'";
-
-            Statement stmt = (Statement) db.conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(query);
-
-//            ResultSetMetaData metadata = rs.getMetaData();
-//            int numberOfColumns = metadata.getColumnCount();
-            while (rs.next()) {
-                CartClass x = new CartClass();
-                x.setC_ID(rs.getInt(1));
-                x.setU_Name(rs.getString(2));
-                x.setB_ID(rs.getInt(3));
-                x.setC_Qty(rs.getInt(4));
-                x.setAmount(rs.getDouble(5));
-                cart.add(x);
-            }
-            db.endConnection();
-
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-
-        return cart;
-    }
-
-    public void removeNoQtyItems() throws SQLException {
-        try {
-            db.getConnection();
-
-            String query;
-            query = "Delete FROM cart WHERE c_Qty = 0";
-            Statement stmt = (Statement) db.conn.createStatement();
-            stmt.executeUpdate(query);
-            db.endConnection();
-
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-    }
-
-    public boolean removeItem() throws SQLException {
-        boolean res = false;
-
-        try {
-            db.getConnection();
-
-            String query;
-            query = "Delete FROM cart WHERE c_ID = '" + getC_ID() + "'";
-            Statement stmt = (Statement) db.conn.createStatement();
-            int x = stmt.executeUpdate(query);
-
-            if (x == 1) {
-                res = true;
-            } else {
-                res = false;
-            }
-
-            db.endConnection();
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-
-        return res;
-    }
-
-    public boolean addToCart() throws SQLException {
-        boolean res = false;
-
-        try {
-            db.getConnection();
-
-            String query;
-            query = "INSERT INTO `cart`(`u_Name`, `b_ID`, `c_Qty`) VALUES (?,?,?)";
-            PreparedStatement stmt = db.conn.prepareStatement(query);            
-            stmt.setString(1, getU_Name());
-            stmt.setInt(2, getB_ID());
-            stmt.setInt(3, getC_Qty());
-            
-            int x = stmt.executeUpdate();
-
-            if (x == 1) {
-                res = true;
-            } else {
-                res = false;
-            }
-
-            db.endConnection();
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-
-        return res;
+        
+        return items; 
     }
 }

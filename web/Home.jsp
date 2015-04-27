@@ -14,17 +14,13 @@
 <!DOCTYPE html>
 
 <%
-    try {
-        if (session.getAttribute("Login") == null) {
-            response.sendRedirect("LoginCheck");
-        } else {
-            UserClass x = new UserClass();
-            if (x.chkUserName(session.getAttribute("Username").toString()) == false) {
-                response.sendRedirect("LoginCheck");
-            }
-        }
-    }catch(Exception e){
+    if (session.getAttribute("Login") == null) {
         response.sendRedirect("LoginCheck");
+    } else {
+        UserClass x = new UserClass();
+        if (x.chkUserName(session.getAttribute("Username").toString()) == false) {
+            response.sendRedirect("LoginCheck");
+        }
     }
 %>
 
@@ -61,13 +57,15 @@
         <script type="text/javascript">
         </script>
 
-        <!--internal JS end-->           
+        <!--internal JS end-->          
     </head>
 
-    <jsp:include page='header.jsp'></jsp:include>
-    <jsp:include page="ShowMessageScript.jsp"></jsp:include>
 
-        <body> 
+
+    <body> 
+
+        <jsp:include page="header.jsp"></jsp:include>
+
             <div class="row container-fluid">
                 <div class="row">
                     <!--Slider-->
@@ -128,9 +126,7 @@
                     </div>
                 </div>
             </div>
-            <br/>
+                    <br/>
         </body>
-    
     <jsp:include page='footer.jsp'></jsp:include>
-    
 </html>

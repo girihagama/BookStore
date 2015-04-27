@@ -70,6 +70,34 @@ public class UserClass {
     /**
      * @return the manager
      */
+    public ScriptEngineManager getManager() {
+        return manager;
+    }
+
+    /**
+     * @param manager the manager to set
+     */
+    public void setManager(ScriptEngineManager manager) {
+        this.manager = manager;
+    }
+
+    /**
+     * @return the engine
+     */
+    public ScriptEngine getEngine() {
+        return engine;
+    }
+
+    /**
+     * @param engine the engine to set
+     */
+    public void setEngine(ScriptEngine engine) {
+        this.engine = engine;
+    }
+
+    /**
+     * @return the u_Name
+     */
     public String getU_Name() {
         return u_Name;
     }
@@ -93,34 +121,6 @@ public class UserClass {
      */
     public void setU_Pass(String u_Pass) {
         this.u_Pass = u_Pass;
-    }
-
-    /**
-     * @return the u_ImageInput
-     */
-    public InputStream getU_ImageInput() {
-        return u_ImageInput;
-    }
-
-    /**
-     * @param u_ImageInput the u_ImageInput to set
-     */
-    public void setU_ImageInput(InputStream u_ImageInput) {
-        this.u_ImageInput = u_ImageInput;
-    }
-
-    /**
-     * @return the u_Image
-     */
-    public byte[] getU_Image() {
-        return u_Image;
-    }
-
-    /**
-     * @param u_Image the u_Image to set
-     */
-    public void setU_Image(byte[] u_Image) {
-        this.u_Image = u_Image;
     }
 
     /**
@@ -235,328 +235,35 @@ public class UserClass {
         this.u_CardNo = u_CardNo;
     }
 
-    public Boolean chkMember(String username) throws Exception {
-        /*
-         This method will return true,
-         if user exist according to provided username
-         */
-        Boolean stat = false;
-
-        try {
-            db.getConnection();
-
-            String query;
-            query = "SELECT COUNT(*) FROM user WHERE u_name='" + getU_Name() + "'";
-
-            Statement stmt = (Statement) db.conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                int x = rs.getInt("COUNT(*)");
-
-                if (x == 1) {
-                    stat = true;
-                    System.out.println("User exist");
-                }
-                if (x == 0) {
-                    stat = false;
-                    System.out.println("User Doesn't exist");
-                }
-            }
-            db.endConnection();
-
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-
-        return stat;
+    /**
+     * @return the u_Image
+     */
+    public Image getU_Image() {
+        return u_Image;
     }
 
-    public boolean login() throws SQLException, Exception {
-        /*
-         this method checks the user in the database
-         and returns whether the user exist or not
-         according to provided username and password.
-         */
-
-        boolean stat = false;
-
-        try {
-            db.getConnection();
-
-            String query;
-            query = "SELECT COUNT(*) FROM user WHERE u_name='" + getU_Name() + "' AND u_pass='" + getU_Pass() + "'";
-
-            Statement stmt = (Statement) db.conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                int x = rs.getInt("COUNT(*)");
-
-                if (x == 1) {
-                    stat = true;
-                    System.out.println("Login Success");
-                }
-                if (x == 0) {
-                    stat = false;
-                    System.out.println("Login Failed");
-                }
-            }
-            db.endConnection();
-
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-
-        return stat;
-    }
-
-    public int chkPrivilege() throws Exception {
-        /*
-         This method returns the privilege,
-         if the login() returns true
-         */
-        int prev = 0;
-
-        if (this.login() == true) {
-            try {
-                db.getConnection();
-
-                String query;
-                query = "SELECT u_Privilege FROM user WHERE u_name='" + getU_Name() + "' AND u_pass='" + getU_Pass() + "'";
-
-                Statement stmt = (Statement) db.conn.createStatement();
-
-                ResultSet rs = stmt.executeQuery(query);
-
-                while (rs.next()) {
-                    int x = rs.getInt("u_Privilege");
-
-                    if (x == 1) {
-                        prev = 1;
-                        System.out.println("Admin");
-                    }
-                    if (x == 0) {
-                        prev = 0;
-                        System.out.println("User");
-                    }
-                }
-                db.endConnection();
-
-            } finally {
-                if (db.conn != null) {
-                    db.endConnection();
-                }
-            }
-
-        }
-
-        return prev;
+    /**
+     * @param u_Image the u_Image to set
+     */
+    public void setU_Image(Image u_Image) {
+        this.u_Image = u_Image;
     }
 
     //methods
     public void exceptionShow(String msg) throws Exception {
 
-    public boolean chkUserName(String username) throws Exception {
-        boolean stat = false;
+        ScriptEngineManager sem = new ScriptEngineManager();
+        ScriptEngine scEng = sem.getEngineByName("JavaScript");
 
-        try {
-            db.getConnection();
+        // JavaScript code in a String
+        String script = "function exceptionShow(msg){ alert(arguments[0]); }";
 
-            String query;
-            query = "SELECT COUNT(*) FROM user WHERE u_name='" + username + "'";
+        // evaluate script
+        scEng.eval(script);
+        Invocable inv = (Invocable) scEng;
 
-            Statement stmt = (Statement) db.conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                int x = rs.getInt("COUNT(*)");
-
-                if (x == 1) {
-                    stat = true;
-                    System.out.println("Exist");
-                }
-                if (x == 0) {
-                    stat = false;
-                    System.out.println("Not Exist");
-                }
-            }
-            db.endConnection();
-
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-
-        return stat;
-
-    }
-
-    public void importProfile() {
-
-    }
-
-    public ArrayList loadProfile() throws SQLException {
-        ArrayList arrayList = new ArrayList();
-
-        try {
-            db.getConnection();
-
-            String query;
-            query = "SELECT u_name, u_pass FROM user WHERE u_name='" + getU_Name() + "'";
-
-            Statement stmt = (Statement) db.conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(query);
-
-//            ResultSetMetaData metadata = rs.getMetaData();
-//            int numberOfColumns = metadata.getColumnCount();
-            while (rs.next()) {
-                UserClass user = new UserClass();
-                user.setU_Name(rs.getString("u_name"));
-                user.setU_Pass(rs.getString("u_pass"));
-                arrayList.add(user);
-            }
-
-            db.endConnection();
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-
-        return arrayList;
-    }
-
-    public ArrayList loadUser() throws SQLException {
-        ArrayList arrayList = new ArrayList();
-        ImageExchange ex = new ImageExchange();
-
-        try {
-            db.getConnection();
-
-            String query;
-            query = "SELECT * FROM user WHERE u_name='" + getU_Name() + "'";
-
-            Statement stmt = (Statement) db.conn.createStatement();
-
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                UserClass user = new UserClass();
-                user.setU_Name(rs.getString("u_Name"));
-                user.setU_RegDate(rs.getString("u_RegDate"));
-                user.setU_Mail(rs.getString("u_Mail"));
-                user.setU_TPN(rs.getString("u_TPN"));
-                user.setU_addLine1(rs.getString("u_addLine1"));
-                user.setU_addLine2(rs.getString("u_addLine2"));
-                user.setU_addLine3(rs.getString("u_addLine3"));
-                user.setU_CardNo(rs.getString("u_CardNo"));
-
-                if (rs.getBlob("u_image") != null) {
-                    user.setU_Image(ex.getBytes(rs.getBlob("u_image")));
-                } else {
-                    user.setU_Image(null);
-                }
-                arrayList.add(user);
-            }
-
-            db.endConnection();
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-
-        return arrayList;
-    }
-
-    public boolean deactivateAccount() throws SQLException {
-        boolean x = false;
-
-        try {
-            db.getConnection();
-
-            String query;
-            query = "Delete FROM user WHERE u_name='" + getU_Name() + "'";
-
-            Statement stmt = (Statement) db.conn.createStatement();
-
-            int res = stmt.executeUpdate(query);
-
-            if (res == 1) {
-                x = true;
-            }
-
-            db.endConnection();
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-
-        return x;
-    }
-
-    public boolean editProfile() throws SQLException {
-        boolean x = false;
-
-        try {
-            db.getConnection();
-
-            if (getU_ImageInput() != null) {
-                String query;
-                query = "UPDATE user SET u_image=?, u_Mail=?, u_TPN=?, u_CardNo=?, u_addLine1=?, u_addLine2=?, u_addLine3=? where u_name='" + getU_Name() + "'";
-
-                PreparedStatement stmt = db.conn.prepareStatement(query);
-                stmt.setBlob(1, getU_ImageInput());
-                stmt.setString(2, getU_Mail());
-                stmt.setString(3, getU_TPN());
-                stmt.setString(4, getU_CardNo());
-                stmt.setString(5, getU_addLine1());
-                stmt.setString(6, getU_addLine2());
-                stmt.setString(7, getU_addLine3());
-
-                int res = stmt.executeUpdate();
-
-                if (res == 1) {
-                    x = true;
-                }
-            } else {
-                String query;
-                query = "UPDATE user SET u_Mail=?, u_TPN=?, u_CardNo=?, u_addLine1=?, u_addLine2=?, u_addLine3=? where u_name='" + getU_Name() + "'";
-
-                PreparedStatement stmt = db.conn.prepareStatement(query);
-                stmt.setString(1, getU_Mail());
-                stmt.setString(2, getU_TPN());
-                stmt.setString(3, getU_CardNo());
-                stmt.setString(4, getU_addLine1());
-                stmt.setString(5, getU_addLine2());
-                stmt.setString(6, getU_addLine3());
-
-                int res = stmt.executeUpdate();
-
-                if (res == 1) {
-                    x = true;
-                }
-            }
-
-            db.endConnection();
-        } finally {
-            if (db.conn != null) {
-                db.endConnection();
-            }
-        }
-
-        return x;
+        // invoke the global function named "hello"
+        inv.invokeFunction("Exception", msg);
     }
 
     public List searchClient() {
