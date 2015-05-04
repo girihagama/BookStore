@@ -9,6 +9,7 @@ import com.mysql.jdbc.PreparedStatement;
 import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -136,8 +137,7 @@ public class SaleClass {
     public void setState(String State) {
         this.State = State;
     }
-    
-    
+
     public ArrayList Orders() throws SQLException {
         ArrayList arrayList = new ArrayList();
         DbClass db = new DbClass();
@@ -154,20 +154,20 @@ public class SaleClass {
 //            ResultSetMetaData metadata = rs.getMetaData();
 //            int numberOfColumns = metadata.getColumnCount();
             while (rs.next()) {
-                SaleClass sale=new SaleClass();
-                BookClass book=new BookClass();
-                UserClass user=new UserClass();
-                
+                SaleClass sale = new SaleClass();
+                BookClass book = new BookClass();
+                UserClass user = new UserClass();
+
                 sale.setS_Amount(rs.getInt("s_Amount"));
-                sale.setS_Date(rs.getString("s_Date").substring(0,10));
+                sale.setS_Date(rs.getString("s_Date").substring(0, 10));
                 sale.setS_ID(rs.getInt("s_ID"));
                 sale.setU_Name(rs.getString("u_Name"));
                 sale.setS_Qty(rs.getInt("s_Qty"));
                 sale.setB_ID(rs.getInt("b_ID"));
-                
+
                 book.getBookName(rs.getInt("b_ID"));
                 sale.setB_Title(book.getB_Title());
-                
+
                 arrayList.add(sale);
             }
 
@@ -200,4 +200,33 @@ public class SaleClass {
             }
         }
     }
+
+    public boolean addItem() throws SQLException {
+        boolean res = false;
+        DbClass db = new DbClass();
+        try {
+            db.getConnection();
+
+            String query;
+            query = "INSERT INTO Sale(u_Name,b_ID,s_Qty) Values('" + getU_Name() + "'," + getB_ID() + "," + getS_Qty() + ")";
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            int x = stmt.executeUpdate(query);
+
+            if (x == 1) {
+                res = true;
+            } else {
+                res = false;
+            }
+
+            db.endConnection();
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return res;
+    }
+
 }

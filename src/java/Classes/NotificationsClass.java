@@ -5,13 +5,13 @@
  */
 package Classes;
 
-
 import com.mysql.jdbc.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -127,6 +127,7 @@ public class NotificationsClass {
 
         return notifications;
     }
+
     public int sendNotification() {
         PreparedStatement pstmt;
         DbClass db = new DbClass();
@@ -148,4 +149,155 @@ public class NotificationsClass {
         }
         return -1;
     }
+
+    public ArrayList unreadedNotifications() throws SQLException {
+
+        ArrayList notifications = new ArrayList();
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT * FROM notifications WHERE u_name='" + getU_Name() + "' AND n_ReadState= 0";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+//            ResultSetMetaData metadata = rs.getMetaData();
+//            int numberOfColumns = metadata.getColumnCount();
+            while (rs.next()) {
+                NotificationsClass x = new NotificationsClass();
+                x.setN_ID(rs.getInt("n_ID"));
+                x.setU_Name(rs.getString("u_Name"));
+                x.setN_Date(rs.getString("n_Date"));
+                x.setN_Content(rs.getString("n_Content"));
+                x.setN_ReadState(rs.getInt("n_ReadState"));
+                notifications.add(x);
+            }
+            db.endConnection();
+
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return notifications;
+    }
+
+    public ArrayList readeddNotifications() throws SQLException {
+
+        ArrayList notifications = new ArrayList();
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "SELECT * FROM notifications WHERE u_name='" + getU_Name() + "' AND n_ReadState= 1 LIMIT 30";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+
+            ResultSet rs = stmt.executeQuery(query);
+
+//            ResultSetMetaData metadata = rs.getMetaData();
+//            int numberOfColumns = metadata.getColumnCount();
+            while (rs.next()) {
+                NotificationsClass x = new NotificationsClass();
+                x.setN_ID(rs.getInt("n_ID"));
+                x.setU_Name(rs.getString("u_Name"));
+                x.setN_Date(rs.getString("n_Date"));
+                x.setN_Content(rs.getString("n_Content"));
+                x.setN_ReadState(rs.getInt("n_ReadState"));
+                notifications.add(x);
+            }
+            db.endConnection();
+
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return notifications;
+    }
+
+    public boolean deleteNotification() throws SQLException {
+        boolean x = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "DELETE from notifications where n_ID='" + getN_ID() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+            int res = stmt.executeUpdate(query);
+
+            if (res == 1) {
+                x = true;
+            } else {
+                x = false;
+            }
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return x;
+    }
+
+    public boolean markAsRead() throws SQLException {
+        boolean x = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "UPDATE notifications SET n_ReadState=1 WHERE n_ID='" + getN_ID() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+            int res = stmt.executeUpdate(query);
+
+            if (res == 1) {
+                x = true;
+            } else {
+                x = false;
+            }
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return x;
+    }
+
+    public boolean markAsUnread() throws SQLException {
+        boolean x = false;
+
+        try {
+            db.getConnection();
+
+            String query;
+            query = "UPDATE notifications SET n_ReadState=0 WHERE n_ID='" + getN_ID() + "'";
+
+            Statement stmt = (Statement) db.conn.createStatement();
+            int res = stmt.executeUpdate(query);
+
+            if (res == 1) {
+                x = true;
+            } else {
+                x = false;
+            }
+        } finally {
+            if (db.conn != null) {
+                db.endConnection();
+            }
+        }
+
+        return x;
+    }
+
 }
