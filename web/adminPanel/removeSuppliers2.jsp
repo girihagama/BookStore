@@ -8,63 +8,41 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="http://localhost:8080/BookStore/adminPanel/Images/Page icons/BookIcon.ico" type="image/ico" />
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css" rel="stylesheet">
-        <link href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css" rel="stylesheet">
+
+        <%--Bootsrap CSS files--%>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="http://localhost:8080/BookStore/adminPanel/css/bootstrapValidator.css"/>
+        
+        <%--Bootsrap jS files--%>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/jquery.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://localhost:8080/BookStore/adminPanel/js/bootstrapValidator.js"></script>
+
+        <%-- my css files --%>
         <link href="http://localhost:8080/BookStore/adminPanel/css/startPage.css" rel="stylesheet">
         <link href="http://localhost:8080/BookStore/adminPanel/css/form.css" rel="stylesheet">
-        <title>Admin Panel</title>
+        <title>Admin Panel - Remove Suppliers</title>
     </head>
     <body>
+        <% if(request.getHeader("Referer").length()<42){%>
+           <script>
+                history.forward()
+        </script> 
+        <%} else
+            if (!"http://localhost:8080/BookStore/adminPanel".equals(request.getHeader("Referer").substring(0, 42))) {%>
+            <script>
+                history.forward()
+        </script>
+            
+        <%}%>
         <div class="container" style="background-color:#F5F5F0">
-            <div class="row"><div class="col-md-10">&nbsp;</div></div>
-            <div class="row">
-                <div class="col-md-11"></div>
-                <div class="col-md-1"><button type="button" class="btn btn-warning">Logout</button></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-1">
-                    <img src="Images/Page icons/BookIcon.png" class="img-responsive" width="100%"alt="Responsive image">
-                </div>
-                <div class="col-md-11">
-                    <font color=#FF7519><h1><strong>Orchid Book Store</strong><small>&nbsp; Admin Panel</small></h1></font>
-                </div>
-            </div>
-            <div class="row">
-                <img src="Images/Orthers/line.png" width="100%" alt="Responsive image">
-            </div>
-            <%-- sub menus--%>
-            <div class="row">
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Home.png" class="image" width="100%" alt="Responsive image" title="Home"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Books.png" class="image" width="100%" alt="Responsive image" title="Books"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="addAuthors.jsp"><img src="Images/Page icons/Author.png" class="image" width="100%" alt="Responsive image" title="Authors"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Clients.png" class="image" width="100%" alt="Responsive image" title="Clients"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Admin.png" class="image" width="100%" alt="Responsive image" title="Admins"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Stocks.png" class="image" width="100%" alt="Responsive image" title="Stocks"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Suppliers.png" class="image" width="100%" alt="Responsive image" title="Suppliers" style="opacity: 0.4"></a>
-                </div>
-                <div class="col-lg-1">
-                    <a href="#"><img src="Images/Page icons/Order.png" class="image" width="100%" alt="Responsive image" title="Orders"></a>
-                </div>
-            </div>    
-            <div class="row">
-                <img src="Images/Orthers/orange line.png"width="100%" alt="Responsive image"">
-            </div>
-            <%-- end of sub menus--%>           
+           <%@include file="HeaderFiles/suppliersHeader.jsp"%> 
             <div class="row">
                 <%--left side navigation--%>
                 <div class="col-lg-2">
@@ -73,8 +51,8 @@
                         <li>
                             <div id="topmenu">
                             <ul class="nav nav-pills nav-stacked topmenu">
-                                <li role="presentation"><a href="addAuppliers.jsp"><font style="color: orange">Add Supplier</font></a></li>
-                                <li role="presentation"><a href="modifySuppliers.jsp"><font style="color: orange">Modify Supplier</font></a></li>
+                                <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/addAuppliers.jsp"><font style="color: orange">Add Supplier</font></a></li>
+                                <li role="presentation"><a href="http://localhost:8080/BookStore/adminPanel/modifySuppliers.jsp"><font style="color: orange">Modify Supplier</font></a></li>
                                 <li role="presentation" class="active"><a href="#">Remove Supplier</a></li>
                             </ul>
                             </div>
@@ -88,59 +66,116 @@
                 <div class="col-lg-9">
                     <br>
                     <br>
-                    <form>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Supplier Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Supplier Name" name="removeSupplierName" required>
+                    <form id="RemoveForm" action="RemoveSupplier3" method="POST">
+                    <table border="0">
+                            <tbody>
+                                <tr>
+                                    <td><label>Supplier Name</label></td>
+                                    <td><label>: <%=request.getAttribute("searchedSupplierName")%></label></td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td><label>Supplier Contact Number </label>&nbsp;&nbsp;&nbsp; </td>
+                                    <td><label>:  <%=request.getAttribute("searchedSupplierConNO")%></label></td>
+                                    <td></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><label>Supplier Email</label></td>
+                                    <td><label>: <%=request.getAttribute("searchedSupplierMail")%></label></td>
+                                    <td></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><label>Supplier Address Line1</label></td>
+                                    <td><label>: <%=request.getAttribute("searchedSupplierADD1")%></label></td>
+                                    <td></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><label>Supplier Address Line 2</label></td>
+                                    <td><label>: <%=request.getAttribute("searchedSupplierADD2")%></label></td>
+                                    <td></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td><label>Supplier Address Line 3</label></td>
+                                    <td><label>: <%=request.getAttribute("searchedSupplierADD3")%></label></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>                      
+                        <input type="hidden" name="oldName" value="<%=request.getAttribute("searchedSupplierName")%>">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-lg-5">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="checkbox" value="Choice #1" /> I want to remove this supplier
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Supplier Contact Number</label>
-                                <input type="text" class="form-control" placeholder="Enter Contact Number" name="removeSupplierContactNO" required>
-                            </div>
-                        </div>
-                        
-                                                <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Supplier Email</label>
-                                <input type="email" class="form-control" placeholder="Enter Email" data-error="Email address is invalid" name="removeSupplierEmail" required>
-                            </div>
-                        </div>
-                        
-                                                <div id ="orange">
-                            <div class="form-group orange">
-                                <label>Supplier Address</label>
-                                <input type="text" class="form-control" placeholder="Address Line 1" required>
-                                <input type="text" class="form-control" placeholder="Address Line 2">
-                                <input type="text" class="form-control" placeholder="Address Line 3">
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-default">Remove Supplier</button>
+                        <br>
+                        <table>
+                        <tbody>
+                                <tr>
+                                    <td><label> <a class="btn btn-default" href="adminPanel/removeSuppliers.jsp" role="button">Cancel</a></label></td>
+                                    <td><label><button type="submit" class="btn btn-default">Remove This Supplier</button></label></td>
+                                </tr>
+                        </tbody>
+                        </table>
                     </form>
+                 <script type="text/javascript">
+                        $(document).ready(function() {
+                            var validator = $("#RemoveForm").bootstrapValidator({
+                                fields: {
+                                    checkbox: {
+                                        validators: {
+                                            notEmpty: {
+                                                message: "If you need to remove this supplier, please put a tick"
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    </script>
                 </div>
             </div>
-            <%--Form end--%>
-   <div class="row">
+ <% if (request.getAttribute("msg") != null) {
+            %>
+            <div class="row">
                 &nbsp;
             </div>
             <div class="row">
                 &nbsp;
             </div>
-                <div class="row">
+            <div class="row">
                 &nbsp;
             </div>
             <div class="row">
                 &nbsp;
             </div>
-                <div class="row">
+            <div class="row">
                 &nbsp;
             </div>
             <div class="row">
                 &nbsp;
             </div>
+            <%} else {%>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
+            <%}%>
                 <div class="row">
                 &nbsp;
             </div>
@@ -149,9 +184,6 @@
             </div>
             <div class="row" >
                 <ol class="breadcrumb" style="background-color:#FF9933">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
                 </ol>
             </div> 
         </div>

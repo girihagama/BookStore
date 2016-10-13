@@ -5,10 +5,13 @@
  */
 package Classes;
 
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -123,6 +126,28 @@ public class NotificationsClass {
         }
 
         return notifications;
+    }
+
+    public int sendNotification() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into notifications(u_Name,n_Content) values(?,?)");
+                pstmt.setString(1, u_Name);
+                pstmt.setString(2, n_Content);
+
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1;
     }
 
     public ArrayList unreadedNotifications() throws SQLException {
@@ -274,4 +299,5 @@ public class NotificationsClass {
 
         return x;
     }
+
 }

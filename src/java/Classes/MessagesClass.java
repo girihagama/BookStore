@@ -5,10 +5,13 @@
  */
 package Classes;
 
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,7 +26,7 @@ public class MessagesClass {
     private int m_ReadState;
 
     //DbClass object
-    DbClass db = new DbClass();
+    private DbClass db = new DbClass();
 
     /**
      * @return the m_ID
@@ -95,7 +98,7 @@ public class MessagesClass {
         this.m_ReadState = m_ReadState;
     }
 
-    //methods    
+    //methods
     public int unreadedMessagesCount() {
 
         int messages = 0;
@@ -124,6 +127,28 @@ public class MessagesClass {
         }
 
         return messages;
+    }
+
+    public int sendMsg() {
+        PreparedStatement pstmt;
+        DbClass db = new DbClass();
+        if (db.getConnection() == true) {
+            try {
+                pstmt = (PreparedStatement) db.conn.prepareStatement("Insert into messages(u_Name,m_Content) values(?,?)");
+                pstmt.setString(1, u_Name);
+                pstmt.setString(2, m_Content);
+
+                System.out.println(pstmt);
+                int inserted = pstmt.executeUpdate();
+                pstmt.close();
+                db.endConnection();
+
+                return inserted;
+            } catch (SQLException ex) {
+                Logger.getLogger(BookClass.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return -1;
     }
 
     public ArrayList unreadedMessages() throws SQLException {
@@ -205,16 +230,16 @@ public class MessagesClass {
             db.getConnection();
 
             String query;
-            query = "DELETE from messages where m_ID='"+getM_ID()+"'";
+            query = "DELETE from messages where m_ID='" + getM_ID() + "'";
 
             Statement stmt = (Statement) db.conn.createStatement();
-            int res= stmt.executeUpdate(query);
-            
-            if(res==1){
-                x=true;
-            }else{
-                x=false;
-            }            
+            int res = stmt.executeUpdate(query);
+
+            if (res == 1) {
+                x = true;
+            } else {
+                x = false;
+            }
         } finally {
             if (db.conn != null) {
                 db.endConnection();
@@ -231,16 +256,16 @@ public class MessagesClass {
             db.getConnection();
 
             String query;
-            query = "UPDATE messages SET m_ReadState=1 WHERE m_ID='"+getM_ID()+"'";
+            query = "UPDATE messages SET m_ReadState=1 WHERE m_ID='" + getM_ID() + "'";
 
             Statement stmt = (Statement) db.conn.createStatement();
-            int res= stmt.executeUpdate(query);
-            
-            if(res==1){
-                x=true;
-            }else{
-                x=false;
-            }            
+            int res = stmt.executeUpdate(query);
+
+            if (res == 1) {
+                x = true;
+            } else {
+                x = false;
+            }
         } finally {
             if (db.conn != null) {
                 db.endConnection();
@@ -257,16 +282,16 @@ public class MessagesClass {
             db.getConnection();
 
             String query;
-            query = "UPDATE messages SET m_ReadState=0 WHERE m_ID='"+getM_ID()+"'";
+            query = "UPDATE messages SET m_ReadState=0 WHERE m_ID='" + getM_ID() + "'";
 
             Statement stmt = (Statement) db.conn.createStatement();
-            int res= stmt.executeUpdate(query);
-            
-            if(res==1){
-                x=true;
-            }else{
-                x=false;
-            }            
+            int res = stmt.executeUpdate(query);
+
+            if (res == 1) {
+                x = true;
+            } else {
+                x = false;
+            }
         } finally {
             if (db.conn != null) {
                 db.endConnection();
@@ -275,4 +300,5 @@ public class MessagesClass {
 
         return x;
     }
+
 }

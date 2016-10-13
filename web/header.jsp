@@ -106,7 +106,8 @@
                             </li>
 
                             <li>
-                                <a href="SignOut">
+                                <!--also use SignOut servlet-->
+                                <a href="ClearAll">
                                     <span class="glyphicon glyphicon-off"></span>
                                     <font style="font-family: calibri;">Log Out</font>
                                 </a>
